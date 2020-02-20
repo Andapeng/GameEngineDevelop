@@ -1,4 +1,6 @@
 /Debug/
 /GameDevelop/Debug/
-/.vs/
-/GameDevelop/ThirdParty/
+.vs/
+GameDevelop/ThirdParty/
+GameDevelop/x64/
+x64/

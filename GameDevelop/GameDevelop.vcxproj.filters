@@ -18,43 +18,157 @@
     <ClCompile Include="Source\Main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\IManager.cpp">
+    <ClCompile Include="Source\Platform\WindowsApplication.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\IEntity.cpp">
+    <ClCompile Include="Source\Platform\SfmlApplication.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GraphicsManager.cpp">
+    <ClCompile Include="Source\Platform\WindowsMessageHandler.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameInstance.cpp">
+    <ClCompile Include="Source\Platform\WindowsWindow.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\InputManager.cpp">
+    <ClCompile Include="Source\Core\GameInstance.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ResourceManager.cpp">
+    <ClCompile Include="Source\Core\IEntity.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\InputManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\RpgGame.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RHI\Renderer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RHI\Shader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Managers\StateManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entities\GameObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RHI\Texture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Managers\ResourceManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Managers\IManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Managers\GraphicsManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdParty\GLAD\glad.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Managers\FontManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Math\Math.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\GameInstance.h">
+    <ClInclude Include="Source\Platform\WindowsApplication.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\IManager.h">
+    <ClInclude Include="Source\Platform\IApplication.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\IEntity.h">
+    <ClInclude Include="Source\Platform\SfmlApplication.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GraphicsManager.h">
+    <ClInclude Include="Source\Platform\WindowsMessageHandler.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\InputManager.h">
+    <ClInclude Include="Source\Platform\WindowsWindow.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ResourceManager.h">
+    <ClInclude Include="Source\Core\Character.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\GameInstance.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\IEntity.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\InputManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\RpgGame.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RuntimeSupport\IRuntime.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RHI\Renderer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RHI\Shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Managers\StateManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entities\GameObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RHI\Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Managers\ResourceManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Managers\IManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RHI\Character.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Managers\GraphicsManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\GlobalConfiguration.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Math\Math.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Managers\FontManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\stdpch.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Log.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Shaders\texture.vertex" />
+    <None Include="Assets\Shaders\texture.fragment" />
+    <None Include="Assets\Shaders\basic.vertex" />
+    <None Include="Assets\Shaders\basic.fragment" />
+    <None Include="Assets\Shaders\text.vertex" />
+    <None Include="Assets\Shaders\text.fragment" />
+    <None Include="Assets\Shaders\sprite.vertex" />
+    <None Include="Assets\Shaders\sprite.fragment" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Textures\container.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Assets\Textures\awesomeface.png">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
 </Project>

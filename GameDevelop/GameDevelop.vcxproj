@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -75,6 +75,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Project\GameEngineDevelop\GameDevelop\ThirdParty;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -151,21 +152,67 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\InputManager.cpp" />
+    <ClCompile Include="Source\Core\InputManager.cpp" />
+    <ClCompile Include="Source\Entities\GameObject.cpp" />
+    <ClCompile Include="Source\Game\RpgGame.cpp" />
     <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\GameInstance.cpp" />
-    <ClCompile Include="Source\GraphicsManager.cpp" />
-    <ClCompile Include="Source\IEntity.cpp" />
-    <ClCompile Include="Source\IManager.cpp" />
-    <ClCompile Include="Source\ResourceManager.cpp" />
+    <ClCompile Include="Source\Core\GameInstance.cpp" />
+    <ClCompile Include="Source\Managers\FontManager.cpp" />
+    <ClCompile Include="Source\Managers\GraphicsManager.cpp" />
+    <ClCompile Include="Source\Core\IEntity.cpp" />
+    <ClCompile Include="Source\Managers\IManager.cpp" />
+    <ClCompile Include="Source\Math\Math.cpp" />
+    <ClCompile Include="Source\Platform\SfmlApplication.cpp" />
+    <ClCompile Include="Source\Platform\WindowsApplication.cpp" />
+    <ClCompile Include="Source\Platform\WindowsMessageHandler.cpp" />
+    <ClCompile Include="Source\Platform\WindowsWindow.cpp" />
+    <ClCompile Include="Source\Managers\ResourceManager.cpp" />
+    <ClCompile Include="Source\RHI\Renderer.cpp" />
+    <ClCompile Include="Source\RHI\Shader.cpp" />
+    <ClCompile Include="Source\Managers\StateManager.cpp" />
+    <ClCompile Include="Source\RHI\Texture.cpp" />
+    <ClCompile Include="ThirdParty\GLAD\glad.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\InputManager.h" />
-    <ClInclude Include="Source\GameInstance.h" />
-    <ClInclude Include="Source\GraphicsManager.h" />
-    <ClInclude Include="Source\IEntity.h" />
-    <ClInclude Include="Source\IManager.h" />
-    <ClInclude Include="Source\ResourceManager.h" />
+    <ClInclude Include="Source\Core\Character.h" />
+    <ClInclude Include="Source\Core\InputManager.h" />
+    <ClInclude Include="Source\Core\GameInstance.h" />
+    <ClInclude Include="Source\Game\GlobalConfiguration.h" />
+    <ClInclude Include="Source\Log.h" />
+    <ClInclude Include="Source\Managers\FontManager.h" />
+    <ClInclude Include="Source\Managers\GraphicsManager.h" />
+    <ClInclude Include="Source\Core\IEntity.h" />
+    <ClInclude Include="Source\Managers\IManager.h" />
+    <ClInclude Include="Source\Entities\GameObject.h" />
+    <ClInclude Include="Source\Game\RpgGame.h" />
+    <ClInclude Include="Source\Math\Math.h" />
+    <ClInclude Include="Source\Platform\IApplication.h" />
+    <ClInclude Include="Source\Platform\SfmlApplication.h" />
+    <ClInclude Include="Source\Platform\WindowsApplication.h" />
+    <ClInclude Include="Source\Platform\WindowsMessageHandler.h" />
+    <ClInclude Include="Source\Platform\WindowsWindow.h" />
+    <ClInclude Include="Source\Managers\ResourceManager.h" />
+    <ClInclude Include="Source\RHI\Character.h" />
+    <ClInclude Include="Source\RHI\Renderer.h" />
+    <ClInclude Include="Source\RHI\Shader.h" />
+    <ClInclude Include="Source\RHI\Texture.h" />
+    <ClInclude Include="Source\RuntimeSupport\IRuntime.h" />
+    <ClInclude Include="Source\Managers\StateManager.h" />
+    <ClInclude Include="Source\stdpch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Shaders\basic.fragment" />
+    <None Include="Assets\Shaders\basic.vertex" />
+    <None Include="Assets\Shaders\sprite.fragment" />
+    <None Include="Assets\Shaders\sprite.vertex" />
+    <None Include="Assets\Shaders\text.fragment" />
+    <None Include="Assets\Shaders\text.vertex" />
+    <None Include="Assets\Shaders\texture.fragment" />
+    <None Include="Assets\Shaders\texture.vertex" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Textures\awesomeface.png" />
+    <Image Include="Assets\Textures\container.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

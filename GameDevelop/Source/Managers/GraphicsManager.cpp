@@ -4,6 +4,9 @@
 #include <cstdlib>
 #include <iostream>
 
+#include "../Renderer/SpriteRenderer.h"
+#include "../Renderer/TextRenderer.h"
+
 GraphicsManager* GraphicsManager::mSingleGraphicsManager = nullptr;
 
 GraphicsManager* GraphicsManager::Get()
@@ -26,5 +29,35 @@ int GraphicsManager::Initialize()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	mSpriteRenderer = new SpriteRenderer;
+	mTextRenderer = new TextRenderer;
+
+	mSpriteRenderer->Initialize();
+	mTextRenderer->Initialize();
+
 	return 1;
+}
+
+void GraphicsManager::Release()
+{
+	mSpriteRenderer->Release();
+	mTextRenderer->Release();
+
+	delete mSpriteRenderer;
+	delete mTextRenderer;
+
+	delete mSingleGraphicsManager;
+
+		
+}
+
+void GraphicsManager::Draw()
+{
+}
+
+GraphicsManager::GraphicsManager()
+	:mSpriteRenderer(nullptr),
+	mTextRenderer(nullptr)
+{
+
 }

@@ -7,10 +7,15 @@ public:
 
 	
 	static StateManager* Get();
+
+	void Release();
+
 	void GameStart();
-	void GameClose();
+	void GameOver();
+	void GamePause();
 
 	bool IsGameRuning();
+	bool IsGameOver();
 private:
 
 	enum class GameState
@@ -25,3 +30,5 @@ private:
 private:
 	StateManager();
 };
+
+extern StateManager* g_pStateManager;

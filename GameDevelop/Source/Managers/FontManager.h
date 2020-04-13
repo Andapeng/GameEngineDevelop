@@ -16,10 +16,12 @@ public:
 	static FontManager* Get();
 
 	int LoadFont(const char* filepathName);
-	int LoadCharacter();
+	int LoadCharacter(wchar_t unicode);
 private:
 	FT_Library  mLibrary;   /* handle to library     */
 	FT_Face     mFace;      /* handle to face object */
 
 	static FontManager* mSingleFontManager;
 };
+
+extern FontManager* g_pFontManager;

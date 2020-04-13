@@ -1,15 +1,26 @@
 #pragma once
-#include <sfml/Graphics.hpp>
+#include <string>
+#include "../Component/Transform.h"
+#include "Sprite.h"
+class HitInfo;
 class GameObject
 {
 public:
 	GameObject();
-	int GetTexture()const { return mTexture; }
+	GameObject(GameObject& obj);
+	~GameObject();
+	virtual void OnRender();
+	virtual void OnKeyPressed();
+	virtual void OnCollide(HitInfo& hitInfo);
+
+	virtual void Update(float elasedTime);
 
 protected:
+	Transform* mTransform;
+	Sprite* mSprite;
+
 private:
-	int mID;
-	int mTexture;
-	int xPos;
-	int yPos;
+	int mObjectID;
+	int mInstanceID;
+	
 };

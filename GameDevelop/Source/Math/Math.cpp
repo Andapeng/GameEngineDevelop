@@ -18,6 +18,17 @@ Eigen::Matrix4f Ortho(float left, float right, float bottom, float top, float zN
 	return result;
 }
 
+Eigen::Matrix4f Ortho(float left, float right, float bottom, float top)
+{
+	Eigen::Matrix4f result = Eigen::Matrix4f::Identity();
+	result(0, 0) = 2 / (right - left);
+	result(1, 1) = 2 / (top - bottom);
+	result(2, 2) = 1;
+	result(0, 3) = -(right + left) / (right - left);
+	result(1, 3) = -(top + bottom) / (top - bottom);
+	return result;
+}
+
 Eigen::Matrix4f Perspective()
 {
 	return Eigen::Matrix4f();

@@ -17,14 +17,24 @@ StateManager* StateManager::Get()
 	return mSingleStateMgr;
 }
 
+void StateManager::Release()
+{
+	delete mSingleStateMgr;
+}
+
 void StateManager::GameStart()
 {
 	mGameState = GameState::running;
 }
 
-void StateManager::GameClose()
+void StateManager::GameOver()
 {
 	mGameState = GameState::closed;
+}
+
+void StateManager::GamePause()
+{
+	mGameState = GameState::paused;
 }
 
 bool StateManager::IsGameRuning()
@@ -34,4 +44,9 @@ bool StateManager::IsGameRuning()
 		return true;
 	}
 	return false;
+}
+
+bool StateManager::IsGameOver()
+{
+	return mGameState == GameState::closed;
 }

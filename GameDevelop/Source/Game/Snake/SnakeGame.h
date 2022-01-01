@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include "../GameInstance.h"
 
+class GameObject;
+
 class SnakeGame : public GameInstance
 {
 
@@ -29,6 +31,10 @@ public:
 	int Stop() override;
 	int Pause() override;
 	int Start() override;
-private:
 	
+private:
+	bool AddGameObject(std::string objectName, GameObject* gameObject);
+	GameObject* GetGameObject(std::string objectName) { return m_GameObjectsMap[objectName]; }
+private:
+	std::map<std::string, GameObject*> m_GameObjectsMap;
 };

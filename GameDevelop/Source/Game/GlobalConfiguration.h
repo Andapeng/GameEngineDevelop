@@ -13,9 +13,17 @@ public:
 
 	int GetWidth()const { return mWidth; }
 	int GetHeight()const { return mHeight; }
+	int GetDepthBits()const { return mDepthBits; }
+	int GetStencilBits()const { return mStencilBits; }
+	int GetMajorVersion()const { return mMajorVersion; }
+	int GetMinorVersion()const { return mMinorVersion; }
 private:
 	int mWidth;
 	int mHeight;
+	int mDepthBits;
+	int mStencilBits;
+	int mMajorVersion;
+	int mMinorVersion;
 
 	Configuration();
 

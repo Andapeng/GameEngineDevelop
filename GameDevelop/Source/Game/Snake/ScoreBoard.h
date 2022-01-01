@@ -1,8 +1,14 @@
 #pragma once
-class ScoreBoard
+#include "../../Entities/RenderableObject.h"
+class ScoreBoard : public RenderableObject
 {
 public:
-	bool Write();
+	void AddPoint();
+	void OnRender() override;
+
+private:
+	bool show();
+
 private:
 	int mScore;
 };

@@ -11,12 +11,11 @@ public:
 
 	void OnRender() override;
 	void OnKeyPressed() override;
-
+	bool IsCollide(GameObject* gameObject) override;
 	void Update(float elasedTime);
 
 	bool IsAlive() { return alive; }
-	int eatFood(Food& food);
-	bool isContain(int x, int y);
+	bool IsContain(int x, int y);
 private:
 	
 	
@@ -39,10 +38,9 @@ private:
 	point mTail;
 	int mSize;
 	bool alive;
-	int mScore;
 	
 	void die();
 	void hitSelf();
 	void changeDirection(Snake_Direction dir);
-
+	int eatFood(Food& food);
 };

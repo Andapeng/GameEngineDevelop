@@ -1,6 +1,5 @@
 #pragma once
 #include "IManager.h"
-#include <OpenAL/include/alc.h>
 #include <string>
 class AudioManager
 	: public IManager
@@ -16,8 +15,6 @@ public:
 
 	void Play();
 private:
-	ALCdevice* mDevice;
-	ALCcontext* mContext;
 
 	static AudioManager* mSingleAudioManager;
 };

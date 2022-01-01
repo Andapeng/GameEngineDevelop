@@ -108,6 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -170,11 +171,11 @@
     <ClCompile Include="Source\Entities\Sprite.cpp" />
     <ClCompile Include="Source\Game\Snake\Wall.cpp" />
     <ClCompile Include="Source\Log.cpp" />
+    <ClCompile Include="Source\Managers\AudioManager.cpp" />
     <ClCompile Include="Source\Managers\InputManager.cpp" />
     <ClCompile Include="Source\Entities\GameObject.cpp" />
     <ClCompile Include="Source\Game\Snake\SnakeGame.cpp" />
     <ClCompile Include="Source\Main.cpp" />
-    <ClCompile Include="Source\Managers\AudioManager.cpp" />
     <ClCompile Include="Source\Managers\FontManager.cpp" />
     <ClCompile Include="Source\Managers\GraphicsManager.cpp" />
     <ClCompile Include="Source\Managers\IManager.cpp" />
@@ -183,7 +184,6 @@
     <ClCompile Include="Source\Managers\SceneManager.cpp" />
     <ClCompile Include="Source\Math\Math.cpp" />
     <ClCompile Include="Source\Message\Message.cpp" />
-    <ClCompile Include="Source\Network\InputMemoryStream.cpp" />
     <ClCompile Include="Source\Network\NetworkClient.cpp" />
     <ClCompile Include="Source\Physics\HitInfo.cpp" />
     <ClCompile Include="Source\Physics\Physics2D.cpp" />
@@ -225,11 +225,10 @@
     <ClInclude Include="Source\Game\Snake\SnakeMap.h" />
     <ClInclude Include="Source\Game\Tetris\TetrisGame.h" />
     <ClInclude Include="Source\Game\Snake\Wall.h" />
-    <ClInclude Include="Source\InputDevice\InputDevice.h" />
     <ClInclude Include="Source\Log.h" />
+    <ClInclude Include="Source\Managers\AudioManager.h" />
     <ClInclude Include="Source\Managers\InputManager.h" />
     <ClInclude Include="Source\Game\GlobalConfiguration.h" />
-    <ClInclude Include="Source\Managers\AudioManager.h" />
     <ClInclude Include="Source\Managers\FontManager.h" />
     <ClInclude Include="Source\Managers\GraphicsManager.h" />
     <ClInclude Include="Source\Managers\IManager.h" />
@@ -242,7 +241,6 @@
     <ClInclude Include="Source\Math\Math.h" />
     <ClInclude Include="Source\Message\Message.h" />
     <ClInclude Include="Source\Message\MessageHandler.h" />
-    <ClInclude Include="Source\Network\InputMemoryStream.h" />
     <ClInclude Include="Source\Network\NetworkClient.h" />
     <ClInclude Include="Source\Physics\HitInfo.h" />
     <ClInclude Include="Source\Physics\Physics2D.h" />
@@ -260,10 +258,9 @@
     <ClInclude Include="Source\Renderer\TextRenderer.h" />
     <ClInclude Include="Source\RHI\Texture.h" />
     <ClInclude Include="Source\RHI\VertexArray.h" />
-    <ClInclude Include="Source\RuntimeSupport\IRuntime.h" />
     <ClInclude Include="Source\Managers\StateManager.h" />
     <ClInclude Include="Source\stdpch.h" />
-    <ClInclude Include="Source\Unicode\CharFormatConver.h" />
+    <ClInclude Include="ThirdParty\asio.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\basic.fragment" />

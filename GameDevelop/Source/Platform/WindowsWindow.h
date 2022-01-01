@@ -1,6 +1,11 @@
 #pragma once
-class WindowsWindow
+#include "IWindow.h"
+class WindowsWindow : public IWindow
 {
 public:
-	void Initialize();
+	int Create() override;
+
+	void Show() override;
+
+	void ProcessEvent() override;
 };

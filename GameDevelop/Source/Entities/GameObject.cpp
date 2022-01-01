@@ -40,6 +40,11 @@ void GameObject::OnCollide(HitInfo& hitInfo)
 {
 }
 
+bool GameObject::IsCollide(GameObject* object)
+{
+	return false;
+}
+
 void GameObject::Update(float elasedTime)
 {
 }

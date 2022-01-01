@@ -19,15 +19,12 @@
 
 #include <iostream>
 #include "../GlobalConfiguration.h"
-#include "../../Network/NetworkClient.h"
+#include "ScoreBoard.h"
 
-Snake* snake;
-Food* food;
-Wall* wall;
-
-NetworkClient client;
+//NetworkClient client;
 int Score;
 Camera2D* camera;
+
 // ---
 SnakeGame::SnakeGame()
 {
@@ -53,8 +50,8 @@ int SnakeGame::Initialize()
 	g_pPhysicsManager->Initialize();
 	g_pAudioManager->Initialize();
 
-	client.Initialize();
-	client.Send();
+	//client.Initialize();
+	//client.Send();
 
 	// Pre Load Resource
 	g_pResourceManager->LoadTexture("Assets/Textures/awesomeface.png", "face");
@@ -83,9 +80,14 @@ int SnakeGame::Initialize()
 
 	g_pResourceManager->GetShader("texture_shader").Use()->SetInt("texture1", 0);
 
-	snake = new Snake("blank", 0, 0, 50);
-	food = new Food("blank");
-	wall = new Wall("blank");
+	Snake*  snake = new Snake("blank", 0, 0, 50);
+	Food* food = new Food("blank");
+	ScoreBoard* scoreBoard = new ScoreBoard;
+
+	AddGameObject("snake", snake);
+	AddGameObject("food", food);
+	AddGameObject("scoreBoard", scoreBoard);
+	//wall = new Wall("blank");
 	//MusicPlayer.openFromFile("Assets/Music/Start1.ogg");
 	//MusicPlayer.play();
 
@@ -102,11 +104,14 @@ int SnakeGame::Tick()
 }
 
 int SnakeGame::Release()
-{
-	delete wall;
-	delete food;
-	delete snake;
+{	
+	for (auto obj : m_GameObjectsMap)
+	{
+		delete obj.second;
+	}
+	m_GameObjectsMap.clear();
 	
+	g_pAudioManager->Release();
 	g_pFontManager->Release();
 	g_pGraphicsManager->Release();
 	g_pResourceManager->Release();
@@ -122,22 +127,24 @@ int SnakeGame::Release()
 // handle event
 void SnakeGame::ProcessInput()
 {
-	//player->OnKeyPressed();
 	if (IsRunning())
 	{
-		snake->OnKeyPressed();
+		for (auto obj : m_GameObjectsMap)
+		{
+			obj.second->OnKeyPressed();
+		}
 	}
 }
 
 
 void SnakeGame::Render()
 {
-	//player->OnRender(spriteRenderer);
 	if (!g_pStateManager->IsGameOver()) 
 	{
-		snake->OnRender();
-		food->OnRender();
-		wall->OnRender();
+		for (auto obj : m_GameObjectsMap)
+		{
+			obj.second->OnRender();
+		}	
 	}
 }
 
@@ -145,8 +152,10 @@ void SnakeGame::Update(float elapsedTime)
 {
 	//player->Update(elapsedTime);
 	if (IsRunning()) {
-		snake->Update(elapsedTime);
-		snake->eatFood(*food);
+		for (auto obj : m_GameObjectsMap)
+		{
+			obj.second->Update(elapsedTime);
+		}
 	}
 }
 
@@ -160,6 +169,15 @@ void SnakeGame::DetectCollide()
 	//		checkcollide return hitInfo
 	//		if hitInfo.isCollide is true
 	//		snake.OnCollide and food.OnCollide
+
+	if (GetGameObject("snake")->IsCollide(GetGameObject("food")))
+	{
+		auto scoreBoard = dynamic_cast<ScoreBoard*>(GetGameObject("scoreBoard"));
+		if (scoreBoard != nullptr)
+		{
+			scoreBoard->AddPoint();
+		}
+	}
 }
 
 
@@ -185,4 +203,10 @@ int SnakeGame::Start()
 {
 	g_pStateManager->GameStart();
 	return 0;
+}
+
+bool SnakeGame::AddGameObject(std::string objectName, GameObject* gameObject)
+{
+	m_GameObjectsMap[objectName] = gameObject;
+	return true;
 }

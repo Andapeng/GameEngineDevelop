@@ -3,5 +3,4 @@
 Brick::Brick()
 {
 	mTransform = new Transform;
-	
 }

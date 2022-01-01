@@ -11,12 +11,13 @@ int Application::Initialize()
 	config->Load("Assets/Conf/gConfig.xml");
 
 	sf::ContextSettings settings;
-	settings.depthBits = 32;
-	settings.stencilBits = 8;
-	settings.majorVersion = 4;
-	settings.minorVersion = 5;
+	settings.depthBits = config->GetDepthBits();
+	settings.stencilBits = config->GetStencilBits();
+	settings.majorVersion = config->GetMajorVersion();
+	settings.minorVersion = config->GetMinorVersion();
 
-	mWindow = new sf::RenderWindow(sf::VideoMode(config->GetWidth(), config->GetHeight()), "OpenGL with SFML", sf::Style::Default, settings);
+	mWindow = new sf::RenderWindow
+	(sf::VideoMode(config->GetWidth(), config->GetHeight()), "OpenGL with SFML", sf::Style::Default, settings);
 	mGame = new SnakeGame;
 	mGame->Initialize();
 
@@ -31,6 +32,7 @@ int Application::Run()
 		ProcessEvent();
 		elapsedTime = clock.restart().asSeconds();
 		mGame->Update(elapsedTime);
+		mGame->DetectCollide();
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 		mGame->Render();

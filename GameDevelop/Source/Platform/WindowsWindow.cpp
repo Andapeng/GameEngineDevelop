@@ -1,5 +1,14 @@
 #include "WindowsWindow.h"
 
-void WindowsWindow::Initialize()
+int WindowsWindow::Create()
+{
+    return 0;
+}
+
+void WindowsWindow::Show()
+{
+}
+
+void WindowsWindow::ProcessEvent()
 {
 }

@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<root><width>800</width><height>600</height></root>
+<root>
+  <width>800</width>
+  <height>600</height>
+  <depthBits>32</depthBits>
+  <stencilBits>8</stencilBits>
+  <graphicsLib>
+    <name>OpenGL</name>
+    <majorVersion>4</majorVersion>
+    <minorVersion>5</minorVersion>
+  </graphicsLib>
+</root>

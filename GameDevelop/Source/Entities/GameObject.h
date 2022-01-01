@@ -11,7 +11,9 @@ public:
 	~GameObject();
 	virtual void OnRender();
 	virtual void OnKeyPressed();
+
 	virtual void OnCollide(HitInfo& hitInfo);
+	virtual bool IsCollide(GameObject* object);
 
 	virtual void Update(float elasedTime);
 

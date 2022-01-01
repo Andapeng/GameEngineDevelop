@@ -28,7 +28,7 @@ void Food::Produce(Snake* snake)
 	srand((unsigned)time(NULL));
 	x = rand() % 16;
 	y = rand() % 12;
-	while (snake->isContain(x * 50, y * 50)) {
+	while (snake->IsContain(x * 50, y * 50)) {
 		x = rand() % 16;
 		y = rand() % 12;
 	}

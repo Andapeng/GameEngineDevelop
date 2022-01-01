@@ -6,6 +6,7 @@
 #include <exception>
 #include <locale>
 
+#include "../Log.h"
 
 namespace pt = boost::property_tree;
 
@@ -34,10 +35,14 @@ int Configuration::Load(const char* pathName)
 		read_xml(pathName, tree);
 		mWidth = tree.get<int>("root.width");
 		mHeight = tree.get<int>("root.height");
+		mDepthBits = tree.get<int>("root.depthBits");
+		mStencilBits = tree.get<int>("root.stencilBits");
+		mMajorVersion = tree.get<int>("root.graphicsLib.majorVersion");
+		mMinorVersion = tree.get<int>("root.graphicsLib.minorVersion");
 	}
 	catch (const std::exception& e)
 	{
-
+		BOOST_LOG_TRIVIAL(error) << e.what();
 	}
 	
 	return 0;
@@ -55,7 +60,7 @@ int Configuration::Save(const char* pathName)
 	}
 	catch (const std::exception& e)
 	{
-
+		BOOST_LOG_TRIVIAL(error) << e.what();
 	}
 	return 0;
 }

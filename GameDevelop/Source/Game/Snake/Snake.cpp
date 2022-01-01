@@ -10,22 +10,20 @@
 #include <iostream>
 #include <fmt/printf.h>
 #include <string>
+#include <format>
 
 static int tmp_game_width = DEFAULT_WIDTH;
 static int tmp_game_height = DEFAULT_HEIGHT;
 
 float Speed = 5.0f;
-static float time = 0;
-
-std::wstring text = L"µÃ·Ö£º";
+static float sTime = 0;
 
 Snake::Snake()
 	:RenderableObject(),
 	mSize(0),
 	mDirection(Snake_Direction::RIGHT),
 	mNextDirection(Snake_Direction::RIGHT),
-	alive(true),
-	mScore(0)
+	alive(true)
 {
 }
 
@@ -34,8 +32,7 @@ Snake::Snake(std::string texture, int xpos, int ypos, int size)
 	mSize(size),
 	mDirection(Snake_Direction::RIGHT),
 	mNextDirection(Snake_Direction::RIGHT),
-	alive(true),
-	mScore(0)
+	alive(true)
 {
 	mBody.push_back({ xpos, ypos });
 	mBody.push_back({ xpos+ size, ypos });
@@ -57,7 +54,6 @@ void Snake::OnRender()
 		renderer->RenderSprite(g_pResourceManager->GetTexture(sprite->GetTexture()), Eigen::Vector2f(body.x, body.y),
 			Eigen::Vector2f(mSize, mSize), 0, Eigen::Vector3f(sprite->r(), sprite->g(), sprite->b()));
 	}
-	textRenderer->RenderText(text+ std::to_wstring(mScore), 0.0f, 10.0f, 1.0f, Eigen::Vector3f(1.0f, 0.0f, 0.0f));
 }
 
 void Snake::OnKeyPressed()
@@ -82,12 +78,23 @@ void Snake::OnKeyPressed()
 
 }
 
+bool Snake::IsCollide(GameObject* gameObject)
+{
+	Food* food = dynamic_cast<Food*>(gameObject);
+	if (food != nullptr)
+	{
+		return this->eatFood(*food);
+	}
+	return false;
+}
+
+
 void Snake::Update(float elasedTime)
 {
 	if (alive) 
 	{
-		time += elasedTime;
-		if (time > 1.0f / Speed)
+		sTime += elasedTime;
+		if (sTime > 1.0f / Speed)
 		{
 			mTail = mBody.front();
 			if (mNextDirection == Snake_Direction::RIGHT && mDirection != Snake_Direction::LEFT)
@@ -127,7 +134,7 @@ void Snake::Update(float elasedTime)
 				mBody.push_back(newPoint);
 			}
 			hitSelf();
-			time = 0;
+			sTime = 0;
 		}
 	}
 }
@@ -145,14 +152,12 @@ int Snake::eatFood(Food& food)
 		fmt::print("snake eat food {1} : {0} ", foodPosX, foodPosY);
 		mBody.push_front(mTail);
 		food.Produce(this);
-		mScore += 50;
-		std::cout << "total score: " << mScore << std::endl;
 		return 1;
 	}
 	return 0;
 }
 
-bool Snake::isContain(int x, int y)
+bool Snake::IsContain(int x, int y)
 {
 	int num = 0;
 	for (auto body : mBody)

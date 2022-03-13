@@ -352,5 +352,7 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-GameDevelop/x64/
-GameDevelop/ThirdParty/
+Engine/x64/
+Engine/ThirdParty/
+Engine/Assets
+Temp

@@ -34,23 +34,16 @@ SnakeGame::SnakeGame()
 int SnakeGame::Initialize()
 {
 
-	// Managers Initializing
-	g_pStateManager = StateManager::Get();
-	g_pResourceManager = ResourceManager::Get();
-	g_pGraphicsManager = GraphicsManager::Get();
-	g_pFontManager = FontManager::Get();
-	g_pInputManager = InputManager::Get();
-	g_pPhysicsManager = PhysicsManager::Get();
-	g_pAudioManager = AudioManager::Get();
+	GameInstance::Initialize();
 
-	g_pGraphicsManager->Initialize();
-	g_pFontManager->Initialize();
-	g_pInputManager->Initialize();
-	g_pPhysicsManager->Initialize();
-	g_pAudioManager->Initialize();
 
+	// Load Game Instance Config
+	// LoadGameConfig("config path");
+	// 
+	
 	// Pre Load Resource
 	g_pResourceManager->LoadTexture("Assets/Textures/awesomeface.png", "face");
+	g_pResourceManager->LoadTexture("Assets/Textures/awesomeface_transparent.png", "face_transparent");
 	g_pResourceManager->LoadTexture("Assets/Textures/dialogbox005.png", "dialogbox");
 	g_pResourceManager->LoadTexture("Assets/Textures/Background2.jpg", "background");
 	g_pResourceManager->LoadTexture("Assets/Textures/girl001.jpg", "character");
@@ -72,16 +65,13 @@ int SnakeGame::Initialize()
 
 	g_pResourceManager->GetShader("texture_shader").Use()->SetInt("texture1", 0);
 
-	Snake*  snake = new Snake("blank", 0, 0, 50);
+	Snake*  snake = new Snake("face_transparent", 0, 0, 50);
 	Food* food = new Food("blank");
 	ScoreBoard* scoreBoard = new ScoreBoard;
 
 	AddGameObject("snake", snake);
 	AddGameObject("food", food);
 	AddGameObject("scoreBoard", scoreBoard);
-	//wall = new Wall("blank");
-	//MusicPlayer.openFromFile("Assets/Music/Start1.ogg");
-	//MusicPlayer.play();
 
 	this->Start();
 	return 0;
@@ -102,13 +92,6 @@ int SnakeGame::Release()
 		delete obj.second;
 	}
 	m_GameObjectsMap.clear();
-	
-	g_pAudioManager->Release();
-	g_pFontManager->Release();
-	g_pGraphicsManager->Release();
-	g_pResourceManager->Release();
-	g_pInputManager->Release();
-	g_pPhysicsManager->Release();
 
 	return 0;
 }

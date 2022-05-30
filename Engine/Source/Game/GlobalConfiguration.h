@@ -1,6 +1,7 @@
 #pragma once
 const int DEFAULT_WIDTH = 800;
 const int DEFAULT_HEIGHT = 600;
+#include <string>
 
 class Configuration
 {
@@ -17,6 +18,7 @@ public:
 	int GetStencilBits()const { return mStencilBits; }
 	int GetMajorVersion()const { return mMajorVersion; }
 	int GetMinorVersion()const { return mMinorVersion; }
+	std::string GetGraphicsLibName()const { return mGraphicsLibName; }
 private:
 	int mWidth;
 	int mHeight;
@@ -24,6 +26,7 @@ private:
 	int mStencilBits;
 	int mMajorVersion;
 	int mMinorVersion;
+	std::string mGraphicsLibName;
 
 	Configuration();
 

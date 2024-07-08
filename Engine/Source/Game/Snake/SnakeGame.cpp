@@ -1,7 +1,7 @@
 #include "SnakeGame.h"
+
 #include "../../Managers/Managers.h"
 
-#include <GLAD/glad.h>
 #include "../../RHI/Shader.h"
 #include "../../RHI/Texture.h"
 #include "../../RHI/Character.h"
@@ -13,13 +13,19 @@
 #include "../../Entities/Player.h"
 #include "../../Entities/Camera2D.h"
 
+#include "../../Config/GlobalConfiguration.h"
+#include "../../GameInstance.h"
+
+#include "../../Gui/Label.h"
+
 #include "Snake.h"
 #include "Food.h"
-#include "Wall.h"
 
 #include <iostream>
-#include "../GlobalConfiguration.h"
 #include "ScoreBoard.h"
+#include "../../Scene/Scene.h"
+#include "Wall.h"
+
 
 int Score;
 Camera2D* camera;
@@ -30,12 +36,15 @@ SnakeGame::SnakeGame()
 	
 }
 
+SnakeGame::~SnakeGame()
+{
+}
+
 // ---public
 int SnakeGame::Initialize()
 {
 
 	GameInstance::Initialize();
-
 
 	// Load Game Instance Config
 	// LoadGameConfig("config path");
@@ -65,13 +74,8 @@ int SnakeGame::Initialize()
 
 	g_pResourceManager->GetShader("texture_shader").Use()->SetInt("texture1", 0);
 
-	Snake*  snake = new Snake("face_transparent", 0, 0, 50);
-	Food* food = new Food("blank");
-	ScoreBoard* scoreBoard = new ScoreBoard;
-
-	AddGameObject("snake", snake);
-	AddGameObject("food", food);
-	AddGameObject("scoreBoard", scoreBoard);
+	Scene readyScene("readyScene");
+	//Sprite background("background");
 
 	this->Start();
 	return 0;
@@ -96,9 +100,6 @@ int SnakeGame::Release()
 	return 0;
 }
 
-
-// ---private
-
 // handle event
 void SnakeGame::ProcessInput()
 {
@@ -106,7 +107,10 @@ void SnakeGame::ProcessInput()
 	{
 		for (auto obj : m_GameObjectsMap)
 		{
-			obj.second->OnKeyPressed();
+			if (obj.second)
+			{
+				obj.second->OnKeyPressed();
+			}
 		}
 	}
 }
@@ -118,7 +122,10 @@ void SnakeGame::Render()
 	{
 		for (auto obj : m_GameObjectsMap)
 		{
-			obj.second->OnRender();
+			if (obj.second)
+			{
+				obj.second->OnRender();
+			}
 		}	
 	}
 }
@@ -129,41 +136,64 @@ void SnakeGame::Update(float elapsedTime)
 	if (IsRunning()) {
 		for (auto obj : m_GameObjectsMap)
 		{
-			obj.second->Update(elapsedTime);
+			if (obj.second)
+			{
+				obj.second->Update(elapsedTime);
+			}
 		}
+
+		if (const auto fpsLabel = dynamic_cast<Label*>(GetGameObject("fpsLabel")))
+		{
+			fpsLabel->SetText(L"FPS:" + std::to_wstring(g_pStatisticsManager->GetFPS()));
+		}
+		
 	}
 }
 
 void SnakeGame::DetectCollide()
 {
-	// snake for all wall
-	//		checkcollide return hitInfo
-	//		if hitInfo.isCollide is true
-	//		snake.OnCollide and wall[n].OnCollide
-	// snake and food
-	//		checkcollide return hitInfo
-	//		if hitInfo.isCollide is true
-	//		snake.OnCollide and food.OnCollide
-
-	if (GetGameObject("snake")->IsCollide(GetGameObject("food")))
+	if (GetGameObject("snake") == nullptr)
 	{
-		auto scoreBoard = dynamic_cast<ScoreBoard*>(GetGameObject("scoreBoard"));
-		if (scoreBoard != nullptr)
+		return;
+	}
+	if (GetGameObject("food" ) == nullptr)
+	{
+		return;
+	}
+
+	for (auto& gameObject : m_GameObjectsMap)
+	{
+		if(GetGameObject("snake")->IsCollide(gameObject.second))
 		{
-			scoreBoard->AddPoint();
+			if (IsFood(gameObject.second))
+			{
+				AddPoint();
+			}
+
+			// if (IsWall(gameObject.second))
+			// {
+			// 	Stop();
+			// 	break;
+			// }
 		}
 	}
+	
 }
 
 
 // change game state
 bool SnakeGame::IsRunning()
 {
-	return g_pStateManager->IsGameRuning();
+	return g_pStateManager->IsGameRunning();
 }
 
 int SnakeGame::Stop()
 {
+	for (auto& obj : m_GameObjectsMap)
+	{
+		delete obj.second;
+	}
+	m_GameObjectsMap.clear();
 	g_pStateManager->GameOver();
 	return 0;
 }
@@ -176,12 +206,67 @@ int SnakeGame::Pause()
 
 int SnakeGame::Start()
 {
+	if (g_pStateManager->IsGameOver())
+	{
+		Snake* snake = new Snake("face_transparent", 0, 0, 50);
+		Food* food = new Food("blank");
+		ScoreBoard* scoreBoard = new ScoreBoard;
+		Label* fpsLabel = new Label(L"FPS:", 0.0f, 50.0f, 1.0f);
+		Wall* wall = new Wall("blank");
+
+		AddGameObject("snake", snake);
+		AddGameObject("food", food);
+		AddGameObject("scoreBoard", scoreBoard);
+		AddGameObject("fpsLabel", fpsLabel);
+		// AddGameObject("wall", wall);
+	}
+
 	g_pStateManager->GameStart();
 	return 0;
 }
 
-bool SnakeGame::AddGameObject(std::string objectName, GameObject* gameObject)
+void SnakeGame::AddPoint()
+{
+	auto scoreBoard = dynamic_cast<ScoreBoard*>(GetGameObject("scoreBoard"));
+	if (scoreBoard != nullptr)
+	{
+		scoreBoard->AddPoint();
+	}
+}
+
+bool SnakeGame::IsFood(GameObject* gameObject)
+{
+	Food* food = dynamic_cast<Food*>(gameObject);
+	if (food != nullptr)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool SnakeGame::IsWall(GameObject* gameObject)
+{
+	Wall* wall = dynamic_cast<Wall*>(gameObject);
+	if (wall != nullptr)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool SnakeGame::AddGameObject(const std::string& objectName, GameObject* gameObject)
 {
 	m_GameObjectsMap[objectName] = gameObject;
 	return true;
+}
+
+bool SnakeGame::AddScene(const std::string& sceneName, Scene* scene)
+{
+	m_sceneMap[sceneName] = scene;
+	return true;
+}
+
+Scene* SnakeGame::GetScene(const std::string& sceneName)
+{
+	return m_sceneMap[sceneName];
 }

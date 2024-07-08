@@ -6,9 +6,9 @@ class Transform :public IComponent
 public:
 	Transform();
 
-	virtual int GetType() { return 1; }
-	virtual bool IsType() { return true; }
-	virtual void Update() {}
+
+	void Update() override {}
+	std::string GetTypeName() override { return "Transform"; }
 
 	Eigen::Vector3f mPosition;
 	float mRotation;

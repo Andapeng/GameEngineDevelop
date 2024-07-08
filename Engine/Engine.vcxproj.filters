@@ -18,18 +18,6 @@
     <ClCompile Include="Source\Main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Platform\WindowsApplication.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Platform\SfmlApplication.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Platform\WindowsMessageHandler.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Platform\WindowsWindow.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Source\RHI\Shader.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -111,37 +99,10 @@
     <ClCompile Include="Source\Network\NetworkClient.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\Snake\Food.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Snake\Snake.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\GlobalConfiguration.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Snake\SnakeGame.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\GameInstance.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Snake\ScoreBoard.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Managers\Managers.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\Snake\Wall.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Breakout\Breakout.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Entities\Camera2D.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Game\Breakout\Brick.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Source\Gui\Label.cpp">
@@ -150,21 +111,60 @@
     <ClCompile Include="Source\Managers\AudioManager.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Managers\StatisticsManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Platform\WindowImp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Platform\Window.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Breakout\Breakout.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Breakout\Brick.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Snake\Food.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Snake\ScoreBoard.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Snake\Snake.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Snake\SnakeGame.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Snake\Wall.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameInstance.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Config\GlobalConfiguration.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\Scene.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Network\NetMessage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Managers\NetworkManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\Test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Component\Collider2D.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Platform\WindowsApplication.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Platform\IApplication.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Platform\SfmlApplication.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Platform\WindowsMessageHandler.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Platform\WindowsWindow.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Source\RHI\Shader.h">
@@ -251,15 +251,6 @@
     <ClInclude Include="Source\Message\MessageHandler.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\PlaneWar\PlaneWarGame.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Tetris\TetrisGame.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Breakout\Breakout.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Engine\Engine.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -278,31 +269,7 @@
     <ClInclude Include="Source\Log.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\Snake\Food.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Snake\Snake.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Snake\Wall.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Snake\SnakeMap.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\GlobalConfiguration.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Snake\SnakeGame.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\GameInstance.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Snake\ScoreBoard.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Managers\TimeManager.h">
+    <ClInclude Include="Source\Managers\StatisticsManager.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Source\Component\Collider2D.h">
@@ -312,9 +279,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Source\Entities\Camera2D.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\Breakout\Brick.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Source\RHI\DrawCommand.h">
@@ -327,6 +291,63 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Source\Managers\AudioManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Platform\WindowImp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Platform\Window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Breakout\Breakout.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Breakout\Brick.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\PlaneWar\PlaneWarGame.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Snake\Food.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Snake\ScoreBoard.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Snake\Snake.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Snake\SnakeGame.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Snake\SnakeMap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Snake\Wall.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Tetris\TetrisGame.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameInstance.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Config\GlobalConfiguration.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\Scene.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Network\NetMessage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Managers\NetworkManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Gui\GuiObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Snake\Level.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -350,5 +371,10 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="Assets\Conf\gConfig.xml" />
+    <Xml Include="Assets\Conf\Game.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Source\CMakeLists.txt" />
+    <Text Include="CMakeLists.txt" />
   </ItemGroup>
 </Project>

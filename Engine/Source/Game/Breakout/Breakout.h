@@ -1,5 +1,5 @@
 #pragma once
-#include "../GameInstance.h"
+#include "../../GameInstance.h"
 class Breakout : public GameInstance
 {
 	virtual int Initialize() override;

@@ -7,12 +7,12 @@ class Snake : public RenderableObject
 public:
 	Snake();
 	Snake(std::string texture, int xpos, int ypos, int size);
-	~Snake();
+	~Snake() override;
 
 	void OnRender() override;
 	void OnKeyPressed() override;
 	bool IsCollide(GameObject* gameObject) override;
-	void Update(float elasedTime);
+	void Update(float elasedTime) override;
 
 	bool IsAlive() { return alive; }
 	bool IsContain(int x, int y);

@@ -6,7 +6,7 @@ class Food : public RenderableObject
 public:
 	Food();
 	Food(std::string texture, int xpos = 0, int ypos = 0, int xsize = 50, int ysize = 50);
-	~Food();
+	~Food() override;
 	void Produce(Snake* snake);
 private:
 

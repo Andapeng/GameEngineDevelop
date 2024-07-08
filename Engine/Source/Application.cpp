@@ -1,8 +1,11 @@
 #include "Application.h"
 #include <GLAD/glad.h>
+
+#include "Config/GlobalConfiguration.h"
 #include "Managers/InputManager.h"
-#include "Game/GlobalConfiguration.h"
 #include "Game/Snake/SnakeGame.h"
+#include "Game/Breakout/Breakout.h"
+#include "Managers/StatisticsManager.h"
 
 int Application::Initialize()
 {
@@ -16,9 +19,10 @@ int Application::Initialize()
 	settings.majorVersion = config->GetMajorVersion();
 	settings.minorVersion = config->GetMinorVersion();
 
-	mWindow = new sf::RenderWindow
-	(sf::VideoMode(config->GetWidth(), config->GetHeight()), "OpenGL with SFML", sf::Style::Default, settings);
+	mWindow = new sadp::Window;
+	mWindow->Create();
 	mGame = new SnakeGame;
+	// mGame = new Breakout;
 	mGame->Initialize();
 
 	return 0;
@@ -28,16 +32,19 @@ int Application::Run()
 {
 	sf::Clock clock;
 	float elapsedTime = clock.getElapsedTime().asSeconds();
-	while (mWindow->isOpen()) {
+	while (mWindow->IsOpen()) {
+
 		ProcessEvent();
+
 		elapsedTime = clock.restart().asSeconds();
 		mGame->Update(elapsedTime);
-		mGame->DetectCollide();
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		mGame->Render();
+		g_pStatisticsManager->UpdateFPS(elapsedTime);
 
-		mWindow->display();
+		mGame->DetectCollide();
+
+		mWindow->OnRenderBefore();
+		mGame->Render();
+		mWindow->Show();
 	}
 	return 0;
 }
@@ -49,40 +56,10 @@ int Application::Release()
 	return 0;
 }
 
-int Application::ProcessEvent()
+void Application::ProcessEvent()
 {
-	sf::Event event;
-	while (mWindow->pollEvent(event)) {
-		if (event.type == sf::Event::Closed) {
-			mWindow->close();
-			return 0;
-		}
-		if (event.type == sf::Event::EventType::KeyPressed) {
-			switch (event.key.code)
-			{
-			case sf::Keyboard::Key::Escape:
-				mGame->Stop();
-				break;
-			case sf::Keyboard::Key::Enter:
-				mGame->Start();
-				break;
-			case sf::Keyboard::Key::Space:
-				mGame->Pause();
-				break;
-			default:
-				InputManager::Get()->KeyPressed(event.key.code);
-				break;
-			}
-		}
-		if (event.type == sf::Event::EventType::KeyReleased) {
-			InputManager::Get()->KeyRelease(event.key.code);
-		}
-		if (event.type == sf::Event::Resized)
-		{
-			glViewport(0, 0, event.size.width, event.size.height);
-		}
-	}
-
+	mWindow->ProcessEvent();
 	mGame->ProcessInput();
-	return 0;
 }
+
+

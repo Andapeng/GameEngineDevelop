@@ -2,6 +2,8 @@
 class GameInstance
 {
 public:
+	virtual ~GameInstance() = default;
+
 	virtual int Initialize();
 	virtual int Tick();
 	virtual int Release();

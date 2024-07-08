@@ -7,7 +7,7 @@ class RenderableObject : public GameObject
 public:
 	RenderableObject();
 	RenderableObject(std::string texture, int xpos, int ypos, int xsize, int ysize);
-	~RenderableObject();
+	~RenderableObject() override;
 
 	void OnRender() override;
 	

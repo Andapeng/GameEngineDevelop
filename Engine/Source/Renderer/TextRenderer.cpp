@@ -34,7 +34,7 @@ int TextRenderer::Initialize()
 
 void TextRenderer::RenderText(std::wstring text, float x, float y, float scale, Eigen::Vector3f color)
 {
-	if (StateManager::Get()->IsGameRuning()) 
+	if (StateManager::Get()->IsGameRunning()) 
 	{
 		ResourceManager::Get()->GetShader("text_shader").Use()->SetVector3f("textColor", color);
 		glActiveTexture(GL_TEXTURE0);

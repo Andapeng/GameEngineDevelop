@@ -1,6 +1,6 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "Game/GameInstance.h"
+#include "GameInstance.h"
+#include "Platform/Window.h"
 
 class Application
 {
@@ -9,10 +9,11 @@ public:
 	int Run();
 	int Release();
 protected:
-	int ProcessEvent();
+	void ProcessEvent();
 
 
 private:
 	GameInstance* mGame;
-	sf::RenderWindow* mWindow;
+//	sf::RenderWindow* mWindow;
+	sadp::Window* mWindow;
 };

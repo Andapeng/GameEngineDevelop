@@ -3,7 +3,7 @@
 StateManager* StateManager::mSingleStateMgr = nullptr;
 
 StateManager::StateManager()
-	:mGameState(GameState::closed)
+	:m_gameState(GameState::closed)
 {
 
 }
@@ -24,29 +24,31 @@ void StateManager::Release()
 
 void StateManager::GameStart()
 {
-	mGameState = GameState::running;
+	m_gameState = GameState::running;
 }
 
 void StateManager::GameOver()
 {
-	mGameState = GameState::closed;
+	m_gameState = GameState::closed;
 }
 
 void StateManager::GamePause()
 {
-	mGameState = GameState::paused;
+	m_gameState = GameState::paused;
 }
 
-bool StateManager::IsGameRuning()
+bool StateManager::IsGameRunning()
 {
-	if (mGameState == GameState::running)
-	{
-		return true;
-	}
-	return false;
+	return m_gameState == GameState::running;
 }
 
 bool StateManager::IsGameOver()
 {
-	return mGameState == GameState::closed;
+	return m_gameState == GameState::closed;
+}
+
+bool StateManager::IsGamePause()
+{
+	return m_gameState == GameState::paused;
+
 }

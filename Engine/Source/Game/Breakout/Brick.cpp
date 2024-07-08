@@ -2,5 +2,5 @@
 
 Brick::Brick()
 {
-	mTransform = new Transform;
+	m_transform = new Transform;
 }

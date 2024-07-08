@@ -5,4 +5,7 @@ GraphicsManager* g_pGraphicsManager;
 FontManager* g_pFontManager;
 InputManager* g_pInputManager;
 PhysicsManager* g_pPhysicsManager;
+NetworkManager* g_pNetworkManager;
 AudioManager* g_pAudioManager;
+StatisticsManager* g_pStatisticsManager;
+SceneManager* g_pSceneManager;

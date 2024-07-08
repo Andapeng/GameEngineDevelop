@@ -30,26 +30,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -76,8 +76,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(BOOST_HOME);C:\Project\GameEngineDevelop\Engine\ThirdParty;C:\Project\GameEngineDevelop\Engine\ThirdParty\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(BOOST_HOME)\stage\lib;C:\Project\GameEngineDevelop\Engine\ThirdParty\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(BOOST_HOME);$(ProjectDir)ThirdParty;$(ProjectDir);$(ProjectDir)\ThirdParty\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(BOOST_HOME)\stage\lib;$(ProjectDir)ThirdParty\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)$(OS)_$(Platform)\$(ProjectName)\$(Configuration)\</OutDir>
     <IntDir>Temp\$(OS)_$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -159,41 +159,41 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Application.cpp" />
+    <ClCompile Include="Source\Component\Collider2D.cpp" />
     <ClCompile Include="Source\Component\Transform.cpp" />
     <ClCompile Include="Source\Entities\Camera2D.cpp" />
     <ClCompile Include="Source\Entities\Player.cpp" />
     <ClCompile Include="Source\Entities\RenderableObject.cpp" />
+    <ClCompile Include="Source\GameInstance.cpp" />
     <ClCompile Include="Source\Game\Breakout\Breakout.cpp" />
     <ClCompile Include="Source\Game\Breakout\Brick.cpp" />
-    <ClCompile Include="Source\Game\GameInstance.cpp" />
     <ClCompile Include="Source\Game\Snake\Food.cpp" />
-    <ClCompile Include="Source\Game\GlobalConfiguration.cpp" />
-    <ClCompile Include="Source\Gui\Label.cpp" />
     <ClCompile Include="Source\Game\Snake\ScoreBoard.cpp" />
     <ClCompile Include="Source\Game\Snake\Snake.cpp" />
-    <ClCompile Include="Source\Entities\Sprite.cpp" />
+    <ClCompile Include="Source\Game\Snake\SnakeGame.cpp" />
     <ClCompile Include="Source\Game\Snake\Wall.cpp" />
+    <ClCompile Include="Source\Config\GlobalConfiguration.cpp" />
+    <ClCompile Include="Source\Gui\Label.cpp" />
+    <ClCompile Include="Source\Entities\Sprite.cpp" />
     <ClCompile Include="Source\Log.cpp" />
     <ClCompile Include="Source\Managers\AudioManager.cpp" />
     <ClCompile Include="Source\Managers\InputManager.cpp" />
     <ClCompile Include="Source\Entities\GameObject.cpp" />
-    <ClCompile Include="Source\Game\Snake\SnakeGame.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Managers\FontManager.cpp" />
     <ClCompile Include="Source\Managers\GraphicsManager.cpp" />
     <ClCompile Include="Source\Managers\IManager.cpp" />
     <ClCompile Include="Source\Managers\Managers.cpp" />
+    <ClCompile Include="Source\Managers\NetworkManager.cpp" />
     <ClCompile Include="Source\Managers\PhysicsManager.cpp" />
     <ClCompile Include="Source\Managers\SceneManager.cpp" />
+    <ClCompile Include="Source\Managers\StatisticsManager.cpp" />
     <ClCompile Include="Source\Math\Math.cpp" />
     <ClCompile Include="Source\Message\Message.cpp" />
+    <ClCompile Include="Source\Network\NetMessage.cpp" />
     <ClCompile Include="Source\Network\NetworkClient.cpp" />
     <ClCompile Include="Source\Physics\HitInfo.cpp" />
     <ClCompile Include="Source\Physics\Physics2D.cpp" />
-    <ClCompile Include="Source\Platform\SfmlApplication.cpp" />
-    <ClCompile Include="Source\Platform\WindowsApplication.cpp" />
-    <ClCompile Include="Source\Platform\WindowsMessageHandler.cpp" />
-    <ClCompile Include="Source\Platform\WindowsWindow.cpp" />
     <ClCompile Include="Source\Managers\ResourceManager.cpp" />
     <ClCompile Include="Source\RHI\Character.cpp" />
     <ClCompile Include="Source\Renderer\Renderer.cpp" />
@@ -202,7 +202,11 @@
     <ClCompile Include="Source\Renderer\SpriteRenderer.cpp" />
     <ClCompile Include="Source\Renderer\TextRenderer.cpp" />
     <ClCompile Include="Source\RHI\Texture.cpp" />
+    <ClCompile Include="Source\Scene\Scene.cpp" />
+    <ClCompile Include="Test\Test.cpp" />
     <ClCompile Include="ThirdParty\GLAD\glad.c" />
+    <ClCompile Include="Source\Platform\WindowImp.cpp" />
+    <ClCompile Include="Source\Platform\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Application.h" />
@@ -216,42 +220,42 @@
     <ClInclude Include="Source\Entities\Entities.h" />
     <ClInclude Include="Source\Entities\Player.h" />
     <ClInclude Include="Source\Entities\RenderableObject.h" />
+    <ClInclude Include="Source\GameInstance.h" />
     <ClInclude Include="Source\Game\Breakout\Breakout.h" />
     <ClInclude Include="Source\Game\Breakout\Brick.h" />
-    <ClInclude Include="Source\Game\GameInstance.h" />
-    <ClInclude Include="Source\Game\Snake\Food.h" />
-    <ClInclude Include="Source\Gui\Label.h" />
     <ClInclude Include="Source\Game\PlaneWar\PlaneWarGame.h" />
+    <ClInclude Include="Source\Game\Snake\Food.h" />
+    <ClInclude Include="Source\Game\Snake\Level.h" />
     <ClInclude Include="Source\Game\Snake\ScoreBoard.h" />
     <ClInclude Include="Source\Game\Snake\Snake.h" />
-    <ClInclude Include="Source\Entities\Sprite.h" />
+    <ClInclude Include="Source\Game\Snake\SnakeGame.h" />
     <ClInclude Include="Source\Game\Snake\SnakeMap.h" />
-    <ClInclude Include="Source\Game\Tetris\TetrisGame.h" />
     <ClInclude Include="Source\Game\Snake\Wall.h" />
+    <ClInclude Include="Source\Game\Tetris\TetrisGame.h" />
+    <ClInclude Include="Source\Config\GlobalConfiguration.h" />
+    <ClInclude Include="Source\Gui\GuiObject.h" />
+    <ClInclude Include="Source\Gui\Label.h" />
+    <ClInclude Include="Source\Entities\Sprite.h" />
     <ClInclude Include="Source\Log.h" />
     <ClInclude Include="Source\Managers\AudioManager.h" />
     <ClInclude Include="Source\Managers\InputManager.h" />
-    <ClInclude Include="Source\Game\GlobalConfiguration.h" />
     <ClInclude Include="Source\Managers\FontManager.h" />
     <ClInclude Include="Source\Managers\GraphicsManager.h" />
     <ClInclude Include="Source\Managers\IManager.h" />
     <ClInclude Include="Source\Entities\GameObject.h" />
-    <ClInclude Include="Source\Game\Snake\SnakeGame.h" />
     <ClInclude Include="Source\Managers\Managers.h" />
+    <ClInclude Include="Source\Managers\NetworkManager.h" />
     <ClInclude Include="Source\Managers\PhysicsManager.h" />
     <ClInclude Include="Source\Managers\SceneManager.h" />
-    <ClInclude Include="Source\Managers\TimeManager.h" />
+    <ClInclude Include="Source\Managers\StatisticsManager.h" />
     <ClInclude Include="Source\Math\Math.h" />
     <ClInclude Include="Source\Message\Message.h" />
     <ClInclude Include="Source\Message\MessageHandler.h" />
+    <ClInclude Include="Source\Network\NetMessage.h" />
     <ClInclude Include="Source\Network\NetworkClient.h" />
     <ClInclude Include="Source\Physics\HitInfo.h" />
     <ClInclude Include="Source\Physics\Physics2D.h" />
     <ClInclude Include="Source\Platform\IApplication.h" />
-    <ClInclude Include="Source\Platform\SfmlApplication.h" />
-    <ClInclude Include="Source\Platform\WindowsApplication.h" />
-    <ClInclude Include="Source\Platform\WindowsMessageHandler.h" />
-    <ClInclude Include="Source\Platform\WindowsWindow.h" />
     <ClInclude Include="Source\Managers\ResourceManager.h" />
     <ClInclude Include="Source\RHI\Character.h" />
     <ClInclude Include="Source\Renderer\Renderer.h" />
@@ -262,8 +266,11 @@
     <ClInclude Include="Source\RHI\Texture.h" />
     <ClInclude Include="Source\RHI\VertexArray.h" />
     <ClInclude Include="Source\Managers\StateManager.h" />
+    <ClInclude Include="Source\Scene\Scene.h" />
     <ClInclude Include="Source\stdpch.h" />
     <ClInclude Include="ThirdParty\asio.hpp" />
+    <ClInclude Include="Source\Platform\WindowImp.h" />
+    <ClInclude Include="Source\Platform\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\basic.fragment" />
@@ -280,7 +287,12 @@
     <Image Include="Assets\Textures\container.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="Assets\Conf\Game.xml" />
     <Xml Include="Assets\Conf\gConfig.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
+    <Text Include="Source\CMakeLists.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -17,6 +17,8 @@ private:
 	void Send();
 	void Recv();
 
+	void SaveToFile(const std::string& msgString);
+
 	std::shared_ptr<asio::io_context> m_ioContext;
 	std::shared_ptr<udp::resolver> m_resolver;
 	//std::shared_ptr<udp::endpoint> m_endpoint;

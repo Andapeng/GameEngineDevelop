@@ -1,16 +1,18 @@
 #include "Snake.h"
 
+#include <iostream>
+#include <fmt/printf.h>
+#include <string>
+#include <format>
+
 #include "../../Entities/Sprite.h"
 #include "../../Managers/Managers.h"
 #include "../../Renderer/SpriteRenderer.h"
 #include "../../Renderer/TextRenderer.h"
 
-#include "../GlobalConfiguration.h"
-
-#include <iostream>
-#include <fmt/printf.h>
-#include <string>
-#include <format>
+#include "../../Config/GlobalConfiguration.h"
+#include "../../Log.h"
+#include "Wall.h"
 
 static int tmp_game_width = DEFAULT_WIDTH;
 static int tmp_game_height = DEFAULT_HEIGHT;
@@ -85,6 +87,12 @@ bool Snake::IsCollide(GameObject* gameObject)
 	{
 		return this->eatFood(*food);
 	}
+	Wall* wall = dynamic_cast<Wall*>(gameObject);
+	if (wall != nullptr)
+	{
+		die();
+		return true;
+	}
 	return false;
 }
 
@@ -148,8 +156,7 @@ int Snake::eatFood(Food& food)
 
 	if (foodPosX == body.x && foodPosY == body.y) {
 
-		//std::cout << "snake eat food " << foodPosX << " : " << foodPosY << std::endl;
-		fmt::print("snake eat food {1} : {0} ", foodPosX, foodPosY);
+		Logger::LogInfo(fmt::format("snake eat food {1} : {0} ", foodPosX, foodPosY));
 		mBody.push_front(mTail);
 		food.Produce(this);
 		return 1;
@@ -164,7 +171,7 @@ bool Snake::IsContain(int x, int y)
 	{
 		if (x == body.x && y == body.y && num != mBody.size())
 		{
-			std::cout << "x, y is a snake body" << std::endl;
+			Logger::LogInfo("x, y is a snake body");
 			return true;
 		}
 		num++;
@@ -175,6 +182,7 @@ bool Snake::IsContain(int x, int y)
 
 void Snake::die()
 {
+	alive = false;
 }
 
 void Snake::hitSelf()
@@ -186,7 +194,7 @@ void Snake::hitSelf()
 		if (head.x == body.x && head.y == body.y && num != mBody.size() - 1)
 		{
 			alive = false;
-			std::cout << "hit snake self" << std::endl;
+			Logger::LogInfo("hit snake self");
 		}
 		num++;
 	}

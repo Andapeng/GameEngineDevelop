@@ -17,13 +17,12 @@ int InputManager::Initialize()
 	mStringToKeyMap["Down"] = sf::Keyboard::Key::Down;
 	mStringToKeyMap["Left"] = sf::Keyboard::Key::Left;
 	mStringToKeyMap["Right"] = sf::Keyboard::Key::Right;
+	mStringToKeyMap["Upload"] = sf::Keyboard::Key::U;
 	return 1;
 }
 
 void InputManager::Tick()
 {
-
-
 }
 
 void InputManager::Release()

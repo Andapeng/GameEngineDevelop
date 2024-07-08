@@ -6,3 +6,6 @@
 #include "../Managers/InputManager.h"
 #include "../Managers/PhysicsManager.h"
 #include "../Managers/AudioManager.h"
+#include "../Managers/StatisticsManager.h"
+#include "../Managers/SceneManager.h"
+#include "../Managers/NetworkManager.h"

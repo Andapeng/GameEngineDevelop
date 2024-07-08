@@ -56,7 +56,7 @@ int Configuration::Load(const char* pathName)
 	}
 	catch (const std::exception& e)
 	{
-		BOOST_LOG_TRIVIAL(error) << e.what();
+		Logger::LogError(e.what());
 	}
 	
 	return 0;
@@ -74,7 +74,7 @@ int Configuration::Save(const char* pathName)
 	}
 	catch (const std::exception& e)
 	{
-		BOOST_LOG_TRIVIAL(error) << e.what();
+		Logger::LogError(e.what());
 	}
 	return 0;
 }

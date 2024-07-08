@@ -45,7 +45,11 @@ int Shader::LoadShaderFile(const char* vertexShaderPath, const char* fragmentSha
 	in.open(vertexShaderPath);
 	while (in)
 	{
-		vertexShader += in.get();
+		char ch = in.get();
+		if (ch != EOF)
+		{
+			vertexShader += ch;
+		}
 	}
 	in.clear();
 	in.close();
@@ -53,13 +57,17 @@ int Shader::LoadShaderFile(const char* vertexShaderPath, const char* fragmentSha
 	in.open(fragmentShaderPath);
 	while (in)
 	{
-		fragmentShader += in.get();
+		char ch = in.get();
+		if (ch != EOF)
+		{
+			fragmentShader += ch;
+		}
 	}
 	in.clear();
 	in.close();
 
-//	std::cout << vertexShader << std::endl;
-//	std::cout << fragmentShader << std::endl;
+	//std::cout << vertexShader << std::endl;
+	//std::cout << fragmentShader << std::endl;
 	LoadShaderString(vertexShader.data(), fragmentShader.data());
 
 	return 0;

@@ -14,17 +14,19 @@ public:
 	void GameOver();
 	void GamePause();
 
-	bool IsGameRuning();
+	bool IsGameRunning();
 	bool IsGameOver();
+	bool IsGamePause();
 private:
 
 	enum class GameState
 	{
 		running = 0,
 		closed = 1,
-		paused = 2
+		paused = 2,
+		menu = 3
 	};
-	GameState mGameState;
+	GameState m_gameState;
 	
 
 private:

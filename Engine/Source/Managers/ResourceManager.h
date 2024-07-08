@@ -30,11 +30,11 @@ public:
 
 private:
 	ResourceManager();
-	static ResourceManager* mResourceMgr;
+	static ResourceManager* m_ResourceMgr;
 
-	std::map<std::string, Texture2D> mTextures;
-	std::map<std::string, Shader> mShaders;
-	std::map<wchar_t, Character> mCharacters;
+	std::map<std::string, Texture2D> m_Textures;
+	std::map<std::string, Shader> m_Shaders;
+	std::map<wchar_t, Character> m_Characters;
 };
 
 extern ResourceManager* g_pResourceManager;

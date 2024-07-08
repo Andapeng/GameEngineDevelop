@@ -9,6 +9,8 @@ class FontManager
 	: public IManager
 {
 public:
+	virtual ~FontManager();
+
 	virtual int Initialize() override;
 	virtual void Tick() override;
 	virtual void Release() override;
@@ -18,10 +20,11 @@ public:
 	int LoadFont(const char* filepathName);
 	int LoadCharacter(wchar_t unicode);
 private:
-	FT_Library  mLibrary;   /* handle to library     */
-	FT_Face     mFace;      /* handle to face object */
+	FontManager();
+	FT_Library  m_library;   /* handle to library     */
+	FT_Face     m_face;      /* handle to face object */
 
-	static FontManager* mSingleFontManager;
+	static FontManager* m_singleFontManager;
 };
 
 extern FontManager* g_pFontManager;

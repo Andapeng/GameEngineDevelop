@@ -4,22 +4,29 @@
 
 #include <iostream>
 #include "Application.h"
-
 #include "Log.h"
 
-using namespace std;
+#define RUN_TEST_CASE 1
+
+#ifdef RUN_TEST_CASE
+#include <gtest/gtest.h>
+#endif
 
 int main(int argc, char** args) {
 
-    BOOST_LOG_TRIVIAL(info) << "Engine Start. ";
+#ifdef RUN_TEST_CASE
+    testing::InitGoogleTest();
+    RUN_ALL_TESTS();
+#endif
 
+   Logger::LogInfo("Engine Start. ");
     //_CrtSetBreakAlloc(1887);
     Application app;
     app.Initialize();
     app.Run();
     app.Release();
 
-    BOOST_LOG_TRIVIAL(info) << "Engine end. ";
+    Logger::LogInfo("Engine end. ");
 
     _CrtDumpMemoryLeaks();
     return 0;

@@ -1,31 +1,26 @@
 
 #include "GameObject.h"
-
-#include "../Managers/ResourceManager.h"
 #include "../Renderer/SpriteRenderer.h"
 
 #include "../Physics/HitInfo.h"
 
-#include <Eigen/Core>
-extern ResourceManager* g_pResourceManager;
-
 GameObject::GameObject()
-	:mObjectID(0),
-	mInstanceID(0)
+	:m_objectID(0),
+	m_instanceID(0)
 {
-	mTransform = nullptr;
-	mSprite = nullptr;
+	m_transform = nullptr;
+	m_sprite = nullptr;
 }
 
 GameObject::GameObject(GameObject& obj)
 {
-	this->mObjectID = obj.mObjectID;
+	this->m_objectID = obj.m_objectID;
 }
 
 GameObject::~GameObject()
 {
-	delete mTransform;
-	delete mSprite;
+	delete m_transform;
+	delete m_sprite;
 }
 
 void GameObject::OnRender()
@@ -42,9 +37,22 @@ void GameObject::OnCollide(HitInfo& hitInfo)
 
 bool GameObject::IsCollide(GameObject* object)
 {
+	// get physics component
+	// call component check collide function
+	
 	return false;
 }
 
 void GameObject::Update(float elasedTime)
 {
+}
+
+std::vector<std::shared_ptr<IComponent>> GameObject::GetComponents(std::string TypeName)
+{
+	return std::vector<std::shared_ptr<IComponent>>();
+}
+
+std::shared_ptr<IComponent> GameObject::GetComponent(std::string componentName)
+{
+	return nullptr;
 }

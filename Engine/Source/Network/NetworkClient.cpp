@@ -1,9 +1,6 @@
 #include "NetworkClient.h"
-#include <array>
-#include <boost/log/trivial.hpp>
-#include <fmt/printf.h>
-
 #include "NetMessage.h"
+#include "../Log.h"
 
 using asio::ip::udp;
 
@@ -18,10 +15,10 @@ UdpSocketClient::~UdpSocketClient()
 }
 void UdpSocketClient::Initialize()
 {
-	m_ioContext = std::make_shared<asio::io_context>();
-	m_resolver = std::make_shared<udp::resolver>(*m_ioContext);
-	m_socket = std::make_shared<udp::socket>(*m_ioContext);
-	m_destinationEndpoint = std::make_shared <udp::endpoint>(asio::ip::address::from_string(NET_IP), NET_DESTINATION_PORT);
+	m_ioContext = new asio::io_context();
+	m_resolver = new asio::ip::udp::resolver(*m_ioContext);
+	m_socket = new udp::socket(*m_ioContext);
+	m_destinationEndpoint = new udp::endpoint(asio::ip::address::from_string(NET_IP), NET_DESTINATION_PORT);
 
 	m_socket->open(udp::v4());
 }
@@ -35,7 +32,7 @@ bool UdpSocketClient::SendMessages(const std::string& msg)
 {
 	if (!Send(msg))
 	{
-		BOOST_LOG_TRIVIAL(error) << "UdpSocketClient SendMessages failed. ";
+		Logger::LogError("UdpSocketClient SendMessages failed. ");
 		return false;
 	}
 	return true;
@@ -51,11 +48,11 @@ size_t UdpSocketClient::Send(const std::string& msg)
 	const size_t ret = m_socket->send_to(asio::buffer(msg), *m_destinationEndpoint);
 	if (ret > 0)
 	{
-		BOOST_LOG_TRIVIAL(info) << msg;
+		Logger::LogInfo(msg);
 	}
 	else
 	{
-		BOOST_LOG_TRIVIAL(error) << "UdpSocketClient Send failed. ";
+		Logger::LogError("UdpSocketClient Send failed. ");
 	}
 	return ret;
 }
@@ -65,11 +62,11 @@ size_t UdpSocketClient::Recv(std::string msg)
 	const size_t ret = m_socket->receive_from(asio::buffer(msg), *m_destinationEndpoint);
 	if (ret > 0)
 	{
-		BOOST_LOG_TRIVIAL(info) << msg;
+		Logger::LogInfo(msg);
 	}
 	else
 	{
-		BOOST_LOG_TRIVIAL(error) << "Client Receive Message failed. ";
+		Logger::LogError("Client Receive Message failed. ");
 	}
 	return ret;
 }

@@ -17,10 +17,10 @@ public:
 	void Close();
 private:
 	
-	std::shared_ptr<asio::io_context> m_ioContext;
-	std::shared_ptr<asio::ip::udp::resolver> m_resolver;
-	std::shared_ptr<asio::ip::udp::endpoint> m_destinationEndpoint;
-	std::shared_ptr<asio::ip::udp::socket> m_socket;
+	asio::io_context* m_ioContext;
+	asio::ip::udp::resolver* m_resolver;
+	asio::ip::udp::endpoint* m_destinationEndpoint;
+	asio::ip::udp::socket* m_socket;
 
 	size_t Send(const std::string& msg);
 	size_t Recv(std::string msg);

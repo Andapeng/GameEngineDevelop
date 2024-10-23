@@ -7,7 +7,7 @@ namespace sadp
 	class WindowImp : public IWindow
 	{
 	public:
-		virtual ~WindowImp() = 0;
+		virtual ~WindowImp() = default;
 	};
 
 	class SfmlWindowImp : public WindowImp

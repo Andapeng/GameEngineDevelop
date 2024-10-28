@@ -1,5 +1,6 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+#include <string>
+#include <map>
 #include "../../GameInstance.h"
 
 class Scene;

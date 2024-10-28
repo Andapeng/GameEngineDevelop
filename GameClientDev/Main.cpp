@@ -1,11 +1,16 @@
 #include <iostream>
 
-#include "Entities/Camera2D.h"
+#include "Application.h"
+#include "Game/Snake/Source/SnakeGameInstance.h"
 #include "math/Math.h"
 
 int main()
 {
-	Camera2D camera(800, 600);
-	auto Matrix = camera.GetProjectMatrix();
-	std::cout << "hello world!" << *Matrix.data() << std::endl;
+
+	std::cout << "hello world!" << std::endl;
+
+    Application app;
+    app.Initialize(new SnakeGameInstance());
+    app.Run();
+    app.Release();
 }

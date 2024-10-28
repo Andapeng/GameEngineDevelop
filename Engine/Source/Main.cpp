@@ -2,13 +2,14 @@
 #include <crtdbg.h>
 #include "Application.h"
 #include "Log.h"
+#include "Game/Snake/SnakeGame.h"
 
 
 int main(int argc, char** args) {
    Logger::LogInfo("Engine Start. ");
     //_CrtSetBreakAlloc(1887);
     Application app;
-    app.Initialize();
+    app.Initialize(new SnakeGame());
     app.Run();
     app.Release();
 

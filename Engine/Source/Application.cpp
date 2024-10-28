@@ -1,13 +1,8 @@
 #include "Application.h"
-#include <GLAD/glad.h>
-
 #include "Config/GlobalConfiguration.h"
-#include "Managers/InputManager.h"
-#include "Game/Snake/SnakeGame.h"
-#include "Game/Breakout/Breakout.h"
 #include "Managers/StatisticsManager.h"
 
-int Application::Initialize()
+int Application::Initialize(GameInstance* InGameInstance)
 {
 
 	auto config = Configuration::Get();
@@ -21,8 +16,7 @@ int Application::Initialize()
 
 	mWindow = new sadp::Window;
 	mWindow->Create();
-	mGame = new SnakeGame;
-	// mGame = new Breakout;
+	mGame = InGameInstance;
 	mGame->Initialize();
 
 	return 0;

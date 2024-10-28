@@ -5,7 +5,7 @@
 class Application
 {
 public:
-	int Initialize();
+	int Initialize(GameInstance* InGameInstance);
 	int Run();
 	int Release();
 protected:

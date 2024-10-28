@@ -1,1 +1,29 @@
 cmake_minimum_required (VERSION 3.8)
+
+project(GameClient VERSION 0.0.1)
+
+add_executable(GameClient Main.cpp)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+set(VCPKG_ROOT "C:/Source/git/vcpkg" CACHE STRING "Vcpkg root directory")
+set(CMAKE_TOOLCHAIN_FILE "C:/Source/git/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
+
+target_include_directories(GameClient
+PRIVATE 
+../Engine/ThirdParty)
+target_include_directories(GameClient
+PRIVATE 
+../Engine/ThirdParty/Eigen)
+target_include_directories(GameClient 
+PRIVATE 
+../Engine/Source
+)
+target_link_directories(GameClient
+						PUBLIC
+						"../Engine/ThirdParty/lib")
+target_link_libraries(GameClient
+PRIVATE
+LibEngine.lib
+)

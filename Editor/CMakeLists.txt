@@ -12,6 +12,9 @@ find_package(Qt${QT_VERSION_MAJOR}
         Core
         Gui
         Widgets
+        Quick
+        Quickwidgets
+        Qml
 )
 qt_standard_project_setup()
 
@@ -20,9 +23,25 @@ set(PROJECT_SOURCES
     Editor.ui
     Editor.h
     Editor.cpp
+    qml.qrc
 )
 
 qt_add_executable(Editor ${PROJECT_SOURCES})
+qt_add_qml_module(
+    Editor
+    URI "Editor"
+    VERSION 1.0
+    RESOURCE_PREFIX /
+    QML_FILES QML/main.qml
+    RESOURCES qml.qrc
+) 
+
+qt_add_resources(Editor
+    "qml"
+    PREFIX "/"                              #资源的前缀
+    FILES 
+        QML/main.qml                       #资源所在的路径
+)
 
 set_target_properties(Editor
     PROPERTIES
@@ -34,4 +53,7 @@ target_link_libraries(Editor
         Qt::Core
         Qt::Gui
         Qt::Widgets
+        Qt::Quick
+        Qt::QuickWidgets
+        Qt::Qml
 )

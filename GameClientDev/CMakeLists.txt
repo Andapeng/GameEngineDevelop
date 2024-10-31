@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 3.8)
 
 project(GameClient VERSION 0.0.1)
 
-add_executable(GameClient Main.cpp "Game/Snake/Source/SnakeGameInstance.h" "Game/Snake/Source/SnakeGameInstance.cpp")
+add_executable(GameClient Main.cpp )
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -58,4 +58,9 @@ target_link_libraries(GameClient
 
 target_sources(GameClient
 PUBLIC
-Game/Snake/Source/SnakeGameInstance.cpp)
+Game/Snake/Source/SnakeGameInstance.cpp
+"Game/Snake/Source/Food.cpp" 
+"Game/Snake/Source/ScoreBoard.cpp" 
+"Game/Snake/Source/Snake.cpp" 
+"Game/Snake/Source/Wall.cpp" 
+)

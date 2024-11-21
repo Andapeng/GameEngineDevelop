@@ -40,3 +40,13 @@ void sadp::Window::OnRenderBefore()
 {
 	m_windowImp->OnRenderBefore();
 }
+
+long long sadp::Window::GetHandle()
+{
+	return m_windowImp->GetHandle();
+}
+
+void sadp::Window::GetSize(int& x, int& y)
+{
+	return m_windowImp->GetSize(x, y);
+}

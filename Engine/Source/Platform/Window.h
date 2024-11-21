@@ -20,6 +20,8 @@ namespace sadp
 
 		virtual void OnResize(int x, int y, int width, int height) override;
 		virtual void OnRenderBefore() override;
+		virtual long long  GetHandle() override;
+		virtual void GetSize(int& x, int& y) override;
 
 	private:
 		WindowImp* m_windowImp;

@@ -23,7 +23,6 @@ set(PROJECT_SOURCES
     Editor.ui
     Editor.h
     Editor.cpp
-    qml.qrc
 )
 
 qt_add_executable(Editor ${PROJECT_SOURCES})
@@ -33,7 +32,6 @@ qt_add_qml_module(
     VERSION 1.0
     RESOURCE_PREFIX /
     QML_FILES QML/main.qml
-    RESOURCES qml.qrc
 ) 
 
 qt_add_resources(Editor

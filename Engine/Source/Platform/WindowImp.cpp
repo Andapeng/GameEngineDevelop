@@ -3,7 +3,6 @@
 #include "../Managers/InputManager.h"
 #include "../Config/GlobalConfiguration.h"
 #include "glad/glad.h"
-
 namespace sadp
 {
 	int SfmlWindowImp::Create()
@@ -22,7 +21,7 @@ namespace sadp
 	}
 	void SfmlWindowImp::Show()
 	{
-		m_Window->display();
+		// m_Window->display();
 	}
 	void SfmlWindowImp::ProcessEvent()
 	{
@@ -49,9 +48,21 @@ namespace sadp
 	}
 	void SfmlWindowImp::OnRenderBefore()
 	{
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		// glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		// glClear(GL_COLOR_BUFFER_BIT);
 	}
+
+	long long SfmlWindowImp::GetHandle()
+	{
+		return (long long)m_Window->getSystemHandle();
+	}
+
+	void SfmlWindowImp::GetSize(int& x, int& y)
+	{
+		x = m_Window->getSize().x;
+		y = m_Window->getSize().y;
+	}
+
 	bool SfmlWindowImp::IsOpen()
 	{
 		return m_Window->isOpen();

@@ -1,5 +1,8 @@
 #pragma once
 #include "IManager.h"
+class VulkanGrahphicsDevice;
+class D3D12GraphicsDevice;
+class OpenGLGraphicsDevice;
 class TextRenderer;
 class SpriteRenderer;
 
@@ -13,7 +16,7 @@ public:
 
 	virtual int Initialize() override;
 	virtual void Release() override ;
-	virtual void Tick() override {};
+	virtual void Tick() override;
 
 	SpriteRenderer* GetSpriteRenderer() { return mSpriteRenderer; }
 	TextRenderer* GetTextRenderer() { return mTextRenderer; }
@@ -27,6 +30,9 @@ private:
 	static GraphicsManager* mSingleGraphicsManager;
 	SpriteRenderer* mSpriteRenderer;
 	TextRenderer* mTextRenderer;
+	D3D12GraphicsDevice* mD3D12Device;
+	VulkanGrahphicsDevice* mVulkanDevice;
+	OpenGLGraphicsDevice* mOpenGLDevice;
 	
 };
 

@@ -120,13 +120,14 @@ void SnakeGame::Render()
 {
 	if (!g_pStateManager->IsGameOver()) 
 	{
-		for (auto obj : m_GameObjectsMap)
-		{
-			if (obj.second)
-			{
-				obj.second->OnRender();
-			}
-		}	
+		// for (auto obj : m_GameObjectsMap)
+		// {
+		// 	if (obj.second)
+		// 	{
+		// 		obj.second->OnRender();
+		// 	}
+		// }
+		g_pGraphicsManager->Tick();
 	}
 }
 
@@ -213,14 +214,14 @@ int SnakeGame::Start()
 		ScoreBoard* scoreBoard = new ScoreBoard;
 		Label* fpsLabel = new Label(L"FPS:", 0.0f, 50.0f, 1.0f);
 		Wall* wall = new Wall("blank");
-
+	
 		AddGameObject("snake", snake);
 		AddGameObject("food", food);
 		AddGameObject("scoreBoard", scoreBoard);
 		AddGameObject("fpsLabel", fpsLabel);
 		// AddGameObject("wall", wall);
 	}
-
+	
 	g_pStateManager->GameStart();
 	return 0;
 }

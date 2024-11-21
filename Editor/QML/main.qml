@@ -6,7 +6,7 @@ Rectangle {
     color: "lightblue"
  
     Text {
-        text: "Hello World"
+        text: "Hello World!"
         anchors.centerIn: parent
     }
 }

@@ -30,3 +30,18 @@ void Logger::LogInfo(std::string fmtstring)
 {
 	BOOST_LOG_TRIVIAL(info) << fmtstring;
 }
+
+void Logger::LogError(std::wstring fmtstring)
+{
+	BOOST_LOG_TRIVIAL(error) << fmtstring;
+}
+
+void Logger::LogWarning(std::wstring fmtstring)
+{
+	BOOST_LOG_TRIVIAL(warning) << fmtstring;
+}
+
+void Logger::LogInfo(std::wstring fmtstring)
+{
+	BOOST_LOG_TRIVIAL(info) << fmtstring;
+}

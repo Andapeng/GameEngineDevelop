@@ -1,4 +1,5 @@
 #include "GraphicsManager.h"
+#include "GraphicsManager.h"
 #include <GLAD/glad.h>
 
 #include <cstdlib>
@@ -6,6 +7,11 @@
 
 #include "../Renderer/SpriteRenderer.h"
 #include "../Renderer/TextRenderer.h"
+
+#include "../RHI/D3D12GraphicsDevice.h"
+#include "../RHI/VulkanGraphicsDevice.h"
+#include "../RHI/OpenGLGraphicsDevice.h"
+
 
 GraphicsManager* GraphicsManager::mSingleGraphicsManager = nullptr;
 
@@ -20,14 +26,12 @@ GraphicsManager* GraphicsManager::Get()
 
 int GraphicsManager::Initialize()
 {
-	if (!gladLoadGL()) {
-		exit(-1);
-		std::cout << "load gl failed!" << std::endl;
-	}
+	mOpenGLDevice = new OpenGLGraphicsDevice;
+	mVulkanDevice = new VulkanGrahphicsDevice;
+	mD3D12Device = new D3D12GraphicsDevice;
 
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	// mVulkanDevice->Initialize();
+	mD3D12Device->Initialize();
 
 	mSpriteRenderer = new SpriteRenderer;
 	mTextRenderer = new TextRenderer;
@@ -46,9 +50,18 @@ void GraphicsManager::Release()
 	delete mSpriteRenderer;
 	delete mTextRenderer;
 
+	delete mVulkanDevice;
+	delete mOpenGLDevice;
+
 	delete mSingleGraphicsManager;
 
 		
+}
+
+void GraphicsManager::Tick()
+{
+	// mVulkanDevice->drawFrame();
+	mD3D12Device->Draw();
 }
 
 void GraphicsManager::Draw()

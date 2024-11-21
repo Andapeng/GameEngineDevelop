@@ -23,6 +23,9 @@ namespace sadp
 		virtual void ProcessEvent() override;
 		virtual void OnResize(int x, int y, int width, int height) override;
 		virtual void OnRenderBefore() override;
+		virtual long long GetHandle() override;
+
+		virtual void GetSize(int& x, int& y) override;
 
 	private:
 		sf::RenderWindow* m_Window = nullptr;

@@ -9,3 +9,4 @@ NetworkManager* g_pNetworkManager;
 AudioManager* g_pAudioManager;
 StatisticsManager* g_pStatisticsManager;
 SceneManager* g_pSceneManager;
+WindowManager* g_pWindowManager;

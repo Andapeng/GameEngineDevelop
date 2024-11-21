@@ -10,4 +10,8 @@ public:
 	static void LogError(std::string fmtstring);
 	static void LogWarning(std::string fmtstring);
 	static void LogInfo(std::string fmtstring);
+
+	static void LogError(std::wstring fmtstring);
+	static void LogWarning(std::wstring fmtstring);
+	static void LogInfo(std::wstring fmtstring);
 };

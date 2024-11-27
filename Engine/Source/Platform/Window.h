@@ -1,6 +1,5 @@
 #pragma once
 #include "IWindow.h"
-#include "WindowImp.h"
 
 namespace sadp
 {
@@ -18,13 +17,13 @@ namespace sadp
 		virtual void ProcessEvent() override;
 		virtual bool IsOpen() override;
 
+		virtual void Update(float elapsedTime) override;
 		virtual void OnResize(int x, int y, int width, int height) override;
 		virtual void OnRenderBefore() override;
 		virtual long long  GetHandle() override;
 		virtual void GetSize(int& x, int& y) override;
 
 	private:
-		WindowImp* m_windowImp;
+		IWindow* m_windowImp;
 	};
-
 }

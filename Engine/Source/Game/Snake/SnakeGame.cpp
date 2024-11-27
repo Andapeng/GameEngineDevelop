@@ -17,6 +17,8 @@
 #include "../../GameInstance.h"
 
 #include "../../Gui/Label.h"
+#include "../../Gui/Button.h"
+
 
 #include "Snake.h"
 #include "Food.h"
@@ -105,12 +107,27 @@ void SnakeGame::ProcessInput()
 {
 	if (IsRunning())
 	{
+		if (g_pInputManager->IsKeyPressed("Enter"))
+		{
+			Pause();
+		}
+		if (g_pInputManager->IsKeyPressed("Esc"))
+		{
+			Stop();
+		}
 		for (auto obj : m_GameObjectsMap)
 		{
 			if (obj.second)
 			{
 				obj.second->OnKeyPressed();
 			}
+		}
+	}
+	else
+	{
+		if (g_pInputManager->IsKeyPressed("Enter"))
+		{
+			Start();
 		}
 	}
 }
@@ -120,13 +137,13 @@ void SnakeGame::Render()
 {
 	if (!g_pStateManager->IsGameOver()) 
 	{
-		// for (auto obj : m_GameObjectsMap)
-		// {
-		// 	if (obj.second)
-		// 	{
-		// 		obj.second->OnRender();
-		// 	}
-		// }
+		for (auto obj : m_GameObjectsMap)
+		{
+			if (obj.second)
+			{
+				obj.second->OnRender();
+			}
+		}
 		g_pGraphicsManager->Tick();
 	}
 }
@@ -153,6 +170,9 @@ void SnakeGame::Update(float elapsedTime)
 
 void SnakeGame::DetectCollide()
 {
+	if (!IsRunning()) {
+		return;
+	}
 	if (GetGameObject("snake") == nullptr)
 	{
 		return;
@@ -213,12 +233,14 @@ int SnakeGame::Start()
 		Food* food = new Food("blank");
 		ScoreBoard* scoreBoard = new ScoreBoard;
 		Label* fpsLabel = new Label(L"FPS:", 0.0f, 50.0f, 1.0f);
+		Button* button = new Button();
 		Wall* wall = new Wall("blank");
 	
 		AddGameObject("snake", snake);
 		AddGameObject("food", food);
 		AddGameObject("scoreBoard", scoreBoard);
 		AddGameObject("fpsLabel", fpsLabel);
+		AddGameObject("button", button);
 		// AddGameObject("wall", wall);
 	}
 	

@@ -524,7 +524,7 @@ void VulkanGrahphicsDevice::CreateSyncObjects()
     }
 }
 
-void VulkanGrahphicsDevice::drawFrame()
+void VulkanGrahphicsDevice::Draw()
 {
     vkWaitForFences(mDevice, 1, &mInFlightFence, VK_TRUE, UINT64_MAX);
     vkResetFences(mDevice, 1, &mInFlightFence);

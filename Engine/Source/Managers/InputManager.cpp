@@ -11,6 +11,7 @@ int InputManager::Initialize()
 	//KeyMap[VK_LEFT] = "Left";
 	//KeyMap[VK_RIGHT] = "Right";
 	//KeyMap[VK_SPACE] = "Space";
+	mStringToKeyMap["Esc"] = sf::Keyboard::Key::Escape;
 	mStringToKeyMap["Space"] = sf::Keyboard::Key::Space;
 	mStringToKeyMap["Enter"] = sf::Keyboard::Key::Enter;
 	mStringToKeyMap["Up"] = sf::Keyboard::Key::Up;

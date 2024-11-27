@@ -1,4 +1,6 @@
 #pragma once
+#include <memory>
+
 #include "IWindow.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 
@@ -20,6 +22,7 @@ namespace sadp
 		virtual void Show() override;
 		virtual bool IsOpen() override;
 
+		virtual void Update(float elapsedTime) override;
 		virtual void ProcessEvent() override;
 		virtual void OnResize(int x, int y, int width, int height) override;
 		virtual void OnRenderBefore() override;
@@ -28,6 +31,6 @@ namespace sadp
 		virtual void GetSize(int& x, int& y) override;
 
 	private:
-		sf::RenderWindow* m_Window = nullptr;
+		std::unique_ptr<sf::RenderWindow> m_Window = nullptr;
 	};
 }

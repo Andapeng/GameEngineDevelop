@@ -2,15 +2,16 @@
 #include <dxgi1_4.h>
 #include <wrl/client.h>
 #include "D3dUtil.h"
+#include "IGraphicsDevice.h"
 
-class D3D12GraphicsDevice
+class D3D12GraphicsDevice : public IGraphicsDevice
 {
 public:
 	D3D12GraphicsDevice();
 	~D3D12GraphicsDevice();
-	void Initialize();
-	void Draw();
-	void Release();
+	void Initialize() override;
+	void Draw() override;
+	void Release() override;
 private:
 	void LogAdapters();
 	void LogAdapterOutputs(IDXGIAdapter* adapter);

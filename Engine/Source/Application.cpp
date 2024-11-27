@@ -1,21 +1,16 @@
 #include "Application.h"
 #include "Config/GlobalConfiguration.h"
 #include "Managers/Managers.h"
-
+#include "Misc/GameTimer.h"
+#include "imgui-sfml/imgui-SFML.h"
 int Application::Initialize(GameInstance* InGameInstance)
 {
 
 	auto config = Configuration::Get();
 	config->Load("Assets/Conf/gConfig.xml");
 
-	sf::ContextSettings settings;
-	settings.depthBits = config->GetDepthBits();
-	settings.stencilBits = config->GetStencilBits();
-	settings.majorVersion = config->GetMajorVersion();
-	settings.minorVersion = config->GetMinorVersion();
-
 	g_pWindowManager = WindowManager::Get();
-
+	
 	mWindow = new sadp::Window;
 	mWindow->Create();
 	g_pWindowManager->RegisterWindow(mWindow, true);
@@ -50,16 +45,16 @@ int Application::Initialize(GameInstance* InGameInstance)
 
 int Application::Run()
 {
-	sf::Clock clock;
-	float elapsedTime = clock.getElapsedTime().asSeconds();
+	GameTimer g_GameTimer;
+	float elapsedTime = g_GameTimer.Start();
 	while (mWindow->IsOpen()) {
 
 		ProcessEvent();
 
-		elapsedTime = clock.restart().asSeconds();
+		elapsedTime = g_GameTimer.GetElapsedTime();
 		mGame->Update(elapsedTime);
+		mWindow->Update(elapsedTime);
 		g_pStatisticsManager->UpdateFPS(elapsedTime);
-
 		mGame->DetectCollide();
 
 		mWindow->OnRenderBefore();

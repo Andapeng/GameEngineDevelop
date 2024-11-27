@@ -1,5 +1,6 @@
 #pragma once
 #include "IManager.h"
+class IGraphicsDevice;
 class VulkanGrahphicsDevice;
 class D3D12GraphicsDevice;
 class OpenGLGraphicsDevice;
@@ -30,10 +31,7 @@ private:
 	static GraphicsManager* mSingleGraphicsManager;
 	SpriteRenderer* mSpriteRenderer;
 	TextRenderer* mTextRenderer;
-	D3D12GraphicsDevice* mD3D12Device;
-	VulkanGrahphicsDevice* mVulkanDevice;
-	OpenGLGraphicsDevice* mOpenGLDevice;
-	
+	IGraphicsDevice* mGrahpicsDevice;	
 };
 
 extern GraphicsManager* g_pGraphicsManager;

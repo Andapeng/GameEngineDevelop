@@ -1,5 +1,4 @@
 #include "GraphicsManager.h"
-#include "GraphicsManager.h"
 #include <GLAD/glad.h>
 
 #include <cstdlib>
@@ -11,7 +10,7 @@
 #include "../RHI/D3D12GraphicsDevice.h"
 #include "../RHI/VulkanGraphicsDevice.h"
 #include "../RHI/OpenGLGraphicsDevice.h"
-
+#include "../RHI/IGraphicsDevice.h"
 
 GraphicsManager* GraphicsManager::mSingleGraphicsManager = nullptr;
 
@@ -26,12 +25,13 @@ GraphicsManager* GraphicsManager::Get()
 
 int GraphicsManager::Initialize()
 {
-	mOpenGLDevice = new OpenGLGraphicsDevice;
-	mVulkanDevice = new VulkanGrahphicsDevice;
-	mD3D12Device = new D3D12GraphicsDevice;
+	mGrahpicsDevice = new OpenGLGraphicsDevice;
+	// mVulkanDevice = new VulkanGrahphicsDevice;
+	// mD3D12Device = new D3D12GraphicsDevice;
 
+	mGrahpicsDevice->Initialize();
 	// mVulkanDevice->Initialize();
-	mD3D12Device->Initialize();
+	// mD3D12Device->Initialize();
 
 	mSpriteRenderer = new SpriteRenderer;
 	mTextRenderer = new TextRenderer;
@@ -50,8 +50,8 @@ void GraphicsManager::Release()
 	delete mSpriteRenderer;
 	delete mTextRenderer;
 
-	delete mVulkanDevice;
-	delete mOpenGLDevice;
+	mGrahpicsDevice->Release();
+	delete mGrahpicsDevice;
 
 	delete mSingleGraphicsManager;
 
@@ -60,8 +60,8 @@ void GraphicsManager::Release()
 
 void GraphicsManager::Tick()
 {
-	// mVulkanDevice->drawFrame();
-	mD3D12Device->Draw();
+	// mVulkanDevice->Draw();
+	// mD3D12Device->Draw();
 }
 
 void GraphicsManager::Draw()

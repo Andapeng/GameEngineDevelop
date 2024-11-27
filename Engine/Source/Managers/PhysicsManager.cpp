@@ -70,7 +70,7 @@ void PhysicsManager::Tick()
 
 void PhysicsManager::Release()
 {
-	delete m2DWorld;
+	// delete m2DWorld;
 	delete mSinglePhysicsManager;
 }
 

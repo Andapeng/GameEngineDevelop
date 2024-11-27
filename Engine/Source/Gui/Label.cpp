@@ -1,6 +1,7 @@
 #include "Label.h"
 #include "../Managers/Managers.h"
 #include "../Renderer/TextRenderer.h"
+
 class TextRenderer;
 
 Label::Label(const std::wstring& text, float xpos, float ypos, float size)

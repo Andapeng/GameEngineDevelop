@@ -49,7 +49,6 @@ Snake::~Snake()
 void Snake::OnRender()
 {
 	auto renderer = g_pGraphicsManager->GetSpriteRenderer();
-	auto textRenderer = g_pGraphicsManager->GetTextRenderer();
 	auto sprite = GetSprite();
 	for (auto body : mBody)
 	{

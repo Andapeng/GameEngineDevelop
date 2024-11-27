@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+#include "IGraphicsDevice.h"
 #include "vulkan/vulkan_core.h"
 struct QueueFamilyIndices {
 	std::optional<uint32_t> graphicsFamily;
@@ -19,15 +20,15 @@ struct SwapChainSupportDetails {
 	std::vector<VkPresentModeKHR> presentModes;
 };
 
-class VulkanGrahphicsDevice
+class VulkanGrahphicsDevice : public IGraphicsDevice
 {
 public:
 	VulkanGrahphicsDevice();
 	~VulkanGrahphicsDevice();
 
-	void Initialize();
-	void Release();
-	void drawFrame();
+	void Initialize() override;
+	void Release() override;
+	void Draw() override;
 
 private:
 	void CreateInstance();

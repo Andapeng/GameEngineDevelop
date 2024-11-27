@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "WindowImp.h"
 
 sadp::Window::Window()
 	: m_windowImp(new sadp::SfmlWindowImp)
@@ -29,6 +30,10 @@ void sadp::Window::ProcessEvent()
 bool sadp::Window::IsOpen()
 {
 	return m_windowImp->IsOpen();
+}
+
+void sadp::Window::Update(float elapsedTime)
+{
 }
 
 void sadp::Window::OnResize(int x, int y, int width, int height)

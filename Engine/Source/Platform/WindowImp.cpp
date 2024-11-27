@@ -3,6 +3,9 @@
 #include "../Managers/InputManager.h"
 #include "../Config/GlobalConfiguration.h"
 #include "glad/glad.h"
+#include "imgui-sfml/imgui-SFML.h"
+#include "imgui_impl_opengl3.h"
+
 namespace sadp
 {
 	int SfmlWindowImp::Create()
@@ -16,17 +19,25 @@ namespace sadp
 		settings.majorVersion = config->GetMajorVersion();
 		settings.minorVersion = config->GetMinorVersion();
 
-		m_Window = new sf::RenderWindow(sf::VideoMode(config->GetWidth(), config->GetHeight()), "OpenGL with SFML", sf::Style::Default, settings);
+		m_Window = std::make_unique<sf::RenderWindow>(sf::VideoMode(config->GetWidth(), config->GetHeight()), "OpenGL with SFML", sf::Style::Default, settings) ;
+		ImGui::SFML::Init(*m_Window);
+		// Setup Dear ImGui context
+		IMGUI_CHECKVERSION();
+		ImGui_ImplOpenGL3_Init("#version 150");
 		return 0;
 	}
 	void SfmlWindowImp::Show()
 	{
-		// m_Window->display();
+#ifdef OPENGL_RENDERING
+		ImGui::SFML::Render(*m_Window);
+		m_Window->display();
+#endif
 	}
 	void SfmlWindowImp::ProcessEvent()
 	{
 		sf::Event event;
 		while (m_Window->pollEvent(event)) {
+			ImGui::SFML::ProcessEvent(*m_Window, event);
 			if (event.type == sf::Event::Closed) {
 				m_Window->close();
 			}
@@ -48,8 +59,10 @@ namespace sadp
 	}
 	void SfmlWindowImp::OnRenderBefore()
 	{
-		// glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		// glClear(GL_COLOR_BUFFER_BIT);
+#ifdef OPENGL_RENDERING
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+#endif
 	}
 
 	long long SfmlWindowImp::GetHandle()
@@ -66,5 +79,10 @@ namespace sadp
 	bool SfmlWindowImp::IsOpen()
 	{
 		return m_Window->isOpen();
+	}
+
+	void SfmlWindowImp::Update(float elapsedTime)
+	{
+		ImGui::SFML::Update(*m_Window, sf::seconds(elapsedTime));
 	}
 }

@@ -1,26 +1,25 @@
 cmake_minimum_required (VERSION 3.8)
 project(Engine VERSION 0.0.1)
 
-set(LIBRARY_OUTPUT_PATH "lib")
-
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(VCPKG_ROOT "C:/Source/git/vcpkg" CACHE STRING "Vcpkg root directory")
 set(CMAKE_TOOLCHAIN_FILE "C:/Source/git/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
-
+set(SFML_DIR "C:/Source/git/vcpkg/installed/x64-windows/share/sfml")
+set(IMGUI_DIR "D:/Project/GameEngineDevelop/Engine/ThirdParty/imgui")
 add_compile_definitions(-DNOMINMAX)
 
 set(EngineSources Source/Component/Transform.cpp
-				Source/Application.cpp
-				Source/Log.cpp
-				Source/GameInstance.cpp
-				Source/Config/GlobalConfiguration.cpp
-				Source/Entities/Camera2D.cpp
-				Source/Entities/GameObject.cpp
-				Source/Entities/Player.cpp
-				Source/Entities/RenderableObject.cpp
-				Source/Entities/Sprite.cpp
+Source/Application.cpp
+Source/Log.cpp
+Source/GameInstance.cpp
+Source/Config/GlobalConfiguration.cpp
+Source/Entities/Camera2D.cpp
+Source/Entities/GameObject.cpp
+Source/Entities/Player.cpp
+Source/Entities/RenderableObject.cpp
+Source/Entities/Sprite.cpp
 Source/Managers/AudioManager.cpp
 Source/Managers/FontManager.cpp
 Source/Managers/GraphicsManager.cpp
@@ -58,56 +57,42 @@ Source/RHI/VulkanGrahphicsDevice.cpp
 Source/RHI/OpenGLGraphicsDevice.cpp 
 Source/Managers/WindowManager.cpp 
 Source/RHI/D3dUtil.cpp
-Source/RHI/d3dx12.h)
+Source/RHI/d3dx12.h "Source/Misc/GameTimer.cpp" "Source/Gui/Button.cpp")
 
 add_executable(Engine Source/Main.cpp)
 add_library(LibEngine ${EngineSources})
+add_subdirectory(ThirdParty/imgui)
+add_subdirectory(ThirdParty/imgui-sfml)
 
-target_include_directories(LibEngine
-PUBLIC 
-ThirdParty)
-target_include_directories(LibEngine
-PUBLIC 
-ThirdParty/Eigen)
-target_include_directories(LibEngine
-PUBLIC 
-ThirdParty/Vulkan/include)
-target_include_directories(LibEngine
-PUBLIC 
-ThirdParty/include)
-target_include_directories(LibEngine
-PUBLIC 
-"C:/Source/git/vcpkg/installed/x64-windows/include/")
-target_include_directories(LibEngine
-PUBLIC 
+target_compile_definitions(Engine PRIVATE -DOPENGL_RENDERING)
+target_compile_definitions(LibEngine PRIVATE -DOPENGL_RENDERING)
+
+include_directories(LibEngine
+PRIVATE 
+"ThirdParty"
+"ThirdParty/Eigen"
+"ThirdParty/Vulkan/include"
+"ThirdParty/include"
+"C:/Source/git/vcpkg/installed/x64-windows/include/"
 "C:/Source/boost/boost_1_72_0/boost_1_72_0")
 
 target_link_directories(LibEngine
-						PUBLIC
-						"ThirdParty/lib")
-
-target_link_directories(Engine
 						PRIVATE
-						"ThirdParty/Vulkan/lib")
-
-target_link_directories(LibEngine
-						PUBLIC
-						"C:/Source/boost/boost_1_72_0/boost_1_72_0/stage/lib")
-
-target_link_directories(LibEngine
-						PUBLIC
-						"C:/Source/git/vcpkg/installed/x64-windows/lib")
+						"ThirdParty/lib"
+						"ThirdParty/Vulkan/lib"
+						"C:/Source/boost/boost_1_72_0/boost_1_72_0/stage/lib"
+						"C:/Source/git/vcpkg/installed/x64-windows/debug/lib")
 
 target_link_libraries(LibEngine
 					PUBLIC
-					gtest.lib
+					gtestd.lib
 					glad.lib
-					sfml-window.lib
-					sfml-graphics.lib
-					sfml-audio.lib
-					sfml-network.lib
-					sfml-system.lib
-					freetype.lib
+					sfml-window-d.lib
+					sfml-graphics-d.lib
+					sfml-audio-d.lib
+					sfml-network-d.lib
+					sfml-system-d.lib
+					freetyped.lib
 					box2d.lib
 					fmtd.lib
 					dxgi.lib
@@ -115,56 +100,39 @@ target_link_libraries(LibEngine
 					d3d12.lib
 					dxgi.lib
 					d3dcompiler.lib
+					libimgui
+					ImGui-SFML
 
 )
 install(TARGETS LibEngine DESTINATION lib)
 
 include_directories(Engine
 PRIVATE 
-ThirdParty)
-target_include_directories(Engine
-PRIVATE 
- ThirdParty/Eigen)
-target_include_directories(Engine
-PUBLIC 
-ThirdParty/Vulkan/include)
-target_include_directories(Engine
-PRIVATE 
-ThirdParty/include)
-target_include_directories(Engine
-PRIVATE 
-"C:/Source/git/vcpkg/installed/x64-windows/include/")
-target_include_directories(Engine
-PRIVATE 
+"ThirdParty"
+"ThirdParty/Eigen"
+"ThirdParty/Vulkan/include"
+"ThirdParty/include"
+"C:/Source/git/vcpkg/installed/x64-windows/include/"
 "C:/Source/boost/boost_1_72_0/boost_1_72_0")
 
 
 target_link_directories(Engine
 						PRIVATE
-						"ThirdParty/lib")
-
-target_link_directories(Engine
-						PRIVATE
-						"ThirdParty/Vulkan/lib")
-
-target_link_directories(Engine
-						PRIVATE
-						"C:/Source/boost/boost_1_72_0/boost_1_72_0/stage/lib")
-
-target_link_directories(Engine
-						PRIVATE
-						"C:/Source/git/vcpkg/installed/x64-windows/lib")
+						"ThirdParty/lib"
+						"ThirdParty/Vulkan/lib"
+						"C:/Source/boost/boost_1_72_0/boost_1_72_0/stage/lib"
+						"C:/Source/git/vcpkg/installed/x64-windows/debug/lib")
 
 target_link_libraries(Engine
-					PRIVATE
-					gtest.lib
+					PUBLIC
+					gtestd.lib
 					glad.lib
-					sfml-window.lib
-					sfml-graphics.lib
-					sfml-audio.lib
-					sfml-network.lib
-					sfml-system.lib
-					freetype.lib
+					sfml-window-d.lib
+					sfml-graphics-d.lib
+					sfml-audio-d.lib
+					sfml-network-d.lib
+					sfml-system-d.lib
+					freetyped.lib
 					box2d.lib
 					fmtd.lib
 					dxgi.lib
@@ -172,6 +140,8 @@ target_link_libraries(Engine
 					d3d12.lib
 					dxgi.lib
 					d3dcompiler.lib
+					libimgui
+					ImGui-SFML
 )
 target_sources(Engine 
 				PRIVATE

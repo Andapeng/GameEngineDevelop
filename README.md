@@ -1,3 +1,1 @@
-第三方库：boost、asio、SFML、OpenGL、Eigen、GLAD、fmt、qt6、D3D12、Vulkan
-
-boost版本：1.72
+第三方库：boost(1.72)、asio、SFML(2.5.1)、OpenGL、Eigen、GLAD、fmt、qt6、D3D12、Vulkan、imgui(2.6.x)、imgui-SFML(2.6.x)

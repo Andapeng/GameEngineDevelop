@@ -1,5 +1,6 @@
 #pragma once
 #include "IManager.h"
+class ImguiRenderer;
 class IGraphicsDevice;
 class VulkanGrahphicsDevice;
 class D3D12GraphicsDevice;
@@ -21,6 +22,7 @@ public:
 
 	SpriteRenderer* GetSpriteRenderer() { return mSpriteRenderer; }
 	TextRenderer* GetTextRenderer() { return mTextRenderer; }
+	ImguiRenderer* GetImguiRenderer() { return mImguiRenerer; }
 
 	int ProcessDrawCommnad();
 
@@ -31,6 +33,7 @@ private:
 	static GraphicsManager* mSingleGraphicsManager;
 	SpriteRenderer* mSpriteRenderer;
 	TextRenderer* mTextRenderer;
+	ImguiRenderer* mImguiRenerer;
 	IGraphicsDevice* mGrahpicsDevice;	
 };
 

@@ -34,6 +34,7 @@ bool sadp::Window::IsOpen()
 
 void sadp::Window::Update(float elapsedTime)
 {
+	m_windowImp->Update(elapsedTime);
 }
 
 void sadp::Window::OnResize(int x, int y, int width, int height)

@@ -52,8 +52,7 @@ void Snake::OnRender()
 	auto sprite = GetSprite();
 	for (auto body : mBody)
 	{
-		renderer->RenderSprite(g_pResourceManager->GetTexture(sprite->GetTexture()), Eigen::Vector2f(body.x, body.y),
-			Eigen::Vector2f(mSize, mSize), 0, Eigen::Vector3f(sprite->r(), sprite->g(), sprite->b()));
+		renderer->AddSprite(std::make_shared<Sprite>(sprite->GetTexture(), body.x, body.y, 0.0f, mSize, mSize, sprite->r(), sprite->g(), sprite->b()));
 	}
 }
 

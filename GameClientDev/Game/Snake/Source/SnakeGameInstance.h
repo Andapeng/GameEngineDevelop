@@ -37,9 +37,6 @@ public:
 	int Pause() override;
 	int Start() override;
 	void AddPoint();
-	bool IsFood(GameObject* gameObject);
-	bool IsWall(GameObject* gameObject);
-
 private:
 	bool AddGameObject(const std::string& objectName, GameObject* gameObject);
 	GameObject* GetGameObject(const std::string& objectName) { return m_GameObjectsMap[objectName]; }

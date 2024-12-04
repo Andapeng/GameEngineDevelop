@@ -44,23 +44,45 @@ int SpriteRenderer::Initialize()
 void SpriteRenderer::RenderSprite(Texture2D tex, Eigen::Vector2f pos, Eigen::Vector2f size, float rotate, Eigen::Vector3f color)
 {
 
-		ResourceManager::Get()->GetShader("sprite_shader").Use();
-		Eigen::Matrix4f model = Eigen::Matrix4f::Identity();
-		Translate(model, Eigen::Vector3f(pos(0), pos(1), 0.0f));
-		Scale(model, Eigen::Vector3f(size(0), size(1), 1.0f));
+	ResourceManager::Get()->GetShader("sprite_shader").Use();
+	Eigen::Matrix4f model = Eigen::Matrix4f::Identity();
+	Translate(model, Eigen::Vector3f(pos(0), pos(1), 0.0f));
+	Scale(model, Eigen::Vector3f(size(0), size(1), 1.0f));
 
-		ResourceManager::Get()->GetShader("sprite_shader").SetMatrix4f("model", model);
-		ResourceManager::Get()->GetShader("sprite_shader").SetVector3f("spriteColor", color);
+	ResourceManager::Get()->GetShader("sprite_shader").SetMatrix4f("model", model);
+	ResourceManager::Get()->GetShader("sprite_shader").SetVector3f("spriteColor", color);
 
-		glActiveTexture(GL_TEXTURE0);
-		// bind textures on corresponding texture units
-		tex.Bind();
-		//glBindTexture(GL_TEXTURE_2D, 5);
-		glBindVertexArray(quadVAO);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-		glBindVertexArray(0);
+	glActiveTexture(GL_TEXTURE0);
+	// bind textures on corresponding texture units
+	tex.Bind();
+	//glBindTexture(GL_TEXTURE_2D, 5);
+	glBindVertexArray(quadVAO);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glBindVertexArray(0);
 }
 
+
+void SpriteRenderer::AddSprite(std::shared_ptr<Sprite> Sprite)
+{
+	if (Sprite != nullptr)
+	{
+		mSprites.push_back(Sprite);
+	}
+}
+
+void SpriteRenderer::OnRender()
+{
+	for(const auto& Sprite : mSprites)
+	{
+		g_pGraphicsManager->GetSpriteRenderer()->RenderSprite(g_pResourceManager->GetTexture(Sprite->GetTexture()), Eigen::Vector2f(Sprite->GetPosX(), Sprite->GetPosY()),
+			Eigen::Vector2f(Sprite->GetSizeX(), Sprite->GetSizeY()), 0, Eigen::Vector3f(Sprite->r(), Sprite->g(), Sprite->b()));
+	}
+}
+
+void SpriteRenderer::Clear()
+{
+	mSprites.clear();
+}
 
 int SpriteRenderer::Release()
 {

@@ -58,7 +58,15 @@ Source/RHI/VulkanGrahphicsDevice.cpp
 Source/RHI/OpenGLGraphicsDevice.cpp 
 Source/Managers/WindowManager.cpp 
 Source/RHI/D3dUtil.cpp
-Source/RHI/d3dx12.h "Source/Misc/GameTimer.cpp" "Source/Gui/Button.cpp")
+Source/RHI/d3dx12.h 
+"Source/Misc/GameTimer.cpp" 
+"Source/Gui/Button.cpp" 
+"Source/Entities/Text.cpp" 
+"Source/Renderer/ImguiRenderer.cpp" 
+"Source/Gui/ButtonDescript.cpp" 
+"Source/Game/Breakout/GameLevel.cpp"
+"Source/Game/Breakout/Brick.cpp"
+"Source/Game/Breakout/Breakout.cpp" "Source/Game/Breakout/Paddle.cpp" "Source/Game/Breakout/Ball.cpp")
 
 add_executable(Engine Source/Main.cpp)
 add_library(LibEngine ${EngineSources})

@@ -17,10 +17,14 @@ public:
 
 	static SceneManager* Get();
 
+	bool AddScene(const std::string& sceneName, std::shared_ptr<Scene> scene);
+	std::shared_ptr<Scene> GetScene(const std::string& sceneName) { return mScenes[sceneName]; }
+	std::shared_ptr<Scene> LoadScene(const std::string& SceneName);
 private:
 	SceneManager();
 
-	std::map<std::string, Scene*> m_scenes;
+	std::shared_ptr<Scene> mCurrentScene;
+	std::map<std::string, std::shared_ptr<Scene>> mScenes;
 
 	static SceneManager* m_singleSceneManager;
 };

@@ -3,8 +3,6 @@
 #include "../Renderer/SpriteRenderer.h"
 #include "../Managers/GraphicsManager.h"
 #include "Sprite.h"
-extern ResourceManager* g_pResourceManager;
-extern GraphicsManager* g_pGraphicsManager;
 
 RenderableObject::RenderableObject()
 	:GameObject()
@@ -12,10 +10,10 @@ RenderableObject::RenderableObject()
 	mSprite = std::make_shared<Sprite>();
 }
 
-RenderableObject::RenderableObject(std::string texture, int xpos, int ypos, int xsize, int ysize)
+RenderableObject::RenderableObject(std::string texture, int xpos, int ypos, int xsize, int ysize, Eigen::Vector3f color)
 	:GameObject()
 {
-	mSprite = std::make_shared<Sprite>(texture, xpos, ypos, 0, xsize, ysize, 1.0f, 1.0f, 1.0f);
+	mSprite = std::make_shared<Sprite>(texture, xpos, ypos, 0, xsize, ysize, color.x(), color.y(), color.z());
 }
 
 RenderableObject::~RenderableObject()
@@ -24,9 +22,7 @@ RenderableObject::~RenderableObject()
 
 void RenderableObject::OnRender()
 {
-	g_pGraphicsManager->GetSpriteRenderer()->RenderSprite(g_pResourceManager->GetTexture(mSprite->GetTexture()), Eigen::Vector2f(mSprite->GetPosX(), mSprite->GetPosY()),
-		Eigen::Vector2f(mSprite->GetSizeX(), mSprite->GetSizeY()), 0, Eigen::Vector3f(mSprite->r(), mSprite->g(), mSprite->b()));
-
+	g_pGraphicsManager->GetSpriteRenderer()->AddSprite(mSprite);
 }
 
 void RenderableObject::SetPosition(float x, float y, float z)
@@ -43,6 +39,11 @@ float RenderableObject::GetPosX()
 float RenderableObject::GetPosY()
 {
 	return mSprite->GetPosY();
+}
+
+float RenderableObject::GetSizeX()
+{
+	return mSprite->GetSizeX();
 }
 
 std::shared_ptr<Sprite> RenderableObject::GetSprite()

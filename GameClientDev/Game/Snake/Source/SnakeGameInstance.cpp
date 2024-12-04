@@ -156,22 +156,17 @@ void SnakeGameInstance::DetectCollide()
 		return;
 	}
 
-	for (auto& gameObject : m_GameObjectsMap)
+	if (GetGameObject("snake")->IsCollide(GetGameObject("food")))
 	{
-		if (GetGameObject("snake")->IsCollide(gameObject.second))
-		{
-			if (IsFood(gameObject.second))
-			{
-				AddPoint();
-			}
 
-			// if (IsWall(gameObject.second))
-			// {
-			// 	Stop();
-			// 	break;
-			// }
-		}
+		AddPoint();
 	}
+
+	// if (IsWall(gameObject.second))
+	// {
+	// 	Stop();
+	// 	break;
+	// }
 
 }
 
@@ -217,7 +212,6 @@ int SnakeGameInstance::Start()
 	}
 
 	g_pStateManager->GameStart();
-	return 0;
 }
 
 void SnakeGameInstance::AddPoint()
@@ -227,26 +221,6 @@ void SnakeGameInstance::AddPoint()
 	{
 		scoreBoard->AddPoint();
 	}
-}
-
-bool SnakeGameInstance::IsFood(GameObject* gameObject)
-{
-	Food* food = dynamic_cast<Food*>(gameObject);
-	if (food != nullptr)
-	{
-		return true;
-	}
-	return false;
-}
-
-bool SnakeGameInstance::IsWall(GameObject* gameObject)
-{
-	Wall* wall = dynamic_cast<Wall*>(gameObject);
-	if (wall != nullptr)
-	{
-		return true;
-	}
-	return false;
 }
 
 bool SnakeGameInstance::AddGameObject(const std::string& objectName, GameObject* gameObject)

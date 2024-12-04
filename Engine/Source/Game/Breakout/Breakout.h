@@ -1,5 +1,10 @@
 #pragma once
+#include <memory>
+
 #include "../../GameInstance.h"
+class Camera2D;
+class Scene;
+
 class Breakout : public GameInstance
 {
 	virtual int Initialize() override;
@@ -17,6 +22,13 @@ class Breakout : public GameInstance
 
 	// manage physics
 	virtual void DetectCollide() override;
-private:
 
+	// manage game state
+	bool IsRunning();
+	int Stop() override;
+	int Pause() override;
+	int Start() override;
+private:
+	std::shared_ptr<Scene> mCurrentScene;
+	Camera2D* camera;
 };

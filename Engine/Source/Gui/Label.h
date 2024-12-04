@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
+#include <memory>
 #include "../Entities/RenderableObject.h"
-
+#include "../Entities/Text.h"
 class Label : public RenderableObject
 {
 public:
@@ -9,15 +10,12 @@ public:
 	~Label() override;
 
 	void SetText(const std::wstring& text);
-	const std::wstring& GetText();
+	std::wstring GetText();
 
 	void OnKeyPressed() override;
 	void Update(float elasedTime) override;
 	void OnRender() override;
 private:
-	float m_xPos;
-	float m_yPos;
-	float m_size;
-	Eigen::Vector3f m_color;
-	std::wstring m_text;
+
+	std::shared_ptr<Text> mText;
 };

@@ -10,14 +10,10 @@ Scene::~Scene()
 
 void Scene::Release()
 {
-    for (auto gameObject : m_GameObjectsMap)
-    {
-        delete gameObject.second;
-    }
     m_GameObjectsMap.clear();
 }
 
-bool Scene::AddGameObject(const std::string& objectName, GameObject* gameObject)
+bool Scene::AddGameObject(const std::string& objectName, std::shared_ptr<GameObject> gameObject)
 {
     m_GameObjectsMap[objectName] = gameObject;
     return true;

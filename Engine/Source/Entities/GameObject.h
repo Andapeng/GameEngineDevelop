@@ -13,11 +13,12 @@ public:
 	virtual ~GameObject();
 	virtual void OnRender();
 	virtual void OnKeyPressed();
+	virtual void OnKeyPressed(const std::string& keyString);
 
 	virtual void OnCollide(HitInfo& hitInfo);
-	virtual bool IsCollide(GameObject* object);
+	virtual bool IsCollide(std::shared_ptr<GameObject> object);
 
-	virtual void Update(float elasedTime);
+	virtual void Update(float elapsedTime);
 
 protected:
 	std::vector<std::shared_ptr<IComponent>> GetComponents(std::string TypeName);

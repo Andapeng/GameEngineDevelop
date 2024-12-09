@@ -31,11 +31,15 @@ void GameObject::OnKeyPressed()
 {
 }
 
+void GameObject::OnKeyPressed(const std::string& keyString)
+{
+}
+
 void GameObject::OnCollide(HitInfo& hitInfo)
 {
 }
 
-bool GameObject::IsCollide(GameObject* object)
+bool GameObject::IsCollide(std::shared_ptr<GameObject> object)
 {
 	// get physics component
 	// call component check collide function

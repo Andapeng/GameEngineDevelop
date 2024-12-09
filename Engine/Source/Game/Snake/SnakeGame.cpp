@@ -82,20 +82,20 @@ int SnakeGame::Initialize()
 	std::shared_ptr<Scene> ReadyScene = std::make_shared<Scene>("ReadyScene");
 	std::shared_ptr<Scene> Level0 = std::make_shared<Scene>("Level0");
 
-	RenderableObject* Level0BG = new RenderableObject("dialogbox", 0, 0, 800, 600);
-	Snake* snake = new Snake("face_transparent", 0, 0, 50);
-	Food* food = new Food("blank");
-	ScoreBoard* scoreBoard = new ScoreBoard;
-	Label* fpsLabel = new Label(L"FPS:", 0.0f, 50.0f, 1.0f); 
-	Button* button = new Button("Restart", { 150.0f, 350.0f }, { 150.f, 50.f });
-	Button* button2 = new Button("Return to title", { 450.0f, 350.0f }, { 150.f, 50.f });
+	std::shared_ptr < RenderableObject> Level0BG = std::make_shared < RenderableObject>("dialogbox", 0, 0, 800, 600);
+	std::shared_ptr < Snake> snake = std::make_shared < Snake>("face_transparent", 0, 0, 50);
+	std::shared_ptr < Food> food = std::make_shared < Food>("blank");
+	std::shared_ptr < ScoreBoard> scoreBoard = std::make_shared < ScoreBoard>();
+	std::shared_ptr < Label> fpsLabel = std::make_shared < Label>(L"FPS:", 0.0f, 50.0f, 1.0f);
+	std::shared_ptr < Button> button = std::make_shared < Button>("Restart", Eigen::Vector2f{ 150.0f, 350.0f }, Eigen::Vector2f{ 150.f, 50.f });
+	std::shared_ptr < Button> button2 = std::make_shared < Button>("Return to title", Eigen::Vector2f{ 450.0f, 350.0f }, Eigen::Vector2f{ 150.f, 50.f });
 
 
-	Wall* wall = new Wall("block");
+	std::shared_ptr<Wall> wall = std::make_shared<Wall>("block");
 
-	RenderableObject* ReadySceneObject = new RenderableObject("ReadyScene", 0, 0, 800, 600);
+	std::shared_ptr<RenderableObject> ReadySceneObject = std::make_shared<RenderableObject>("ReadyScene", 0, 0, 800, 600);
 	ReadyScene->AddGameObject("ReadySceneObject", ReadySceneObject);
-	Label* StartLabel = new Label(L"Please press any key to start", 50.0f, 400.0f, 1.0f);
+	std::shared_ptr<Label> StartLabel = std::make_shared<Label>(L"Please press any key to start", 50.0f, 400.0f, 1.0f);
 	ReadyScene->AddGameObject("StartLabel", StartLabel);
 
 	Level0->AddGameObject("Level0BG", Level0BG);
@@ -184,7 +184,7 @@ void SnakeGame::Update(float elapsedTime)
 			}
 		}
 
-		if (const auto fpsLabel = dynamic_cast<Label*>(mCurrentScene->GetGameObject("fpsLabel")))
+		if (const auto fpsLabel = dynamic_pointer_cast<Label>(mCurrentScene->GetGameObject("fpsLabel")))
 		{
 			fpsLabel->SetText(L"FPS:" + std::to_wstring(g_pStatisticsManager->GetFPS()));
 		}
@@ -254,7 +254,7 @@ int SnakeGame::Start()
 
 void SnakeGame::AddPoint()
 {
-	auto scoreBoard = dynamic_cast<ScoreBoard*>(mCurrentScene->GetGameObject("scoreBoard"));
+	auto scoreBoard = dynamic_pointer_cast<ScoreBoard>(mCurrentScene->GetGameObject("scoreBoard"));
 	if (scoreBoard != nullptr)
 	{
 		scoreBoard->AddPoint();

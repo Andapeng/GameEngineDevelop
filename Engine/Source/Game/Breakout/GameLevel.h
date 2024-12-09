@@ -12,6 +12,7 @@ public:
 	bool IsCompleted();
 
 	void OnRender() override;
+	std::vector<std::shared_ptr<Brick>> GetBricks() { return mBricks; }
 private:
 	// initialize level from tile data
 	void init(std::vector<std::vector<unsigned int>> tileData,

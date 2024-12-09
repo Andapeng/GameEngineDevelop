@@ -9,10 +9,13 @@ public:
 
 	void SetPosX(float x) { mPos[0] = x; }
 	void SetPosY(float y) { mPos[1] = y; }
+	void SetSizeX(float x) { mSize[0] = x; }
+	void SetSizeY(float y) { mSize[1] = y; }
 
 	std::string GetTexture() { return mTexture; }
 	float GetPosX() { return mPos[0]; }
 	float GetPosY() { return mPos[1]; }
+	float GetPosZ() { return mPos[2]; }
 	float GetSizeX() { return mSize[0]; }
 	float GetSizeY() { return mSize[1]; }
 	float r() { return mColor[0]; }

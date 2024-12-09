@@ -1,27 +1,22 @@
 #include "Paddle.h"
 #include "../../Config/GlobalConfiguration.h"
 #include "../../Managers/InputManager.h"
-Paddle::Paddle(std::string texture, int xpos, int ypos, int xsize, int ysize, Eigen::Vector3f color)
+Paddle::Paddle(std::string texture, float xpos, float ypos, float xsize, float ysize, Eigen::Vector3f color)
 	: RenderableObject(texture, xpos, ypos, xsize, ysize, color)
 {
-
+	mVelocity = PLAYER_VELOCITY;
 }
 
-void Paddle::OnRender()
+void Paddle::OnKeyPressed(const std::string& keyString)
 {
-	RenderableObject::OnRender();
-}
-
-void Paddle::OnKeyPressed()
-{
-	if (g_pInputManager->IsKeyPressed("Left"))
+	if (keyString == "Left")
 	{
 		if (GetPosX() >= 0.0f)
 		{
 			SetPosition(GetPosX() - mVelocity, GetPosY(), 0);
 		}
 	}
-	else if (g_pInputManager->IsKeyPressed("Right"))
+	else if (keyString == "Right")
 	{
 		if (GetPosX() <= Configuration::Get()->GetWidth() - GetSizeX()) {
 			SetPosition(GetPosX() + mVelocity, GetPosY(), 0);
@@ -34,12 +29,7 @@ void Paddle::OnCollide(HitInfo& hitInfo)
 	RenderableObject::OnCollide(hitInfo);
 }
 
-bool Paddle::IsCollide(GameObject* object)
+void Paddle::Update(float elapsedTime)
 {
-	return RenderableObject::IsCollide(object);
-}
-
-void Paddle::Update(float elaspedTime)
-{
-	mVelocity = PLAYER_VELOCITY * elaspedTime;
+	mVelocity = PLAYER_VELOCITY * elapsedTime;
 }

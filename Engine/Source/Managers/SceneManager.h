@@ -19,6 +19,7 @@ public:
 
 	bool AddScene(const std::string& sceneName, std::shared_ptr<Scene> scene);
 	std::shared_ptr<Scene> GetScene(const std::string& sceneName) { return mScenes[sceneName]; }
+	std::shared_ptr<Scene> GetCurrentScene() { return mCurrentScene; }
 	std::shared_ptr<Scene> LoadScene(const std::string& SceneName);
 private:
 	SceneManager();

@@ -4,3 +4,11 @@ Brick::Brick(std::string texture, int xpos, int ypos, int xsize, int ysize, Eige
 	: RenderableObject(texture, xpos, ypos, xsize, ysize, color)
 {
 }
+
+void Brick::OnRender()
+{
+	if (!IsDestroyed())
+	{
+		RenderableObject::OnRender();
+	}
+}

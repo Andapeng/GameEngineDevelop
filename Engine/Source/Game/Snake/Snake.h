@@ -11,7 +11,7 @@ public:
 
 	void OnRender() override;
 	void OnKeyPressed() override;
-	bool IsCollide(GameObject* gameObject) override;
+	bool IsCollide(std::shared_ptr<GameObject> gameObject) override;
 	void Update(float elasedTime) override;
 
 	bool IsAlive() { return alive; }

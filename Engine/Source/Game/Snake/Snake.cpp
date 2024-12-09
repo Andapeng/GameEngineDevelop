@@ -78,14 +78,14 @@ void Snake::OnKeyPressed()
 
 }
 
-bool Snake::IsCollide(GameObject* gameObject)
+bool Snake::IsCollide(std::shared_ptr<GameObject> gameObject)
 {
-	Food* food = dynamic_cast<Food*>(gameObject);
+	auto food = dynamic_pointer_cast<Food>(gameObject);
 	if (food != nullptr)
 	{
 		return this->eatFood(*food);
 	}
-	Wall* wall = dynamic_cast<Wall*>(gameObject);
+	auto wall = dynamic_pointer_cast<Wall>(gameObject);
 	if (wall != nullptr)
 	{
 		die();

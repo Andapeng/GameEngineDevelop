@@ -41,12 +41,12 @@ int SpriteRenderer::Initialize()
 	return 0;
 }
 
-void SpriteRenderer::RenderSprite(Texture2D tex, Eigen::Vector2f pos, Eigen::Vector2f size, float rotate, Eigen::Vector3f color)
+void SpriteRenderer::RenderSprite(Texture2D tex, Eigen::Vector3f pos, Eigen::Vector2f size, float rotate,
+	Eigen::Vector3f color)
 {
-
 	ResourceManager::Get()->GetShader("sprite_shader").Use();
 	Eigen::Matrix4f model = Eigen::Matrix4f::Identity();
-	Translate(model, Eigen::Vector3f(pos(0), pos(1), 0.0f));
+	Translate(model, pos);
 	Scale(model, Eigen::Vector3f(size(0), size(1), 1.0f));
 
 	ResourceManager::Get()->GetShader("sprite_shader").SetMatrix4f("model", model);
@@ -66,22 +66,25 @@ void SpriteRenderer::AddSprite(std::shared_ptr<Sprite> Sprite)
 {
 	if (Sprite != nullptr)
 	{
-		mSprites.push_back(Sprite);
+		mSpriteRenderQueue[Sprite->GetPosZ()].push_back(Sprite);
 	}
 }
 
 void SpriteRenderer::OnRender()
 {
-	for(const auto& Sprite : mSprites)
+	for (const auto& SpriteQueue : mSpriteRenderQueue)
 	{
-		g_pGraphicsManager->GetSpriteRenderer()->RenderSprite(g_pResourceManager->GetTexture(Sprite->GetTexture()), Eigen::Vector2f(Sprite->GetPosX(), Sprite->GetPosY()),
-			Eigen::Vector2f(Sprite->GetSizeX(), Sprite->GetSizeY()), 0, Eigen::Vector3f(Sprite->r(), Sprite->g(), Sprite->b()));
+		for (const auto& Sprite : SpriteQueue.second)
+		{
+			 	g_pGraphicsManager->GetSpriteRenderer()->RenderSprite(g_pResourceManager->GetTexture(Sprite->GetTexture()), Eigen::Vector3f(Sprite->GetPosX(), Sprite->GetPosY(), Sprite->GetPosZ()),
+ 		Eigen::Vector2f(Sprite->GetSizeX(), Sprite->GetSizeY()), 0, Eigen::Vector3f(Sprite->r(), Sprite->g(), Sprite->b()));
+		}
 	}
 }
 
 void SpriteRenderer::Clear()
 {
-	mSprites.clear();
+	mSpriteRenderQueue.clear();
 }
 
 int SpriteRenderer::Release()

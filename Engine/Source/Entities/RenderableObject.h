@@ -10,7 +10,7 @@ public:
 	RenderableObject(std::string texture, float xPos, float yPos, float zPos, float xSize, float ySize, Eigen::Vector3f color = { 1.0f, 1.0f, 1.0f });
 	~RenderableObject() override;
 
-	void OnRender() override;
+	virtual void OnRender() override;
 	
 	void SetPosition(float x, float y, float z);
 	void SetPosition(Eigen::Vector3f pos);
@@ -26,5 +26,5 @@ public:
 	std::shared_ptr<Sprite> GetSprite();
 	
 private:
-	std::shared_ptr<Sprite> mSprite;
+	std::shared_ptr<Sprite> mSprite = nullptr;
 };

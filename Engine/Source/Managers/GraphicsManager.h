@@ -1,5 +1,6 @@
 #pragma once
 #include "IManager.h"
+class ParticleRenderer;
 class ImguiRenderer;
 class IGraphicsDevice;
 class VulkanGrahphicsDevice;
@@ -23,6 +24,7 @@ public:
 	SpriteRenderer* GetSpriteRenderer() { return mSpriteRenderer; }
 	TextRenderer* GetTextRenderer() { return mTextRenderer; }
 	ImguiRenderer* GetImguiRenderer() { return mImguiRenerer; }
+	ParticleRenderer* GetParticleRenderer() { return mParticleRenderer; }
 
 	int ProcessDrawCommnad();
 
@@ -34,6 +36,7 @@ private:
 	SpriteRenderer* mSpriteRenderer;
 	TextRenderer* mTextRenderer;
 	ImguiRenderer* mImguiRenerer;
+	ParticleRenderer* mParticleRenderer;
 	IGraphicsDevice* mGrahpicsDevice;	
 };
 

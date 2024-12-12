@@ -14,6 +14,7 @@ public:
 	void Clear();
 
 	void OnRender();
+	bool IsReadyToRendering();
 private:
 	std::vector<std::shared_ptr<ButtonDescription>> mButtons;
 };

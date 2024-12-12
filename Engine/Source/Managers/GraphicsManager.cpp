@@ -7,6 +7,7 @@
 #include "../Renderer/SpriteRenderer.h"
 #include "../Renderer/TextRenderer.h"
 #include "../Renderer/ImguiRenderer.h"
+#include "../Renderer/ParticleRenderer.h"
 
 #include "../RHI/D3D12GraphicsDevice.h"
 #include "../RHI/VulkanGraphicsDevice.h"
@@ -37,20 +38,24 @@ int GraphicsManager::Initialize()
 	mSpriteRenderer = new SpriteRenderer;
 	mTextRenderer = new TextRenderer;
 	mImguiRenerer = new ImguiRenderer;
+	mParticleRenderer = new ParticleRenderer;
 
 	mSpriteRenderer->Initialize();
 	mTextRenderer->Initialize();
 	mImguiRenerer->Initialize();
+	mParticleRenderer->Initialize();
 
 	return 1;
 }
 
 void GraphicsManager::Release()
 {
+	mParticleRenderer->Release();
 	mImguiRenerer->Release();
 	mSpriteRenderer->Release();
 	mTextRenderer->Release();
 
+	delete mParticleRenderer;
 	delete mImguiRenerer;
 	delete mSpriteRenderer;
 	delete mTextRenderer;

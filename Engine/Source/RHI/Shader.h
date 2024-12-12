@@ -14,6 +14,7 @@ public:
 	// ...set function
 	int SetInt(const char* name, int val);
 	int SetFloat(const char* name, float val);
+	int SetVector2f(const char* name, Eigen::Vector2f vec);
 	int SetVector3f(const char* name, Eigen::Vector3f vec);
 	int SetVector4f(const char* name, Eigen::Vector4f vec);
 	int SetMatrix4f(const char* name, Eigen::Matrix4f mat);

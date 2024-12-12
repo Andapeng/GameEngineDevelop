@@ -7,6 +7,7 @@
 #include "../../Renderer/SpriteRenderer.h"
 #include "../../Renderer/ImguiRenderer.h"
 #include "../../Renderer/TextRenderer.h"
+#include "../../Renderer/ParticleRenderer.h"
 
 #include "../../Math/Math.h"
 
@@ -27,10 +28,8 @@
 #include "../../Gui/Label.h"
 
 #include "Paddle.h"
-// Initial velocity of the Ball
-const Eigen::Vector2f INITIAL_BALL_VELOCITY = { 100.0f, -350.0f };
-// Radius of the ball object
-const float BALL_RADIUS = 12.5f;
+#include "ParticleGenerator.h"
+#include "GameConfig.h"
 
 int Breakout::Initialize()
 {
@@ -46,7 +45,10 @@ int Breakout::Initialize()
 	g_pResourceManager->LoadShader("Assets/Shaders/texture.vertex", "Assets/Shaders/texture.fragment", "texture_shader");
 	g_pResourceManager->LoadShader("Assets/Shaders/sprite.vertex", "Assets/Shaders/sprite.fragment", "sprite_shader");
 	g_pResourceManager->LoadShader("Assets/Shaders/text.vertex", "Assets/Shaders/text.fragment", "text_shader");
+	g_pResourceManager->LoadShader("Assets/Shaders/particle.vertex", "Assets/Shaders/particle.fragment", "particle_shader");
+
 	g_pFontManager->LoadFont("Assets/Fonts/simsun.ttc");
+
 
 	auto gConfig = Configuration::Get();
 	camera = new Camera2D(gConfig->GetWidth(), gConfig->GetHeight());
@@ -57,6 +59,9 @@ int Breakout::Initialize()
 
 	g_pResourceManager->GetShader("text_shader").Use()->SetInt("text", 0);
 	g_pResourceManager->GetShader("text_shader").SetMatrix4f("projection", camera->GetProjectMatrix());
+
+	g_pResourceManager->GetShader("particle_shader").Use()->SetInt("sprite", 0);
+	g_pResourceManager->GetShader("particle_shader").SetMatrix4f("projection", camera->GetProjectMatrix());
 
 	g_pResourceManager->GetShader("texture_shader").Use()->SetInt("texture1", 0);
 
@@ -70,21 +75,24 @@ int Breakout::Initialize()
 
 	std::shared_ptr<Label> fpsLabel = std::make_shared<Label>(L"FPS:", 0.0f, 50.0f, 1.0f);
 
-	std::shared_ptr<RenderableObject> backgroudObj = std::make_shared<RenderableObject>("background", 0, 0, gConfig->GetWidth(), gConfig->GetHeight(), Eigen::Vector3f{1.0f, 1.0f, 1.0f});
+	std::shared_ptr<RenderableObject> backgroundObj = std::make_shared<RenderableObject>("background", 0, 0, gConfig->GetWidth(), gConfig->GetHeight(), Eigen::Vector3f{1.0f, 1.0f, 1.0f});
 
 	Eigen::Vector2f playSize = { 100.0f, 20.0f };
-	Eigen::Vector2f playerPos = Eigen::Vector2f(gConfig->GetWidth() / 2.0f - playSize.x() / 2.0f, gConfig->GetHeight() - playSize.y());
+	Eigen::Vector2f playerPos = Eigen::Vector2f(static_cast<float>(gConfig->GetWidth()) / 2.0f - playSize.x() / 2.0f, static_cast<float>(gConfig->GetHeight()) - playSize.y());
 	std::shared_ptr<Paddle> Player = std::make_shared<Paddle>("paddle", playerPos.x(), playerPos.y(), playSize.x(), playSize.y(), Eigen::Vector3f{1.0f, 1.0f, 1.0f});
 
 	Eigen::Vector2f ballPos = playerPos + Eigen::Vector2f(playSize.x() / 2.0f - BALL_RADIUS,
 		-BALL_RADIUS * 2.0f);
 	std::shared_ptr<Ball> BallObj = std::make_shared<Ball>("face_transparent", ballPos.x(), ballPos.y(), BALL_RADIUS*2, BALL_RADIUS * 2);
 
+	std::shared_ptr<ParticleGenerator> Particles = std::make_shared<ParticleGenerator>("particle", 500, BallObj, 2, Eigen::Vector2f{ BallObj->GetRadius() / 2 , BallObj->GetRadius() / 2 });
+
 	SceneLevel0->AddGameObject("level0", level0);
 	SceneLevel0->AddGameObject("fpsLabel", fpsLabel);
-	SceneLevel0->AddGameObject("background", backgroudObj);
+	SceneLevel0->AddGameObject("background", backgroundObj);
 	SceneLevel0->AddGameObject("paddle", Player);
 	SceneLevel0->AddGameObject("ball", BallObj);
+	SceneLevel0->AddGameObject("particles", Particles);
 
 	g_pSceneManager->AddScene("SceneLevel0", SceneLevel0);
 	g_pSceneManager->AddScene("SceneLevel1", SceneLevel1);
@@ -151,13 +159,18 @@ void Breakout::ProcessInput()
 void Breakout::Render()
 {
 	g_pGraphicsManager->GetSpriteRenderer()->Clear();
+	g_pGraphicsManager->GetParticleRenderer()->Clear();
 	g_pGraphicsManager->GetTextRenderer()->Clear();
 	g_pGraphicsManager->GetImguiRenderer()->Clear();
 	for (const auto& obj : mCurrentScene->GetSceneObjects())
 	{
-		obj.second->OnRender();
+		if (obj.second)
+		{
+			obj.second->OnRender();
+		}
 	}
 	g_pGraphicsManager->GetSpriteRenderer()->OnRender();
+	g_pGraphicsManager->GetParticleRenderer()->OnRender();
 	g_pGraphicsManager->GetTextRenderer()->OnRender();
 	g_pGraphicsManager->GetImguiRenderer()->OnRender();
 

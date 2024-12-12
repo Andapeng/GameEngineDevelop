@@ -13,5 +13,4 @@ public:
 	virtual void Update(float elapsedTime);
 private:
 	float mVelocity = 0.0f;
-	const float PLAYER_VELOCITY = 6000.0f;
 };

@@ -2,6 +2,8 @@
 #include <string>
 #include "../../Entities/RenderableObject.h"
 #include "../../Physics/Physics2D.h"
+#include "GameConfig.h"
+
 class Ball : public RenderableObject
 {
 public:
@@ -15,9 +17,13 @@ public:
 
     Collision CheckCollision(std::shared_ptr<RenderableObject> obj);
     void OnCollision(Collision collision, std::shared_ptr<GameObject> obj);
+
+    float GetRadius() { return mRadius; }
+    Eigen::Vector2f GetVelocity() { return mVelocity;  }
 private:
-    // Initial velocity of the Ball
-    const Eigen::Vector2f INITIAL_BALL_VELOCITY = { 100.0f, -350.0f };
+
+    void respawnParticle(Eigen::Vector2f offset = Eigen::Vector2f(0.0f, 0.0f));
+
     // Radius of the ball object
     const float BALL_RADIUS = 12.5f;
 
@@ -27,6 +33,5 @@ private:
     Eigen::Vector2f mVelocity = INITIAL_BALL_VELOCITY;
 
     float mWindowWidth = 0.0f;
-    const float PLAYER_VELOCITY = 5000.0f;
     float mPlayerVelocity = 0.0f;
 };

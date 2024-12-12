@@ -13,6 +13,7 @@
 
 #include <ft2build.h>
 #include <freetype/freetype.h>
+#include "../Log.h"
 
 int TextRenderer::Initialize()
 {
@@ -34,6 +35,8 @@ int TextRenderer::Initialize()
 
 void TextRenderer::RenderText(std::wstring text, float x, float y, float scale, Eigen::Vector3f color)
 {
+	// Logger::LogTrace("TextRenderer::OnRender begin");
+
 	ResourceManager::Get()->GetShader("text_shader").Use()->SetVector3f("textColor", color);
 	glActiveTexture(GL_TEXTURE0);
 	glBindVertexArray(textVAO);
@@ -73,6 +76,8 @@ void TextRenderer::RenderText(std::wstring text, float x, float y, float scale, 
 	}
 	glBindVertexArray(0);
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+	// Logger::LogTrace("TextRenderer::OnRender end");
 }
 
 void TextRenderer::AddText(std::shared_ptr<Text> Text)

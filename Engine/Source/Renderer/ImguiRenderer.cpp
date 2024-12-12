@@ -6,6 +6,7 @@
 #include "imgui-sfml/imgui-SFML.h"
 #include "../Managers/WindowManager.h"
 #include "../Gui/ButtonDescript.h"
+#include "../Log.h"
 
 void ImguiRenderer::Initialize()
 {
@@ -32,6 +33,12 @@ void ImguiRenderer::Clear()
 
 void ImguiRenderer::OnRender()
 {
+	// Logger::LogTrace("ImguiRenderer::OnRender begin");
+
+	if (mButtons.empty())
+	{
+		return;
+	}
 	ImGui_ImplOpenGL3_NewFrame();
 	int width, height;
 	g_pWindowManager->GetMainWindowSize(width, height);
@@ -51,5 +58,11 @@ void ImguiRenderer::OnRender()
 	}
 
 	ImGui::End();
+	// Logger::LogTrace("ImguiRenderer::OnRender end");
+
 }
 
+bool ImguiRenderer::IsReadyToRendering()
+{
+	return !mButtons.empty();
+}

@@ -7,16 +7,18 @@
 
 
 int main(int argc, char** args) {
-   Logger::LogInfo("Engine Start. ");
-    //_CrtSetBreakAlloc(1887);
-   Application app;
-   // app.Initialize(new SnakeGame());
-   app.Initialize(new Breakout);
-   app.Run();
-   app.Release();
 
-   Logger::LogInfo("Engine end. ");
+	Logger::SetLogLevel("debug");
+	Logger::LogInfo("Engine Start. ");
+	//_CrtSetBreakAlloc(1887);
+	Application app;
+	// app.Initialize(new SnakeGame());
+	app.Initialize(new Breakout);
+	app.Run();
+	app.Release();
 
-   _CrtDumpMemoryLeaks();
-   return 0;
+	Logger::LogInfo("Engine end. ");
+
+	_CrtDumpMemoryLeaks();
+	return 0;
 }

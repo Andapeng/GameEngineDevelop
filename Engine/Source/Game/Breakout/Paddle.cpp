@@ -1,6 +1,7 @@
 #include "Paddle.h"
 #include "../../Config/GlobalConfiguration.h"
 #include "../../Managers/InputManager.h"
+#include "GameConfig.h"
 Paddle::Paddle(std::string texture, float xpos, float ypos, float xsize, float ysize, Eigen::Vector3f color)
 	: RenderableObject(texture, xpos, ypos, xsize, ysize, color)
 {

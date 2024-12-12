@@ -66,7 +66,12 @@ Source/RHI/d3dx12.h
 "Source/Gui/ButtonDescript.cpp" 
 "Source/Game/Breakout/GameLevel.cpp"
 "Source/Game/Breakout/Brick.cpp"
-"Source/Game/Breakout/Breakout.cpp" "Source/Game/Breakout/Paddle.cpp" "Source/Game/Breakout/Ball.cpp" "Source/Renderer/Particle.cpp")
+"Source/Game/Breakout/Breakout.cpp" 
+"Source/Game/Breakout/Paddle.cpp" 
+"Source/Game/Breakout/Ball.cpp" 
+"Source/Renderer/Particle.cpp"
+"Source/Renderer/ParticleRenderer.cpp" 
+"Source/Game/Breakout/ParticleGenerator.cpp")
 
 add_executable(Engine Source/Main.cpp)
 add_library(LibEngine ${EngineSources})

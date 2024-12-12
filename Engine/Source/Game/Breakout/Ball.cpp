@@ -5,7 +5,6 @@
 
 #include "Brick.h"
 #include "Paddle.h"
-#include "../../Scene/Scene.h"
 
 Ball::Ball(std::string texture, float xpos, float ypos, float xsize, float ysize, Eigen::Vector3f color)
 	: RenderableObject(texture, xpos, ypos, 0.01f, xsize, ysize, color)
@@ -143,4 +142,9 @@ void Ball::OnCollision(Collision collision, std::shared_ptr<GameObject> obj)
         // fix sticky paddle
         mVelocity[1] = -1.0f * abs(mVelocity[1]);
     }
+}
+
+void Ball::respawnParticle(Eigen::Vector2f offset)
+{
+
 }

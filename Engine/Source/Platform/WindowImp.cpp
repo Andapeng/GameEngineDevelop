@@ -1,10 +1,14 @@
 #include "WindowImp.h"
 #include "SFML/Window.hpp"
 #include "../Managers/InputManager.h"
+#include "../Managers/GraphicsManager.h"
 #include "../Config/GlobalConfiguration.h"
 #include "glad/glad.h"
 #include "imgui-sfml/imgui-SFML.h"
 #include "imgui_impl_opengl3.h"
+#include "../Renderer/ImguiRenderer.h"
+
+#include "../Log.h"
 
 namespace sadp
 {
@@ -29,8 +33,14 @@ namespace sadp
 	void SfmlWindowImp::Show()
 	{
 #ifdef OPENGL_RENDERING
-		ImGui::SFML::Render(*m_Window);
+		// Logger::LogTrace("SfmlWindowImp::Show begin");
+		if (g_pGraphicsManager->GetImguiRenderer()->IsReadyToRendering())
+		{
+			ImGui::SFML::Render(*m_Window);			
+		}
 		m_Window->display();
+		// Logger::LogTrace("SfmlWindowImp::Show end");
+
 #endif
 	}
 	void SfmlWindowImp::ProcessEvent()
@@ -83,6 +93,9 @@ namespace sadp
 
 	void SfmlWindowImp::Update(float elapsedTime)
 	{
-		ImGui::SFML::Update(*m_Window, sf::seconds(elapsedTime));
+		if (g_pGraphicsManager->GetImguiRenderer()->IsReadyToRendering())
+		{
+			ImGui::SFML::Update(*m_Window, sf::seconds(elapsedTime));
+		}
 	}
 }

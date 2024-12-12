@@ -94,6 +94,13 @@ int Shader::SetFloat(const char* name, float val)
 	return 0;
 }
 
+int Shader::SetVector2f(const char* name, Eigen::Vector2f vec)
+{
+	this->Use();
+	glUniform2f(glGetUniformLocation(mShaderProgram, name), vec(0), vec(1));
+	return 0;
+}
+
 int Shader::SetVector3f(const char* name, Eigen::Vector3f vec)
 {
 	this->Use();

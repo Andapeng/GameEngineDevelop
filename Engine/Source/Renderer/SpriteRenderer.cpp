@@ -10,6 +10,7 @@
 #include <iostream>
 
 #include <GLAD/glad.h>
+#include "../Log.h"
 
 static float texture_vertices[] =
 {
@@ -26,7 +27,6 @@ static float texture_vertices[] =
 
 int SpriteRenderer::Initialize()
 {
-
 	glGenVertexArrays(1, &quadVAO);
 	glGenBuffers(1, &quadVBO);
 
@@ -44,7 +44,6 @@ int SpriteRenderer::Initialize()
 void SpriteRenderer::RenderSprite(Texture2D tex, Eigen::Vector3f pos, Eigen::Vector2f size, float rotate,
 	Eigen::Vector3f color)
 {
-	ResourceManager::Get()->GetShader("sprite_shader").Use();
 	Eigen::Matrix4f model = Eigen::Matrix4f::Identity();
 	Translate(model, pos);
 	Scale(model, Eigen::Vector3f(size(0), size(1), 1.0f));
@@ -72,6 +71,9 @@ void SpriteRenderer::AddSprite(std::shared_ptr<Sprite> Sprite)
 
 void SpriteRenderer::OnRender()
 {
+	// Logger::LogTrace("SpriteRenderer::OnRender begin");
+
+	ResourceManager::Get()->GetShader("sprite_shader").Use();
 	for (const auto& SpriteQueue : mSpriteRenderQueue)
 	{
 		for (const auto& Sprite : SpriteQueue.second)
@@ -80,6 +82,8 @@ void SpriteRenderer::OnRender()
  		Eigen::Vector2f(Sprite->GetSizeX(), Sprite->GetSizeY()), 0, Eigen::Vector3f(Sprite->r(), Sprite->g(), Sprite->b()));
 		}
 	}
+
+	// Logger::LogTrace("SpriteRenderer::OnRender end");
 }
 
 void SpriteRenderer::Clear()

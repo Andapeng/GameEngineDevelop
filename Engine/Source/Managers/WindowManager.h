@@ -23,10 +23,10 @@ public:
 	sadp::IWindow* GetMainWindow();
 private:
 	WindowManager();
-	static WindowManager* m_WindowMgr;
+	static WindowManager* mWindowMgr;
 
-	sadp::IWindow* m_MainWindow = nullptr;
-	std::vector<sadp::IWindow*> m_WindowHwnds;
+	sadp::IWindow* mMainWindow = nullptr;
+	std::vector<sadp::IWindow*> mWindowHwnds;
 };
 
 extern WindowManager* g_pWindowManager;

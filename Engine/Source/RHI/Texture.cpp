@@ -17,10 +17,26 @@ Texture2D::~Texture2D()
 {
 }
 
+int Texture2D::Generate(unsigned width, unsigned height, const char* data)
+{
+    glGenTextures(1, &mTextureID);
+    Logger::LogInfo(std::format("texture id : {} ", mTextureID));
+    glBindTexture(GL_TEXTURE_2D, mTextureID);
+    // set the texture wrapping parameters
+    // set Texture wrap and filter modes
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    return mTextureID;
+}
+
 int Texture2D::LoadTexture(std::string path, std::string textureName)
 {
     glGenTextures(1, &mTextureID);
-    std::cout << "texture id : " << mTextureID << std::endl;
+    Logger::LogInfo(std::format("texture id : {} ", mTextureID));
     glBindTexture(GL_TEXTURE_2D, mTextureID);
     // set the texture wrapping parameters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)

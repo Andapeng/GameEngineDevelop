@@ -86,11 +86,11 @@ int SnakeGameInstance::Tick()
 
 int SnakeGameInstance::Release()
 {
-	for (auto obj : m_GameObjectsMap)
+	for (auto obj : mGameObjectsMap)
 	{
 		delete obj.second;
 	}
-	m_GameObjectsMap.clear();
+	mGameObjectsMap.clear();
 
 	return 0;
 }
@@ -100,7 +100,7 @@ void SnakeGameInstance::ProcessInput()
 {
 	if (IsRunning())
 	{
-		for (auto obj : m_GameObjectsMap)
+		for (auto obj : mGameObjectsMap)
 		{
 			if (obj.second)
 			{
@@ -115,7 +115,7 @@ void SnakeGameInstance::Render()
 {
 	if (!g_pStateManager->IsGameOver())
 	{
-		for (auto obj : m_GameObjectsMap)
+		for (auto obj : mGameObjectsMap)
 		{
 			if (obj.second)
 			{
@@ -129,7 +129,7 @@ void SnakeGameInstance::Update(float elapsedTime)
 {
 	//player->Update(elapsedTime);
 	if (IsRunning()) {
-		for (auto obj : m_GameObjectsMap)
+		for (auto obj : mGameObjectsMap)
 		{
 			if (obj.second)
 			{
@@ -179,11 +179,11 @@ bool SnakeGameInstance::IsRunning()
 
 int SnakeGameInstance::Stop()
 {
-	for (auto& obj : m_GameObjectsMap)
+	for (auto& obj : mGameObjectsMap)
 	{
 		delete obj.second;
 	}
-	m_GameObjectsMap.clear();
+	mGameObjectsMap.clear();
 	g_pStateManager->GameOver();
 	return 0;
 }
@@ -225,7 +225,7 @@ void SnakeGameInstance::AddPoint()
 
 bool SnakeGameInstance::AddGameObject(const std::string& objectName, GameObject* gameObject)
 {
-	m_GameObjectsMap[objectName] = gameObject;
+	mGameObjectsMap[objectName] = gameObject;
 	return true;
 }
 

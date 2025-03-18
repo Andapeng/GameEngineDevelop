@@ -17,8 +17,6 @@
 
 int TextRenderer::Initialize()
 {
-	
-
 	// Configure VAO/VBO for texture quads
 	glGenVertexArrays(1, &textVAO);
 	glGenBuffers(1, &textVBO);
@@ -37,16 +35,16 @@ void TextRenderer::RenderText(std::wstring text, float x, float y, float scale, 
 {
 	// Logger::LogTrace("TextRenderer::OnRender begin");
 
-	ResourceManager::Get()->GetShader("text_shader").Use()->SetVector3f("textColor", color);
+	g_pResourceManager->GetShader("text_shader").Use()->SetVector3f("textColor", color);
 	glActiveTexture(GL_TEXTURE0);
 	glBindVertexArray(textVAO);
-	GLfloat max_h = static_cast<GLfloat>(ResourceManager::Get()->GetCharacter('H').GetBearing()(1));
+	GLfloat max_h = static_cast<GLfloat>(g_pResourceManager->GetCharacter('H').GetBearing()(1));
 	for (auto c : text)
 	{
-		auto ch = ResourceManager::Get()->GetCharacter(c);
+		auto ch = g_pResourceManager->GetCharacter(c);
 		if (ch.GetTexture() == 0 && FontManager::Get()->LoadCharacter(c) != -1)
 		{
-			ch = ResourceManager::Get()->GetCharacter(c);
+			ch = g_pResourceManager->GetCharacter(c);
 		}
 		GLfloat xpos = x + ch.GetBearing()(0) * scale;
 		GLfloat ypos = y + (max_h - ch.GetBearing()(1)) * scale;

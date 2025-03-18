@@ -25,9 +25,21 @@ void Paddle::OnKeyPressed(const std::string& keyString)
 	}
 }
 
-void Paddle::OnCollide(HitInfo& hitInfo)
+bool Paddle::CheckCollision(std::shared_ptr<RenderableObject> obj)
 {
-	RenderableObject::OnCollide(hitInfo);
+	// collision x-axis?
+	bool collisionX = GetPosX() + GetSizeX() >= obj->GetPosX() &&
+		obj->GetPosX() + obj->GetSizeX() >= GetPosX();
+	// collision y-axis?
+	bool collisionY = GetPosY() + GetSizeY() >= obj->GetPosY() &&
+		obj->GetPosY() + obj->GetSizeY() >= GetPosY();
+	// collision only if on both axes
+	return collisionX && collisionY;
+}
+
+void Paddle::OnCollision(Collision collision, std::shared_ptr<GameObject> obj)
+{
+
 }
 
 void Paddle::Update(float elapsedTime)

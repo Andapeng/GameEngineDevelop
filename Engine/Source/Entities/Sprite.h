@@ -11,6 +11,7 @@ public:
 	void SetPosY(float y) { mPos[1] = y; }
 	void SetSizeX(float x) { mSize[0] = x; }
 	void SetSizeY(float y) { mSize[1] = y; }
+	void SetColor(Eigen::Vector3f color) { mColor = color; }
 
 	std::string GetTexture() { return mTexture; }
 	float GetPosX() { return mPos[0]; }

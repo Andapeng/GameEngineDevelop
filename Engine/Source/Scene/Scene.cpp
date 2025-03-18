@@ -10,20 +10,20 @@ Scene::~Scene()
 
 void Scene::Release()
 {
-    m_GameObjectsMap.clear();
+    mGameObjectsMap.clear();
 }
 
 bool Scene::AddGameObject(const std::string& objectName, std::shared_ptr<GameObject> gameObject)
 {
-    m_GameObjectsMap[objectName] = gameObject;
+    mGameObjectsMap[objectName] = gameObject;
     return true;
 }
 
 std::shared_ptr<GameObject> Scene::GetGameObject(const std::string& objectName)
 {
-    if (m_GameObjectsMap.contains(objectName))
+    if (mGameObjectsMap.contains(objectName))
     {
-        return m_GameObjectsMap[objectName];
+        return mGameObjectsMap[objectName];
     }
     return nullptr;
 }

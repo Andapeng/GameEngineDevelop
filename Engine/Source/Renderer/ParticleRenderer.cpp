@@ -60,9 +60,9 @@ void ParticleRenderer::Clear()
 void ParticleRenderer::RenderParticle(Texture2D tex, Eigen::Vector3f pos, Eigen::Vector4f color)
 {
 	// Logger::LogInfo(std::format("pos = ({}, {})", pos(0), pos(1)));
-	ResourceManager::Get()->GetShader("particle_shader").Use();
-	ResourceManager::Get()->GetShader("particle_shader").SetVector2f("offset", {pos(0), pos(1)});
-	ResourceManager::Get()->GetShader("particle_shader").SetVector4f("color", color);
+	g_pResourceManager->GetShader("particle_shader").Use();
+	g_pResourceManager->GetShader("particle_shader").SetVector2f("offset", {pos(0), pos(1)});
+	g_pResourceManager->GetShader("particle_shader").SetVector4f("color", color);
 	glActiveTexture(GL_TEXTURE0);
 	// bind textures on corresponding texture units
 	tex.Bind();

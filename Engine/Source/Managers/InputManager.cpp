@@ -19,6 +19,8 @@ int InputManager::Initialize()
 	mStringToKeyMap["Left"] = sf::Keyboard::Key::Left;
 	mStringToKeyMap["Right"] = sf::Keyboard::Key::Right;
 	mStringToKeyMap["Upload"] = sf::Keyboard::Key::U;
+	mStringToKeyMap["W"] = sf::Keyboard::Key::W;
+	mStringToKeyMap["S"] = sf::Keyboard::Key::S;
 	return 1;
 }
 

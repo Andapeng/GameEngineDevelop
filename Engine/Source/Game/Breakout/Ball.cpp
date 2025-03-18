@@ -42,7 +42,7 @@ Eigen::Vector2f Ball::Move(float dt, float windowWidth)
     if (!this->mStuck)
     {
         // move the ball
-        this->SetPosition2D( GetPosition() + this->mVelocity * dt);
+        this->SetPosition2D( GetPosition2D() + this->mVelocity * dt);
         // check if outside window bounds; if so, reverse velocity and restore at correct position
         if (this->GetPosX() <= 0.0f)
         {
@@ -61,7 +61,7 @@ Eigen::Vector2f Ball::Move(float dt, float windowWidth)
         }
 
     }
-    return this->GetPosition();
+    return this->GetPosition2D();
 }
 
 void Ball::Reset(Eigen::Vector2f position, Eigen::Vector2f velocity)
@@ -103,31 +103,36 @@ void Ball::OnCollision(Collision collision, std::shared_ptr<GameObject> obj)
         // collision resolution
         Direction dir = std::get<1>(collision);
         Eigen::Vector2f diffVector = std::get<2>(collision);
-        if (dir == LEFT || dir == RIGHT) // horizontal collision
+        if (!mPassThrough)
         {
-            mVelocity[0] = -mVelocity[0]; // reverse horizontal velocity
-            // relocate
-            float penetration = mRadius - std::abs(diffVector.x());
-            if (dir == LEFT)
-                SetPosX(GetPosX() + penetration); // move ball to right
-            else
-                SetPosX(GetPosX() - penetration); // move ball to left;
-        }
-        else // vertical collision
-        {
-            mVelocity[1] = -mVelocity[1]; // reverse vertical velocity
-            // relocate
-            float penetration = mRadius - std::abs(diffVector.y());
-            if (dir == UP)
-                SetPosY(GetPosY() + penetration); // move ball bback up
-            else
-                SetPosY(GetPosY() - penetration); // move ball back down
+            if (dir == LEFT || dir == RIGHT) // horizontal collision
+            {
+                mVelocity[0] = -mVelocity[0]; // reverse horizontal velocity
+                // relocate
+                float penetration = mRadius - std::abs(diffVector.x());
+                if (dir == LEFT)
+                    SetPosX(GetPosX() + penetration); // move ball to right
+                else
+                    SetPosX(GetPosX() - penetration); // move ball to left;
+            }
+            else // vertical collision
+            {
+                mVelocity[1] = -mVelocity[1]; // reverse vertical velocity
+                // relocate
+                float penetration = mRadius - std::abs(diffVector.y());
+                if (dir == UP)
+                    SetPosY(GetPosY() + penetration); // move ball bback up
+                else
+                    SetPosY(GetPosY() - penetration); // move ball back down
+            }
         }
     }
 	
     auto paddleObj = dynamic_pointer_cast<Paddle>(obj);
     if (!mStuck && paddleObj && std::get<0>(collision))
     {
+        mStuck = mSticky;
+
         // check where it hit the board, and change velocity based on where it hit the board
         float centerBoard = paddleObj->GetPosX() + paddleObj->GetSizeX() / 2.0f;
         float distance = GetPosX() + mRadius - centerBoard;

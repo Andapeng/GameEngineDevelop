@@ -33,6 +33,9 @@ void Label::Update(float elasedTime)
 
 void Label::OnRender()
 {
-	g_pGraphicsManager->GetTextRenderer()->AddText(mText);
+	if (IsVisible())
+	{
+		g_pGraphicsManager->GetTextRenderer()->AddText(mText);
+	}
 }
 

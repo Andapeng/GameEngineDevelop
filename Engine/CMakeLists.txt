@@ -71,7 +71,7 @@ Source/RHI/d3dx12.h
 "Source/Game/Breakout/Ball.cpp" 
 "Source/Renderer/Particle.cpp"
 "Source/Renderer/ParticleRenderer.cpp" 
-"Source/Game/Breakout/ParticleGenerator.cpp")
+"Source/Game/Breakout/ParticleGenerator.cpp" "Source/Renderer/PostProcessingRenderer.cpp" "Source/Game/Breakout/PowerUp.cpp" "Source/Game/Breakout/PowerUpSpawner.cpp")
 
 add_executable(Engine Source/Main.cpp)
 add_library(LibEngine ${EngineSources})

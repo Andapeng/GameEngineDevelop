@@ -1,18 +1,18 @@
 #include "NetworkManager.h"
 #include "../Network/NetworkClient.h"
 
-NetworkManager* NetworkManager::m_singleNetworkManager = nullptr;
+NetworkManager* NetworkManager::mSingleNetworkManager = nullptr;
 
 int NetworkManager::Initialize()
 {
-    if (m_udpSocketClient == nullptr)
+    if (mUdpSocketClient == nullptr)
     {
-        m_udpSocketClient = new UdpSocketClient;
+        mUdpSocketClient = new UdpSocketClient;
     }
 
-    if (m_udpSocketClient != nullptr)
+    if (mUdpSocketClient != nullptr)
     {
-        m_udpSocketClient->Initialize();
+        mUdpSocketClient->Initialize();
     }
 
     return 0;
@@ -28,15 +28,15 @@ void NetworkManager::Release()
 
 void NetworkManager::Upload(std::string content)
 {
-    assert(m_udpSocketClient);
-    m_udpSocketClient->SendMessages(content);
+    assert(mUdpSocketClient);
+    mUdpSocketClient->SendMessages(content);
 }
 
 NetworkManager* NetworkManager::Get()
 {
-    if (m_singleNetworkManager == nullptr)
+    if (mSingleNetworkManager == nullptr)
     {
-        m_singleNetworkManager = new NetworkManager;
+        mSingleNetworkManager = new NetworkManager;
     }
-    return m_singleNetworkManager;
+    return mSingleNetworkManager;
 }

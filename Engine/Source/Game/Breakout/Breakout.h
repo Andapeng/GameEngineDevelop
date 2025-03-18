@@ -1,7 +1,9 @@
 #pragma once
 #include <memory>
+#include <vector>
 
 #include "../../GameInstance.h"
+class GameObject;
 class Camera2D;
 class Scene;
 
@@ -29,6 +31,20 @@ class Breakout : public GameInstance
 	int Pause() override;
 	int Start() override;
 private:
+
+	void previousLevel();
+	void nextLevel();
+	void resetLevel();
+	void resetPlayer();
+	void showMenu(bool bIsShow);
+	void showGameOver(bool bIsShow);
+
 	std::shared_ptr<Scene> mCurrentScene;
 	Camera2D* camera;
+	int mLevel = 0;
+
+	std::vector<std::shared_ptr<GameObject>> mGameLevels;
+	const int MAX_LEVEL = 3;
+	const int MAX_LIVES = 3;
+	int mLives = MAX_LIVES;
 };

@@ -7,11 +7,13 @@ public:
 	float Start();
 	float Pause();
 	float GetElapsedTime();
+	float GetTotalTime();
 
 private:
 	float mElapsedTime = 0.0f;
 	float mCurrentTime = 0.0f;
 	float mPausedTime = 0.0f;
+	float mTotalTime = 0.0f;
 	std::unique_ptr<sf::Clock> mClock;
 
 	bool mStopped = true;

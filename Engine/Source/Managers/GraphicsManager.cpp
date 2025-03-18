@@ -8,6 +8,7 @@
 #include "../Renderer/TextRenderer.h"
 #include "../Renderer/ImguiRenderer.h"
 #include "../Renderer/ParticleRenderer.h"
+#include "../Renderer/PostProcessingRenderer.h"
 
 #include "../RHI/D3D12GraphicsDevice.h"
 #include "../RHI/VulkanGraphicsDevice.h"
@@ -39,11 +40,13 @@ int GraphicsManager::Initialize()
 	mTextRenderer = new TextRenderer;
 	mImguiRenerer = new ImguiRenderer;
 	mParticleRenderer = new ParticleRenderer;
+	mPostProcessingRenderer = new PostProcessingRenderer;
 
 	mSpriteRenderer->Initialize();
 	mTextRenderer->Initialize();
 	mImguiRenerer->Initialize();
 	mParticleRenderer->Initialize();
+	mPostProcessingRenderer->Initialize();
 
 	return 1;
 }
@@ -54,18 +57,18 @@ void GraphicsManager::Release()
 	mImguiRenerer->Release();
 	mSpriteRenderer->Release();
 	mTextRenderer->Release();
+	mPostProcessingRenderer->Release();
 
 	delete mParticleRenderer;
 	delete mImguiRenerer;
 	delete mSpriteRenderer;
 	delete mTextRenderer;
+	delete mPostProcessingRenderer;
 
 	mGrahpicsDevice->Release();
 	delete mGrahpicsDevice;
 
 	delete mSingleGraphicsManager;
-
-		
 }
 
 void GraphicsManager::Tick()

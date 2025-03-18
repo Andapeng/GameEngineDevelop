@@ -2,15 +2,15 @@
 
 #include "../Platform/IWindow.h"
 
-WindowManager* WindowManager::m_WindowMgr = nullptr;
+WindowManager* WindowManager::mWindowMgr = nullptr;
 
 WindowManager* WindowManager::Get()
 {
-    if (m_WindowMgr == nullptr)
+    if (mWindowMgr == nullptr)
     {
-        m_WindowMgr = new WindowManager();
+        mWindowMgr = new WindowManager();
     }
-    return m_WindowMgr;
+    return mWindowMgr;
 }
 
 int WindowManager::Initialize()
@@ -28,26 +28,26 @@ void WindowManager::Tick()
 
 void WindowManager::RegisterWindow(sadp::IWindow* Window,bool IsMainWindow)
 {
-    m_WindowHwnds.push_back(Window);
+    mWindowHwnds.push_back(Window);
     if (IsMainWindow)
     {
-        m_MainWindow = Window;
+        mMainWindow = Window;
     }
 }
 
 int WindowManager::GetMainWindowHandle()
 {
-    return m_MainWindow->GetHandle();
+    return mMainWindow->GetHandle();
 }
 
 void WindowManager::GetMainWindowSize(int& x, int& y)
 {
-    m_MainWindow->GetSize(x, y);
+    mMainWindow->GetSize(x, y);
 }
 
 sadp::IWindow* WindowManager::GetMainWindow()
 {
-    return m_MainWindow;
+    return mMainWindow;
 }
 
 WindowManager::WindowManager()

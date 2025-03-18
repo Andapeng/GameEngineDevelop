@@ -9,6 +9,7 @@ class GameLevel : public RenderableObject
 {
 public:
 	void Load(const char* file, unsigned int levelWidth, unsigned int levelHeight);
+	void Reload();
 	bool IsCompleted();
 
 	void OnRender() override;
@@ -19,4 +20,7 @@ private:
 		unsigned int levelWidth, unsigned int levelHeight);
 
 	std::vector<std::shared_ptr<Brick>> mBricks;
+	std::string mLevelFile;
+	unsigned int mLevelWidth = 0;
+	unsigned int mLevelHeight = 0;
 };

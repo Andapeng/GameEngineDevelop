@@ -20,9 +20,9 @@ private:
 	NetworkManager() = default;
 	~NetworkManager() = default ;
 	//管理多个connection
-	UdpSocketClient* m_udpSocketClient = nullptr;
+	UdpSocketClient* mUdpSocketClient = nullptr;
 
-	static NetworkManager* m_singleNetworkManager;
+	static NetworkManager* mSingleNetworkManager;
 };
 
 extern NetworkManager* g_pNetworkManager;

@@ -2,9 +2,8 @@
 #include "SFML/Audio.hpp"
 #include "ResourceManager.h"
 
-#include <boost/log/trivial.hpp>
-
-AudioManager* AudioManager::m_SingleAudioManager = nullptr;
+#include "../Log.h"
+AudioManager* AudioManager::mSingleAudioManager = nullptr;
 
 int AudioManager::Initialize()
 {
@@ -14,7 +13,7 @@ int AudioManager::Initialize()
 
 void AudioManager::Release()
 {
-	delete m_SingleAudioManager;
+	delete mSingleAudioManager;
 }
 
 void AudioManager::Tick()
@@ -26,7 +25,7 @@ bool AudioManager::LoadMusicFromFile(std::string pathName)
 	sf::Music music;
 	if (!music.openFromFile(pathName))
 	{
-		BOOST_LOG_TRIVIAL(error) << "Load Music From File Failed.";
+		Logger::LogError("Load Music From File Failed.");
 	}
 	return true;
 }
@@ -36,23 +35,23 @@ bool AudioManager::LoadSoundFromFile(std::string pathName)
 	sf::SoundBuffer soundBuffer;
 	if (!soundBuffer.loadFromFile(pathName))
 	{
-		BOOST_LOG_TRIVIAL(error) << "Load Sound From File Failed.";
+		Logger::LogError("Load Sound From File Failed.");
 	}
 	return true;
 }
 
 AudioManager* AudioManager::Get()
 {
-	if (m_SingleAudioManager == nullptr)
+	if (mSingleAudioManager == nullptr)
 	{
-		m_SingleAudioManager = new AudioManager;
+		mSingleAudioManager = new AudioManager;
 	}
-	return m_SingleAudioManager;
+	return mSingleAudioManager;
 }
 
 void AudioManager::Play(std::string musicName)
 {
-	m_MusicSets[musicName]->play();
+	mMusicSets[musicName]->play();
 }
 
 

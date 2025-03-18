@@ -20,6 +20,10 @@ public:
 
     float GetRadius() { return mRadius; }
     Eigen::Vector2f GetVelocity() { return mVelocity;  }
+    void SetVelocity(Eigen::Vector2f velocity) { mVelocity = velocity; }
+
+    void SetSticky(bool sticky) { mSticky = sticky; }
+    void SetPassThrough(bool passThrough) { mPassThrough = passThrough; }
 private:
 
     void respawnParticle(Eigen::Vector2f offset = Eigen::Vector2f(0.0f, 0.0f));
@@ -34,4 +38,7 @@ private:
 
     float mWindowWidth = 0.0f;
     float mPlayerVelocity = 0.0f;
+
+    bool mSticky = false;
+    bool mPassThrough = false;
 };

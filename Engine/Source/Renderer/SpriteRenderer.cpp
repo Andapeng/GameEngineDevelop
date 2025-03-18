@@ -48,8 +48,8 @@ void SpriteRenderer::RenderSprite(Texture2D tex, Eigen::Vector3f pos, Eigen::Vec
 	Translate(model, pos);
 	Scale(model, Eigen::Vector3f(size(0), size(1), 1.0f));
 
-	ResourceManager::Get()->GetShader("sprite_shader").SetMatrix4f("model", model);
-	ResourceManager::Get()->GetShader("sprite_shader").SetVector3f("spriteColor", color);
+	g_pResourceManager->GetShader("sprite_shader").SetMatrix4f("model", model);
+	g_pResourceManager->GetShader("sprite_shader").SetVector3f("spriteColor", color);
 
 	glActiveTexture(GL_TEXTURE0);
 	// bind textures on corresponding texture units

@@ -18,5 +18,11 @@ float GameTimer::Pause()
 float GameTimer::GetElapsedTime()
 {
 	mElapsedTime = mClock->restart().asSeconds();
+	mTotalTime += mElapsedTime;
 	return mElapsedTime;
+}
+
+float GameTimer::GetTotalTime()
+{
+	return mTotalTime;
 }

@@ -28,7 +28,10 @@ RenderableObject::~RenderableObject()
 
 void RenderableObject::OnRender()
 {
-	g_pGraphicsManager->GetSpriteRenderer()->AddSprite(mSprite);
+	if (bVisible)
+	{
+		g_pGraphicsManager->GetSpriteRenderer()->AddSprite(mSprite);
+	}
 }
 
 void RenderableObject::SetPosition(float x, float y, float z)
@@ -53,6 +56,11 @@ void RenderableObject::SetSize(Eigen::Vector2f size)
 {
 	mSprite->SetSizeX(size[0]);
 	mSprite->SetSizeY(size[1]);
+}
+
+void RenderableObject::SetColor(Eigen::Vector3f color)
+{
+	mSprite->SetColor(color);
 }
 
 float RenderableObject::GetPosX()

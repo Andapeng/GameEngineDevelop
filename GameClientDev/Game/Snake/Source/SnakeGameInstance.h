@@ -39,10 +39,10 @@ public:
 	void AddPoint();
 private:
 	bool AddGameObject(const std::string& objectName, GameObject* gameObject);
-	GameObject* GetGameObject(const std::string& objectName) { return m_GameObjectsMap[objectName]; }
+	GameObject* GetGameObject(const std::string& objectName) { return mGameObjectsMap[objectName]; }
 	bool AddScene(const std::string& sceneName, Scene* scene);
 	Scene* GetScene(const std::string& sceneName);
 private:
-	std::map<std::string, GameObject*> m_GameObjectsMap;
+	std::map<std::string, GameObject*> mGameObjectsMap;
 	std::map<std::string, Scene*> m_sceneMap;
 };

@@ -25,7 +25,20 @@ void GameLevel::Load(const char* file, unsigned levelWidth, unsigned levelHeight
             tileData.push_back(row);
         }
         if (!tileData.empty())
+        {
             this->init(tileData, levelWidth, levelHeight);
+            mLevelFile = file;
+            mLevelWidth = levelWidth;
+            mLevelHeight = levelHeight;
+        }
+    }
+}
+
+void GameLevel::Reload()
+{
+    if (!mLevelFile.empty())
+    {
+        Load(mLevelFile.c_str(), mLevelWidth, mLevelHeight);
     }
 }
 

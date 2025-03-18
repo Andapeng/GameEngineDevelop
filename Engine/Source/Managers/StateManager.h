@@ -26,7 +26,7 @@ private:
 		paused = 2,
 		menu = 3
 	};
-	GameState m_gameState;
+	GameState mGameState;
 	
 
 private:

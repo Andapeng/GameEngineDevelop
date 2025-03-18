@@ -24,9 +24,9 @@ public:
 
 	void Play(std::string musicName);
 private:
-	std::map<std::string, sf::Music*> m_MusicSets;
-	std::map<std::string, sf::SoundBuffer*> m_SoundSets;
-	static AudioManager* m_SingleAudioManager;
+	std::map<std::string, sf::Music*> mMusicSets;
+	std::map<std::string, sf::SoundBuffer*> mSoundSets;
+	static AudioManager* mSingleAudioManager;
 };
 
 extern AudioManager* g_pAudioManager;

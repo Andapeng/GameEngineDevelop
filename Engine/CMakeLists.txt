@@ -9,6 +9,8 @@ set(VCPKG_ROOT "C:/Source/git/vcpkg" CACHE STRING "Vcpkg root directory")
 set(CMAKE_TOOLCHAIN_FILE "C:/Source/git/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
 set(SFML_DIR "C:/Source/git/vcpkg/installed/x64-windows/share/sfml")
 set(IMGUI_DIR "D:/Project/GameEngineDevelop/Engine/ThirdParty/imgui")
+set(Boost_INCLUDE_DIR "F:/SDK/Boost/include/boost-1_72/boost")
+set(Boost_DIR "F:/SDK/Boost/lib/cmake/Boost-1.72.0")
 add_compile_definitions(-DNOMINMAX)
 
 set(EngineSources Source/Component/Transform.cpp
@@ -71,7 +73,13 @@ Source/RHI/d3dx12.h
 "Source/Game/Breakout/Ball.cpp" 
 "Source/Renderer/Particle.cpp"
 "Source/Renderer/ParticleRenderer.cpp" 
-"Source/Game/Breakout/ParticleGenerator.cpp" "Source/Renderer/PostProcessingRenderer.cpp" "Source/Game/Breakout/PowerUp.cpp" "Source/Game/Breakout/PowerUpSpawner.cpp")
+"Source/Game/Breakout/ParticleGenerator.cpp" 
+"Source/Renderer/PostProcessingRenderer.cpp" 
+"Source/Game/Breakout/PowerUp.cpp" 
+"Source/Game/Breakout/PowerUpSpawner.cpp" 
+"Source/Audio/MusicPlayer.cpp" 
+"Source/Audio/SoundPlayer.cpp" 
+"Source/Game/Snake/SnakeGameLevel.cpp")
 
 add_executable(Engine Source/Main.cpp)
 add_library(LibEngine ${EngineSources})
@@ -81,20 +89,27 @@ add_subdirectory(ThirdParty/imgui-sfml)
 target_compile_definitions(Engine PRIVATE -DOPENGL_RENDERING)
 target_compile_definitions(LibEngine PRIVATE -DOPENGL_RENDERING)
 
+find_package(Boost 1.72 REQUIRED COMPONENTS
+    log
+    log_setup
+    filesystem
+    system
+    thread
+    date_time
+)
+
 include_directories(LibEngine
 PRIVATE 
 "ThirdParty"
 "ThirdParty/Eigen"
 "ThirdParty/Vulkan/include"
 "ThirdParty/include"
-"C:/Source/git/vcpkg/installed/x64-windows/include/"
-"C:/Source/boost/boost_1_72_0/boost_1_72_0")
+"C:/Source/git/vcpkg/installed/x64-windows/include/")
 
 target_link_directories(LibEngine
 						PRIVATE
 						"ThirdParty/lib"
 						"ThirdParty/Vulkan/lib"
-						"C:/Source/boost/boost_1_72_0/boost_1_72_0/stage/lib"
 						"C:/Source/git/vcpkg/installed/x64-windows/debug/lib")
 
 target_link_libraries(LibEngine
@@ -116,7 +131,12 @@ target_link_libraries(LibEngine
 					d3dcompiler.lib
 					libimgui
 					ImGui-SFML
-
+					Boost::log
+					Boost::log_setup
+					Boost::filesystem
+					Boost::system
+					Boost::thread
+					Boost::date_time
 )
 install(TARGETS LibEngine DESTINATION lib)
 
@@ -126,15 +146,13 @@ PRIVATE
 "ThirdParty/Eigen"
 "ThirdParty/Vulkan/include"
 "ThirdParty/include"
-"C:/Source/git/vcpkg/installed/x64-windows/include/"
-"C:/Source/boost/boost_1_72_0/boost_1_72_0")
+"C:/Source/git/vcpkg/installed/x64-windows/include/")
 
 
 target_link_directories(Engine
 						PRIVATE
 						"ThirdParty/lib"
 						"ThirdParty/Vulkan/lib"
-						"C:/Source/boost/boost_1_72_0/boost_1_72_0/stage/lib"
 						"C:/Source/git/vcpkg/installed/x64-windows/debug/lib")
 
 target_link_libraries(Engine
@@ -156,6 +174,12 @@ target_link_libraries(Engine
 					d3dcompiler.lib
 					libimgui
 					ImGui-SFML
+					Boost::log
+					Boost::log_setup
+					Boost::filesystem
+					Boost::system
+					Boost::thread
+					Boost::date_time
 )
 target_sources(Engine 
 				PRIVATE

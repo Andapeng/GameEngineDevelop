@@ -24,6 +24,7 @@
 #include "Snake.h"
 #include "Food.h"
 #include "ScoreBoard.h"
+#include "SnakeGameLevel.h"
 #include "Wall.h"
 #include "../../Renderer/ImguiRenderer.h"
 #include "../../Renderer/SpriteRenderer.h"
@@ -61,6 +62,8 @@ int SnakeGame::Initialize()
 	g_pResourceManager->LoadTexture("Assets/Textures/girl001.jpg", "character");
 	g_pResourceManager->LoadTexture("Assets/Textures/Blank.png", "blank");
 	g_pResourceManager->LoadTexture("Assets/Textures/block.png", "block");
+        g_pResourceManager->LoadTexture("Assets/Textures/orange.jpeg","orange");
+        g_pResourceManager->LoadTexture("Assets/Textures/mine.png","mine");
 	g_pResourceManager->LoadTexture("Assets/Textures/ReadyScene.png", "ReadyScene");
 	g_pResourceManager->LoadShader("Assets/Shaders/texture.vertex", "Assets/Shaders/texture.fragment", "texture_shader");
 	g_pResourceManager->LoadShader("Assets/Shaders/sprite.vertex", "Assets/Shaders/sprite.fragment", "sprite_shader");
@@ -82,29 +85,30 @@ int SnakeGame::Initialize()
 	std::shared_ptr<Scene> ReadyScene = std::make_shared<Scene>("ReadyScene");
 	std::shared_ptr<Scene> Level0 = std::make_shared<Scene>("Level0");
 
-	std::shared_ptr < RenderableObject> Level0BG = std::make_shared < RenderableObject>("dialogbox", 0, 0, 800, 600);
-	std::shared_ptr < Snake> snake = std::make_shared < Snake>("face_transparent", 0, 0, 50);
-	std::shared_ptr < Food> food = std::make_shared < Food>("blank");
-	std::shared_ptr < ScoreBoard> scoreBoard = std::make_shared < ScoreBoard>();
-	std::shared_ptr < Label> fpsLabel = std::make_shared < Label>(L"FPS:", 0.0f, 50.0f, 1.0f);
-	std::shared_ptr < Button> button = std::make_shared < Button>("Restart", Eigen::Vector2f{ 150.0f, 350.0f }, Eigen::Vector2f{ 150.f, 50.f });
-	std::shared_ptr < Button> button2 = std::make_shared < Button>("Return to title", Eigen::Vector2f{ 450.0f, 350.0f }, Eigen::Vector2f{ 150.f, 50.f });
+  	std::shared_ptr<SnakeGameLevel> GameLevel = std::make_shared<SnakeGameLevel>();
+        GameLevel->Load("Assets/Level/SnakeGame/level0.lvl", gConfig->GetWidth(), gConfig->GetHeight());
 
-
-	std::shared_ptr<Wall> wall = std::make_shared<Wall>("block");
+	std::shared_ptr<RenderableObject> Level0BG = std::make_shared<RenderableObject>("dialogbox", 0, 0, 800, 600);
+	std::shared_ptr<Snake> snake = std::make_shared<Snake>("face_transparent", 0, 0, 50);
+	std::shared_ptr<Food> food = std::make_shared<Food>("orange");
+	std::shared_ptr<ScoreBoard> scoreBoard = std::make_shared < ScoreBoard>();
+	std::shared_ptr<Label> fpsLabel = std::make_shared<Label>(L"FPS:", 0.0f, 50.0f, 1.0f);
+	std::shared_ptr<Button> button = std::make_shared<Button>("Restart", Eigen::Vector2f{ 150.0f, 350.0f }, Eigen::Vector2f{ 150.f, 50.f });
+	std::shared_ptr<Button> button2 = std::make_shared<Button>("Return to title", Eigen::Vector2f{ 450.0f, 350.0f }, Eigen::Vector2f{ 150.f, 50.f });
 
 	std::shared_ptr<RenderableObject> ReadySceneObject = std::make_shared<RenderableObject>("ReadyScene", 0, 0, 800, 600);
 	ReadyScene->AddGameObject("ReadySceneObject", ReadySceneObject);
 	std::shared_ptr<Label> StartLabel = std::make_shared<Label>(L"Please press any key to start", 50.0f, 400.0f, 1.0f);
 	ReadyScene->AddGameObject("StartLabel", StartLabel);
 
+        Level0->AddGameObject("GameLevel", GameLevel);
 	Level0->AddGameObject("Level0BG", Level0BG);
 	Level0->AddGameObject("snake", snake);
 	Level0->AddGameObject("food", food);
 	Level0->AddGameObject("scoreBoard", scoreBoard);
 	Level0->AddGameObject("fpsLabel", fpsLabel);
-	Level0->AddGameObject("button", button);
-	Level0->AddGameObject("button2", button2);
+	// Level0->AddGameObject("button", button);
+	// Level0->AddGameObject("button2", button2);
 
 	g_pSceneManager->AddScene("ReadyScene", ReadyScene);
 	g_pSceneManager->AddScene("Level0", Level0);

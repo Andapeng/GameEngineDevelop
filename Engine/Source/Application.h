@@ -2,6 +2,8 @@
 #include "GameInstance.h"
 #include "Platform/Window.h"
 
+#include <memory>
+
 class Application
 {
 public:
@@ -13,7 +15,7 @@ protected:
 
 
 private:
-	GameInstance* mGame;
+	GameInstance* mGame = nullptr;
 //	sf::RenderWindow* mWindow;
-	sadp::Window* mWindow;
+	std::unique_ptr<sadp::Window> mWindow = nullptr;
 };

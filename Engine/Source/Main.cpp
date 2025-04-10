@@ -1,4 +1,4 @@
-﻿#define _CRTDBG_MAP_ALLOC
+#define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
 #include "Application.h"
 #include "Log.h"
@@ -8,11 +8,12 @@
 
 int main(int argc, char** args) {
 
+	Logger::Initialize();
 	Logger::SetLogLevel("debug");
 	Logger::LogInfo("Engine Start. ");
 	//_CrtSetBreakAlloc(1887);
 	Application app;
-	// app.Initialize(new SnakeGame());
+	// app.Initialize(new SnakeGame);
 	app.Initialize(new Breakout);
 	app.Run();
 	app.Release();

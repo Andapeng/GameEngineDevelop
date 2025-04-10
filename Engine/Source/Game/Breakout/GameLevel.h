@@ -16,7 +16,7 @@ public:
 	std::vector<std::shared_ptr<Brick>> GetBricks() { return mBricks; }
 private:
 	// initialize level from tile data
-	void init(std::vector<std::vector<unsigned int>> tileData,
+	void init(std::vector<std::vector<unsigned int>>& tileData,
 		unsigned int levelWidth, unsigned int levelHeight);
 
 	std::vector<std::shared_ptr<Brick>> mBricks;

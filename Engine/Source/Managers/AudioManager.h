@@ -2,7 +2,12 @@
 #include "IManager.h"
 #include <string>
 #include <map>
+#include <memory>
 
+#include "../Audio/MusicPlayer.h"
+
+class SoundPlayer;
+class MusicPlayer;
 
 namespace sf
 {
@@ -17,15 +22,13 @@ public:
 	virtual void Release() override;
 	virtual void Tick() override;
 
-	bool LoadMusicFromFile(std::string pathName);
-	bool LoadSoundFromFile(std::string pathName);
-
 	static AudioManager* Get();
 
-	void Play(std::string musicName);
+	std::shared_ptr<MusicPlayer> GetMusicPlayer() { return mMusicPlayer; }
+	std::shared_ptr<SoundPlayer> GetSoundPlayer() { return mSoundPlayer; }
 private:
-	std::map<std::string, sf::Music*> mMusicSets;
-	std::map<std::string, sf::SoundBuffer*> mSoundSets;
+	std::shared_ptr<MusicPlayer> mMusicPlayer = nullptr;
+	std::shared_ptr<SoundPlayer> mSoundPlayer = nullptr;
 	static AudioManager* mSingleAudioManager;
 };
 

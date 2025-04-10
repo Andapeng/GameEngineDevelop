@@ -30,6 +30,7 @@
 #include "GameConfig.h"
 #include "PowerUp.h"
 #include "PowerUpSpawner.h"
+#include "../../Audio/SoundPlayer.h"
 #include "../../Renderer/PostProcessingRenderer.h"
 
 float ShakeTime = 0.0f;
@@ -60,7 +61,8 @@ int Breakout::Initialize()
 	g_pResourceManager->LoadShader("Assets/Shaders/postprocessing.vertex", "Assets/Shaders/postprocessing.fragment", "postprocessing_shader");
 
 
-	g_pFontManager->LoadFont("Assets/Fonts/simsun.ttc");
+	g_pFontManager->LoadFont("Assets/Fonts/arial.ttf");
+        //g_pFontManager->LoadFont("Assets/Fonts/simsun.ttc"); // 新宋体
 
 
 	g_pConfig = Configuration::Get();
@@ -85,10 +87,10 @@ int Breakout::Initialize()
 	std::shared_ptr <GameLevel> level2 = std::make_shared<GameLevel>();
 	std::shared_ptr <GameLevel> level3 = std::make_shared<GameLevel>();
 
-	level0->Load("Assets/Level/level0.lvl", g_pConfig->GetWidth(), g_pConfig->GetHeight() / 2);
-	level1->Load("Assets/Level/level1.lvl", g_pConfig->GetWidth(), g_pConfig->GetHeight() / 2);
-	level2->Load("Assets/Level/level2.lvl", g_pConfig->GetWidth(), g_pConfig->GetHeight() / 2);
-	level3->Load("Assets/Level/level3.lvl", g_pConfig->GetWidth(), g_pConfig->GetHeight() / 2);
+	level0->Load("Assets/Level/Breakout/level0.lvl", g_pConfig->GetWidth(), g_pConfig->GetHeight() / 2);
+	level1->Load("Assets/Level/Breakout/level1.lvl", g_pConfig->GetWidth(), g_pConfig->GetHeight() / 2);
+	level2->Load("Assets/Level/Breakout/level2.lvl", g_pConfig->GetWidth(), g_pConfig->GetHeight() / 2);
+	level3->Load("Assets/Level/Breakout/level3.lvl", g_pConfig->GetWidth(), g_pConfig->GetHeight() / 2);
 
 	mGameLevels.push_back(level0);
 	mGameLevels.push_back(level1);
@@ -134,7 +136,7 @@ int Breakout::Initialize()
 
 	g_pSceneManager->AddScene("SceneLevel", SceneLevel);
 	mCurrentScene = g_pSceneManager->LoadScene(std::string("SceneLevel"));
-
+	g_pAudioManager->GetMusicPlayer()->Play("Assets/Music/breakout.wav");
 	return 0;
 }
 
@@ -261,6 +263,7 @@ void Breakout::Update(float elapsedTime)
 		{
 			this->resetLevel();
 			Stop();
+			showMenu(true);
 		}
 		this->resetPlayer();
 	}
@@ -304,11 +307,13 @@ void Breakout::DetectCollide()
 					{
 						brick->SetDestroyed(true);
 						powerUpSpawner->SpawnPowerUps(brick);
+						g_pAudioManager->GetSoundPlayer()->Play("Assets/Sounds/breep1_1.wav");
 					}
 					else
 					{
 						ShakeTime = 0.05f;
 						g_pGraphicsManager->GetPostProcessingRenderer()->SetShake(true);
+						g_pAudioManager->GetSoundPlayer()->Play("Assets/Sounds/solid.wav");
 						
 					}
 					BallObj->OnCollision(collision, brick);
@@ -319,6 +324,10 @@ void Breakout::DetectCollide()
 		{
 			Collision collision = BallObj->CheckCollision(std::shared_ptr<RenderableObject>(PaddleObj));
 			BallObj->OnCollision(collision, PaddleObj);
+			if (std::get<0>(collision))
+			{
+				g_pAudioManager->GetSoundPlayer()->Play("Assets/Sounds/breep_1.wav");
+			}
 		}
 		for (auto& powerUp : powerUpSpawner->GetPowerUps())
 		{
@@ -328,12 +337,12 @@ void Breakout::DetectCollide()
 				{
 					powerUp->SetDestroyed(true);
 				}
-				bool isPowerUpActivated = PaddleObj->CheckCollision(powerUp);
-				if (isPowerUpActivated)
+                                if (bool isPowerUpActivated = PaddleObj->CheckCollision(powerUp))
 				{
 					powerUpSpawner->ActivatePowerUp(powerUp);
 					powerUp->SetDestroyed(true);
 					powerUp->SetActivated(true);
+					g_pAudioManager->GetSoundPlayer()->Play("Assets/Sounds/powerup.wav");
 				}
 			}
 		}

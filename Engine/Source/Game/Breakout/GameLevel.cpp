@@ -8,13 +8,12 @@ void GameLevel::Load(const char* file, unsigned levelWidth, unsigned levelHeight
 {
 	// clear old data
     this->mBricks.clear();
+
     // load from file
-    std::string tileCode;
-    GameLevel level;
-    std::string line;
     std::ifstream in(file);
-    if (in.is_open())
-    {
+    if (in.is_open()) {
+        std::string tileCode;
+        std::string line;
         std::vector<std::vector<unsigned int>> tileData;
         while (std::getline(in, line)) // read each line from level file
         {
@@ -58,7 +57,7 @@ void GameLevel::OnRender()
     }
 }
 
-void GameLevel::init(std::vector<std::vector<unsigned>> tileData, unsigned levelWidth, unsigned levelHeight)
+void GameLevel::init(std::vector<std::vector<unsigned>>& tileData, unsigned levelWidth, unsigned levelHeight)
 {
     // calculate dimensions
     size_t height = tileData.size();

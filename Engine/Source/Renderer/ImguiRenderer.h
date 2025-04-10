@@ -15,6 +15,8 @@ public:
 
 	void OnRender();
 	bool IsReadyToRendering();
+        bool ShouldUpdate();
 private:
 	std::vector<std::shared_ptr<ButtonDescription>> mButtons;
+        bool bIsUpdated = false;
 };

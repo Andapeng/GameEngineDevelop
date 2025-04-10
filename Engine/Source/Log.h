@@ -4,6 +4,7 @@ class Logger
 {
 public:
 
+        static void Initialize();
 	static void SetLogLevel(const std::string& levelName);
 
 	static void LogError(const char* fmtstring);

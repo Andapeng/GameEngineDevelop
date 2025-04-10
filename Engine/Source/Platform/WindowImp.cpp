@@ -93,7 +93,7 @@ namespace sadp
 
 	void SfmlWindowImp::Update(float elapsedTime)
 	{
-		if (g_pGraphicsManager->GetImguiRenderer()->IsReadyToRendering())
+		if (g_pGraphicsManager->GetImguiRenderer()->ShouldUpdate())
 		{
 			ImGui::SFML::Update(*m_Window, sf::seconds(elapsedTime));
 		}

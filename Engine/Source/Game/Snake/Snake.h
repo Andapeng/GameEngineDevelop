@@ -35,7 +35,7 @@ private:
 	std::list<point> mBody;
 	Snake_Direction mDirection;
 	Snake_Direction mNextDirection;
-	point mTail;
+	point mTail{0, 0};
 	int mSize;
 	bool alive;
 	

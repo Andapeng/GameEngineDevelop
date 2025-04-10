@@ -35,7 +35,7 @@ void ImguiRenderer::OnRender()
 {
 	// Logger::LogTrace("ImguiRenderer::OnRender begin");
 
-	if (mButtons.empty())
+	if (!IsReadyToRendering())
 	{
 		return;
 	}
@@ -64,5 +64,16 @@ void ImguiRenderer::OnRender()
 
 bool ImguiRenderer::IsReadyToRendering()
 {
-	return !mButtons.empty();
+	return !mButtons.empty() && bIsUpdated;
+}
+
+bool
+ImguiRenderer::ShouldUpdate()
+{
+  if (!mButtons.empty()) {
+    bIsUpdated = true;
+  } else {
+    bIsUpdated = false;
+  }
+  return bIsUpdated;
 }

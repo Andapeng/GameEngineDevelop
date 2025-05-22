@@ -2,6 +2,8 @@
 #include "../../Entities/RenderableObject.h"
 #include <list>
 #include "Food.h"
+class Trap;
+
 class Snake : public RenderableObject
 {
 public:
@@ -12,11 +14,14 @@ public:
 	void OnRender() override;
 	void OnKeyPressed() override;
 	bool IsCollide(std::shared_ptr<GameObject> gameObject) override;
-	void Update(float elasedTime) override;
+	
+	void Update(float elapsedTime) override;
 
 	bool IsAlive() { return alive; }
 	bool IsContain(int x, int y);
-private:
+        void Reset();
+
+      private:
 	
 	
 	struct point
@@ -41,6 +46,7 @@ private:
 	
 	void die();
 	void hitSelf();
+        bool hitTrap(std::shared_ptr<Trap> trap);
 	void changeDirection(Snake_Direction dir);
 	int eatFood(Food& food);
 };

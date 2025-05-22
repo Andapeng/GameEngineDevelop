@@ -1,7 +1,5 @@
 #pragma once
 #include <memory>
-#include <string>
-#include <map>
 #include "../../GameInstance.h"
 
 class Scene;

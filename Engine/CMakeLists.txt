@@ -13,7 +13,8 @@ set(Boost_INCLUDE_DIR "F:/SDK/Boost/include/boost-1_72/boost")
 set(Boost_DIR "F:/SDK/Boost/lib/cmake/Boost-1.72.0")
 add_compile_definitions(-DNOMINMAX)
 
-set(EngineSources Source/Component/Transform.cpp
+set(EngineSources 
+"Source/Component/Transform.cpp"
 Source/Application.cpp
 Source/Log.cpp
 Source/GameInstance.cpp
@@ -53,14 +54,15 @@ Source/Game/Snake/Food.cpp
 Source/Game/Snake/ScoreBoard.cpp
 Source/Game/Snake/Snake.cpp
 Source/Game/Snake/SnakeGame.cpp
-Source/Game/Snake/Wall.cpp
-Source/Gui/Label.cpp
-Source/RHI/D3D12GraphicsDevice.cpp 
-Source/RHI/VulkanGrahphicsDevice.cpp
-Source/RHI/OpenGLGraphicsDevice.cpp 
-Source/Managers/WindowManager.cpp 
-Source/RHI/D3dUtil.cpp
-Source/RHI/d3dx12.h 
+"Source/Game/Snake/Trap.cpp"
+"Source/Game/Tetris/TetrisGame.cpp"
+"Source/Game/Tetris/Block.cpp"
+"Source/Gui/Label.cpp"
+"Source/RHI/D3D12GraphicsDevice.cpp" 
+"Source/RHI/VulkanGrahphicsDevice.cpp"
+"Source/RHI/OpenGLGraphicsDevice.cpp"
+"Source/Managers/WindowManager.cpp" 
+"Source/RHI/D3dUtil.cpp" 
 "Source/Misc/GameTimer.cpp" 
 "Source/Gui/Button.cpp" 
 "Source/Entities/Text.cpp" 
@@ -80,6 +82,32 @@ Source/RHI/d3dx12.h
 "Source/Audio/MusicPlayer.cpp" 
 "Source/Audio/SoundPlayer.cpp" 
 "Source/Game/Snake/SnakeGameLevel.cpp")
+
+set(EngineLinkLibs 
+					gtestd.lib
+					glad.lib
+					sfml-window-d.lib
+					sfml-graphics-d.lib
+					sfml-audio-d.lib
+					sfml-network-d.lib
+					sfml-system-d.lib
+					freetyped.lib
+					box2d.lib
+					fmtd.lib
+					dxgi.lib
+					vulkan-1.lib
+					d3d12.lib
+					dxgi.lib
+					d3dcompiler.lib
+					libimgui
+					ImGui-SFML
+					Boost::log
+					Boost::log_setup
+					Boost::filesystem
+					Boost::system
+					Boost::thread
+					Boost::date_time
+)
 
 add_executable(Engine Source/Main.cpp)
 add_library(LibEngine ${EngineSources})
@@ -114,29 +142,7 @@ target_link_directories(LibEngine
 
 target_link_libraries(LibEngine
 					PUBLIC
-					gtestd.lib
-					glad.lib
-					sfml-window-d.lib
-					sfml-graphics-d.lib
-					sfml-audio-d.lib
-					sfml-network-d.lib
-					sfml-system-d.lib
-					freetyped.lib
-					box2d.lib
-					fmtd.lib
-					dxgi.lib
-					vulkan-1.lib
-					d3d12.lib
-					dxgi.lib
-					d3dcompiler.lib
-					libimgui
-					ImGui-SFML
-					Boost::log
-					Boost::log_setup
-					Boost::filesystem
-					Boost::system
-					Boost::thread
-					Boost::date_time
+					${EngineLinkLibs}	
 )
 install(TARGETS LibEngine DESTINATION lib)
 
@@ -157,29 +163,7 @@ target_link_directories(Engine
 
 target_link_libraries(Engine
 					PUBLIC
-					gtestd.lib
-					glad.lib
-					sfml-window-d.lib
-					sfml-graphics-d.lib
-					sfml-audio-d.lib
-					sfml-network-d.lib
-					sfml-system-d.lib
-					freetyped.lib
-					box2d.lib
-					fmtd.lib
-					dxgi.lib
-					vulkan-1.lib
-					d3d12.lib
-					dxgi.lib
-					d3dcompiler.lib
-					libimgui
-					ImGui-SFML
-					Boost::log
-					Boost::log_setup
-					Boost::filesystem
-					Boost::system
-					Boost::thread
-					Boost::date_time
+					${EngineLinkLibs}
 )
 target_sources(Engine 
 				PRIVATE

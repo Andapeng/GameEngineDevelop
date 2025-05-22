@@ -2,44 +2,42 @@
 #include "Config/GlobalConfiguration.h"
 #include "Managers/Managers.h"
 #include "Misc/GameTimer.h"
-int Application::Initialize(GameInstance* InGameInstance)
+int Application::Initialize(std::shared_ptr<GameInstance> InGameInstance)
 {
+    auto config = Configuration::Get();
+    config->Load("Assets/Conf/gConfig.xml");
 
-	auto config = Configuration::Get();
-	config->Load("Assets/Conf/gConfig.xml");
+    g_pWindowManager = WindowManager::Get();
 
-	g_pWindowManager = WindowManager::Get();
-	
-	mWindow = std::make_unique<sadp::Window>();
-	mWindow->Create();
-	g_pWindowManager->RegisterWindow(mWindow.get(), true);
+    mWindow = std::make_unique<sadp::Window>();
+    mWindow->Create();
+    g_pWindowManager->RegisterWindow(mWindow.get(), true);
 
-	g_pStateManager = StateManager::Get();
-	g_pResourceManager = ResourceManager::Get();
-	g_pGraphicsManager = GraphicsManager::Get();
-	g_pFontManager = FontManager::Get();
-	g_pInputManager = InputManager::Get();
-	g_pPhysicsManager = PhysicsManager::Get();
-	g_pNetworkManager = NetworkManager::Get();
-	g_pAudioManager = AudioManager::Get();
-	g_pStatisticsManager = StatisticsManager::Get();
-	g_pSceneManager = SceneManager::Get();
+    g_pStateManager = StateManager::Get();
+    g_pResourceManager = ResourceManager::Get();
+    g_pGraphicsManager = GraphicsManager::Get();
+    g_pFontManager = FontManager::Get();
+    g_pInputManager = InputManager::Get();
+    g_pPhysicsManager = PhysicsManager::Get();
+    g_pNetworkManager = NetworkManager::Get();
+    g_pAudioManager = AudioManager::Get();
+    g_pStatisticsManager = StatisticsManager::Get();
+    g_pSceneManager = SceneManager::Get();
 
-	g_pWindowManager->Initialize();
-	g_pGraphicsManager->Initialize();
-	g_pFontManager->Initialize();
-	g_pInputManager->Initialize();
-	g_pPhysicsManager->Initialize();
-	g_pNetworkManager->Initialize();
-	g_pAudioManager->Initialize();
-	g_pStatisticsManager->Initialize();
-	g_pSceneManager->Initialize();
+    g_pWindowManager->Initialize();
+    g_pGraphicsManager->Initialize();
+    g_pFontManager->Initialize();
+    g_pInputManager->Initialize();
+    g_pPhysicsManager->Initialize();
+    g_pNetworkManager->Initialize();
+    g_pAudioManager->Initialize();
+    g_pStatisticsManager->Initialize();
+    g_pSceneManager->Initialize();
 
+    mGame = InGameInstance;
+    mGame->Initialize();
 
-	mGame = InGameInstance;
-	mGame->Initialize();
-
-	return 0;
+    return 0;
 }
 
 int Application::Run()

@@ -30,12 +30,11 @@ bool UdpSocketClient::SendMessages(const NetworkMessage& msg)
 
 bool UdpSocketClient::SendMessages(const std::string& msg)
 {
-	if (!Send(msg))
-	{
-		Logger::LogError("UdpSocketClient SendMessages failed. ");
-		return false;
-	}
-	return true;
+    if (!Send(msg)) {
+        Logger::LogError("UdpSocketClient SendMessages failed. ");
+        return false;
+    }
+    return true;
 }
 
 void UdpSocketClient::Close()
@@ -43,30 +42,28 @@ void UdpSocketClient::Close()
 	m_socket->close();
 }
 
-size_t UdpSocketClient::Send(const std::string& msg)
+size_t
+UdpSocketClient::Send(const std::string& msg)
 {
-	const size_t ret = m_socket->send_to(asio::buffer(msg), *m_destinationEndpoint);
-	if (ret > 0)
-	{
-		Logger::LogInfo(msg);
-	}
-	else
-	{
-		Logger::LogError("UdpSocketClient Send failed. ");
-	}
-	return ret;
+    const size_t ret =
+      m_socket->send_to(asio::buffer(msg), *m_destinationEndpoint);
+    if (ret > 0) {
+        Logger::LogInfo(msg);
+    } else {
+        Logger::LogError("UdpSocketClient Send failed. ");
+    }
+    return ret;
 }
 
-size_t UdpSocketClient::Recv(std::string msg)
+size_t
+UdpSocketClient::Recv(std::string msg)
 {
-	const size_t ret = m_socket->receive_from(asio::buffer(msg), *m_destinationEndpoint);
-	if (ret > 0)
-	{
-		Logger::LogInfo(msg);
-	}
-	else
-	{
-		Logger::LogError("Client Receive Message failed. ");
-	}
-	return ret;
+    const size_t ret =
+      m_socket->receive_from(asio::buffer(msg), *m_destinationEndpoint);
+    if (ret > 0) {
+        Logger::LogInfo(msg);
+    } else {
+        Logger::LogError("Client Receive Message failed. ");
+    }
+    return ret;
 }

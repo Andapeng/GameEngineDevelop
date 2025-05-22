@@ -30,21 +30,31 @@ void Logger::Initialize()
     logging::add_common_attributes();
 
 	// // 设置日志级别
- //    logging::core::get()->set_filter(logging::trivial::severity >=
- //                                     logging::trivial::info);
+    logging::core::get()->set_filter(logging::trivial::severity >=
+                                  logging::trivial::debug);
 
 }
 
-
-
-void Logger::SetLogLevel(const std::string& levelName)
+void
+Logger::SetLogLevel(const char* LogLevelName)
 {
-	// if (levelName == "debug")
-	// {
-	// 	boost::log::core::get()->set_filter(boost::log::trivial::severity >= boost::log::trivial::debug);
-	// }
+    if (LogLevelName == "Debug") {
+        boost::log::core::get()->set_filter(boost::log::trivial::severity >=
+                                            boost::log::trivial::debug);
+    } else if (LogLevelName == "Info") {
+        boost::log::core::get()->set_filter(boost::log::trivial::severity >=
+                                            boost::log::trivial::info);
+    } else if (LogLevelName == "Warning") {
+        boost::log::core::get()->set_filter(boost::log::trivial::severity >=
+                                            boost::log::trivial::warning);
+    } else if (LogLevelName == "Error") {
+        boost::log::core::get()->set_filter(boost::log::trivial::severity >=
+                                            boost::log::trivial::error);
+    } else if (LogLevelName == "Fatal") {
+        boost::log::core::get()->set_filter(boost::log::trivial::severity >=
+                                            boost::log::trivial::fatal);
+    }
 }
-
 void Logger::LogError(const char* fmtstring)
 {
 	BOOST_LOG_TRIVIAL(error) << fmtstring;

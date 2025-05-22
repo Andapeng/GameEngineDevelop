@@ -10,82 +10,94 @@ RenderableObject::RenderableObject()
 	mSprite = std::make_shared<Sprite>();
 }
 
-RenderableObject::RenderableObject(std::string texture, float xpos, float ypos, float xsize, float ysize, Eigen::Vector3f color)
-	:GameObject()
+RenderableObject::RenderableObject(std::string texture,
+                                   float xpos,
+                                   float ypos,
+                                   float xsize,
+                                   float ysize,
+                                   Eigen::Vector3f color)
+  : GameObject()
 {
-	mSprite = std::make_shared<Sprite>(texture, xpos, ypos, 0, xsize, ysize, color.x(), color.y(), color.z());
+    mSprite = std::make_shared<Sprite>(
+      texture, xpos, ypos, 0, xsize, ysize, color.x(), color.y(), color.z());
 }
 
-RenderableObject::RenderableObject(std::string texture, float xPos, float yPos, float zPos, float xSize, float ySize,
-	Eigen::Vector3f color)
+RenderableObject::RenderableObject(std::string texture,
+                                   float xPos,
+                                   float yPos,
+                                   float zPos,
+                                   float xSize,
+                                   float ySize,
+                                   Eigen::Vector3f color)
 {
-	mSprite = std::make_shared<Sprite>(texture, xPos, yPos, zPos, xSize, ySize, color.x(), color.y(), color.z());
+    mSprite = std::make_shared<Sprite>(
+      texture, xPos, yPos, zPos, xSize, ySize, color.x(), color.y(), color.z());
 }
 
 RenderableObject::~RenderableObject()
 {
 }
 
-void RenderableObject::OnRender()
+void
+RenderableObject::OnRender()
 {
-	if (bVisible)
-	{
-		g_pGraphicsManager->GetSpriteRenderer()->AddSprite(mSprite);
-	}
+    if (bVisible) {
+        g_pGraphicsManager->GetSpriteRenderer()->AddSprite(mSprite);
+    }
 }
 
 void RenderableObject::SetPosition(float x, float y, float z)
 {
-	mSprite->SetPosX(x);
-	mSprite->SetPosY(y);
+    mSprite->SetPosX(x);
+    mSprite->SetPosY(y);
 }
 
 void RenderableObject::SetPosition(Eigen::Vector3f pos)
 {
-	mSprite->SetPosX(pos.x());
-	mSprite->SetPosY(pos.y());
+    mSprite->SetPosX(pos.x());
+    mSprite->SetPosY(pos.y());
 }
 
 void RenderableObject::SetPosition2D(Eigen::Vector2f pos)
 {
-	mSprite->SetPosX(pos.x());
-	mSprite->SetPosY(pos.y());
+    mSprite->SetPosX(pos.x());
+    mSprite->SetPosY(pos.y());
 }
 
 void RenderableObject::SetSize(Eigen::Vector2f size)
 {
-	mSprite->SetSizeX(size[0]);
-	mSprite->SetSizeY(size[1]);
+    mSprite->SetSizeX(size[0]);
+    mSprite->SetSizeY(size[1]);
 }
 
 void RenderableObject::SetColor(Eigen::Vector3f color)
 {
-	mSprite->SetColor(color);
+    mSprite->SetColor(color);
 }
 
-float RenderableObject::GetPosX()
+float RenderableObject::GetPosX() const
 {
-	return mSprite->GetPosX();
+    return mSprite->GetPosX();
 }
 
-float RenderableObject::GetPosY()
+float RenderableObject::GetPosY() const
 {
-	return mSprite->GetPosY();
+    return mSprite->GetPosY();
 }
 
-float RenderableObject::GetSizeX()
+float RenderableObject::GetSizeX() const
 {
-	return mSprite->GetSizeX();
+    return mSprite->GetSizeX();
 }
 
-float RenderableObject::GetSizeY()
+float RenderableObject::GetSizeY() const
 {
-	return mSprite->GetSizeY();
+    return mSprite->GetSizeY();
 }
 
-std::shared_ptr<Sprite> RenderableObject::GetSprite()
+std::shared_ptr<Sprite> RenderableObject::GetSprite() const
 {
-	return mSprite;
+    return mSprite;
 }
 
 

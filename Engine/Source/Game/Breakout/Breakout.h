@@ -40,7 +40,7 @@ private:
 	void showGameOver(bool bIsShow);
 
 	std::shared_ptr<Scene> mCurrentScene;
-	Camera2D* camera;
+	Camera2D* camera = nullptr;
 	int mLevel = 0;
 
 	std::vector<std::shared_ptr<GameObject>> mGameLevels;

@@ -7,7 +7,7 @@
 class Application
 {
 public:
-	int Initialize(GameInstance* InGameInstance);
+	int Initialize(std::shared_ptr<GameInstance> InGameInstance);
 	int Run();
 	int Release();
 protected:
@@ -15,7 +15,6 @@ protected:
 
 
 private:
-	GameInstance* mGame = nullptr;
-//	sf::RenderWindow* mWindow;
+        std::shared_ptr<GameInstance> mGame = nullptr;
 	std::unique_ptr<sadp::Window> mWindow = nullptr;
 };

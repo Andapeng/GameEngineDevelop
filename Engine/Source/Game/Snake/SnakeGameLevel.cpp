@@ -1,6 +1,6 @@
 #include "SnakeGameLevel.h"
 
-#include "Wall.h"
+#include "Trap.h"
 
 #include <fstream>
 
@@ -61,9 +61,9 @@ SnakeGameLevel::init(std::vector<std::vector<unsigned int>>& tileData,
     for (unsigned int y = 0; y < tileData.size(); ++y) {
         for (unsigned int x = 0; x < tileData[y].size(); ++x) {
             if (tileData[y][x] == 1) {
-                auto wall =
-                  std::make_shared<Wall>("mine", x * 50, y * 50, 50, 50);
-                mTraps.push_back(wall);
+                auto trap =
+                  std::make_shared<Trap>("mine", x * 50, y * 50, 50, 50);
+                mTraps.push_back(trap);
             }
         }
     }

@@ -15,12 +15,12 @@ add_compile_definitions(-DNOMINMAX)
 
 set(EngineSources 
 "Source/Component/Transform.cpp"
-Source/Application.cpp
-Source/Log.cpp
-Source/GameInstance.cpp
-Source/Config/GlobalConfiguration.cpp
-Source/Entities/Camera2D.cpp
-Source/Entities/GameObject.cpp
+"Source/Application.cpp"
+"Source/Log.cpp"
+"Source/GameInstance.cpp"
+"Source/Config/GlobalConfiguration.cpp"
+"Source/Entities/Camera2D.cpp"
+"Source/Entities/GameObject.cpp"
 Source/Entities/Player.cpp
 Source/Entities/RenderableObject.cpp
 Source/Entities/Sprite.cpp
@@ -52,8 +52,8 @@ Source/Physics/HitInfo.cpp
 Source/Physics/Physics2D.cpp
 Source/Game/Snake/Food.cpp
 Source/Game/Snake/ScoreBoard.cpp
-Source/Game/Snake/Snake.cpp
-Source/Game/Snake/SnakeGame.cpp
+"Source/Game/Snake/Snake.cpp"
+"Source/Game/Snake/SnakeGame.cpp"
 "Source/Game/Snake/Trap.cpp"
 "Source/Game/Tetris/TetrisGame.cpp"
 "Source/Game/Tetris/Block.cpp"

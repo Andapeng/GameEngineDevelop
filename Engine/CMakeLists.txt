@@ -21,7 +21,7 @@ set(EngineSources
 "Source/Config/GlobalConfiguration.cpp"
 "Source/Entities/Camera2D.cpp"
 "Source/Entities/GameObject.cpp"
-Source/Entities/Player.cpp
+"Source/Entities/Player.cpp"
 Source/Entities/RenderableObject.cpp
 Source/Entities/Sprite.cpp
 Source/Managers/AudioManager.cpp
